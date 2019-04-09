@@ -1,7 +1,8 @@
 #include <iostream>
 #include <vector>
+#include <tuple>
 
-using myPair = std::pair<long long, long long>;
+using myTuple = std::tuple<long long, long long, long long>;
 
 long long myABS( long long x, long long y )
 {
@@ -39,67 +40,80 @@ int main()
 	}
 
 	// ( P, Q, R, S )を管理する -> ( (P, Q), (R, S) )
-	std::vector<std::pair<myPair, myPair> > vP;
+	std::vector<myTuple> vT;
+
 	// まず中央（QとRを分ける位置）を決める
 	// -> 最低でも左側に2要素、右側に2要素必要
-	for ( int i = 2; i < N - 2; i++ )
+	int midL, rightL, bestL = 1;
+	int leftR, midR, bestR = 3;
+	long long result;
+
+	for ( int i = 2; i <= N - 2; i++ )
 	{
 		// i番目の要素が中央の仕切りの時の(P, Q)を求める
-		int left = 0, mid = left + 1, right = i;
-		long long result = 0xffffffff;
-		std::pair<long long, long long> tmpPairL, tmpPairR;
+		result = 0xfffffffff;
+		midL = bestL;
+		rightL = i;
 
-		while ( mid < right )
+		while ( midL < rightL )
 		{
-			long long tmpP = sum[mid] - sum[left];
-			long long tmpQ = sum[right] - sum[mid];
-			long long d = myABS( tmpP, tmpQ );
+			long long tmpP = sum[midL] - sum[0];
+			long long tmpQ = sum[rightL] - sum[midL];
+			long long d = myABS( tmpQ, tmpP );
 
 			// 差分が一番小さい時が最適な仕切り位置
-			if ( d < result )
+			if ( d <= result )
 			{
+				// resultを更新
 				result = d;
-				tmpPairL.first = tmpP;
-				tmpPairL.second = tmpQ;
+
+				// 最適な仕切り位置を更新する
+				bestL = midL;
 			}
 
-			mid++;	//	左側2要素の中央の仕切りを右に移動する
+			midL++;	//	左側2要素の中央の仕切りを右に移動する
 		}
 
 		// i番目の要素が中央の仕切りの時の(R, S)を求める
-		left = i, mid = i + 1, right = N;
-		result = 0xffffffff;
+		leftR = i, midR = bestR;
+		result = 0xfffffffff;
 
-		while ( mid < right )
+		while ( midR < N )
 		{
-			long long tmpR = sum[mid] - sum[left];
-			long long tmpS = sum[right] - sum[mid];
-			long long d = myABS( tmpR, tmpS );
+			long long tmpR = sum[midR] - sum[leftR];
+			long long tmpS = sum[N] - sum[midR];
+			long long d = myABS( tmpS, tmpR );
 
 			// 差分が一番小さい時が最適な仕切り位置
-			if ( d < result )
+			if ( d <= result )
 			{
+				// resultを更新
 				result = d;
-				tmpPairR.first = tmpR;
-				tmpPairR.second = tmpS;
+
+				// 最適な仕切り位置を更新する
+				bestR = midR;
 			}
 
-			mid++;	//	右側2要素の中央の仕切りを右に移動する
+			midR++;	//	右側2要素の中央の仕切りを右に移動する
 		}
 
 		// 左側と右側の最適なmidの位置が決まってP/Q/R/Sが求められたので、
-		// vectorに突っ込む
-		vP.emplace_back( std::make_pair( tmpPairL, tmpPairR ) );
+		// vectorに突っ込む（左仕切り位置、中央仕切り位置、右仕切り位置）
+		vT.emplace_back( std::make_tuple( bestL, i, bestR ) );
 	}
 
 	// 最適なP/Q/R/Sの候補を計算し終えたので、最適解を出力する
-	long long output = 0xffffffff;
-	for ( auto &&it : vP )
+	long long output = 0xfffffffff;
+	for ( auto &&it : vT )
 	{
-		long long tmpP = it.first.first;
-		long long tmpQ = it.first.second;
-		long long tmpR = it.second.first;
-		long long tmpS = it.second.second;
+		long long tmpLeft = std::get<0>( it );
+		long long tmpCenter = std::get<1>( it );
+		long long tmpRight = std::get<2>( it );
+
+		long long tmpP = sum[tmpLeft];
+		long long tmpQ = sum[tmpCenter] - sum[tmpLeft];
+		long long tmpR = sum[tmpRight] - sum[tmpCenter];
+		long long tmpS = sum[N] - sum[tmpRight];
 
 		long long tmpMIN = myMIN( myMIN( tmpP, tmpQ ), myMIN( tmpR, tmpS ) );
 		long long tmpMAX = myMAX( myMAX( tmpP, tmpQ ), myMAX( tmpR, tmpS ) );
