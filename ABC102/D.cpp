@@ -1,6 +1,7 @@
 #include <iostream>
 #include <vector>
 #include <tuple>
+#include <limits>
 
 using myTuple = std::tuple<long long, long long, long long>;
 
@@ -39,7 +40,7 @@ int main()
 		sum[i + 1] = sum[i] + v[i];
 	}
 
-	// ( P, Q, R, S )を管理する -> ( (P, Q), (R, S) )
+	// ( P, Q, R, S )を管理する -> ( left, mid, right )
 	std::vector<myTuple> vT;
 
 	// まず中央（QとRを分ける位置）を決める
@@ -51,7 +52,7 @@ int main()
 	for ( int i = 2; i <= N - 2; i++ )
 	{
 		// i番目の要素が中央の仕切りの時の(P, Q)を求める
-		result = 0xfffffffff;
+		result = std::numeric_limits<long long>::max();
 		midL = bestL;
 		rightL = i;
 
@@ -70,13 +71,27 @@ int main()
 				// 最適な仕切り位置を更新する
 				bestL = midL;
 			}
+			else
+			{
+				// これ以上良い値は見つからないはず？
+				break;
+			}
 
 			midL++;	//	左側2要素の中央の仕切りを右に移動する
 		}
 
 		// i番目の要素が中央の仕切りの時の(R, S)を求める
-		leftR = i, midR = bestR;
-		result = 0xfffffffff;
+		result = std::numeric_limits<long long>::max();
+		leftR = i;
+		if ( bestR <= i )
+		{
+			// 最低でも1要素ないとダメなので、仕切りの隣の要素からスタート
+			midR = i + 1;
+		}
+		else
+		{
+			midR = bestR;
+		}
 
 		while ( midR < N )
 		{
@@ -93,6 +108,11 @@ int main()
 				// 最適な仕切り位置を更新する
 				bestR = midR;
 			}
+			else
+			{
+				// これ以上良い値は見つからないはず？
+				break;
+			}
 
 			midR++;	//	右側2要素の中央の仕切りを右に移動する
 		}
@@ -103,7 +123,7 @@ int main()
 	}
 
 	// 最適なP/Q/R/Sの候補を計算し終えたので、最適解を出力する
-	long long output = 0xfffffffff;
+	long long output = std::numeric_limits<long long>::max();
 	for ( auto &&it : vT )
 	{
 		long long tmpLeft = std::get<0>( it );
