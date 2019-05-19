@@ -33,7 +33,12 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N, K;
+	string S;
 
+	cin >> N >> K >> S;
+	S[K - 1] = (char)( (char)S[K - 1] + abs('a' - 'A') );
 
+	cout << S << endl;
 	return ( 0 );
 }

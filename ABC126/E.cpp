@@ -33,6 +33,23 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N, M;
+	cin >> N >> M;
+
+	vector<int> v( N, 0 );
+	vector<tuple<int, int, int> > vt;
+	rep( i, N )
+	{
+		int tmpX, tmpY, tmpZ;
+		cin >> tmpX >> tmpY >> tmpZ;
+		v.ep( make_tuple( tmpX, tmpY, tmpZ ) );
+
+		if ( tmpZ % 2 )
+		{
+			// Z‚ª‹ô”‚È‚çAAxi‚ÆAyi‚à‹ô”‚ÅŠm’è
+			v[tmpX - 1] = v[tmpY - 1] = 1;
+		}
+	}
 
 
 	return ( 0 );

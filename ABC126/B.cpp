@@ -33,7 +33,37 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	long a = atoi( S.c_str() );
+
+	bool yymm = false, mmyy = false;
+	if ( ( ( a / 100 ) <= 12 ) && ( ( a / 100 ) >= 1 ) )
+	{
+		mmyy = true;
+	}
+	if ( ( ( a % 100 ) <= 12 ) && ( ( a % 100 ) >= 1 ) )
+	{
+		yymm = true;
+	}
+
+	if ( yymm && mmyy )
+	{
+		cout << "AMBIGUOUS" << endl;
+	}
+	else if ( yymm )
+	{
+		cout << "YYMM" << endl;
+	}
+	else if ( mmyy )
+	{
+		cout << "MMYY" << endl;
+	}
+	else
+	{
+		cout << "NA" << endl;
+	}
 
 	return ( 0 );
 }
