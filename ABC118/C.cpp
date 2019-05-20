@@ -33,10 +33,30 @@ using Pull = pair<ull, ull>;
 
 #define MOD ( 1e9 + 7 )
 
+long gcd( long a, long b )
+{
+	return ( b == 0 ? a : gcd( b, a % b ) );
+}
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N )
+	{
+		cin >> v[i];
+	}
+
+	// Å‘åŒö–ñ”‚ğ‹‚ß‚ê‚ÎOKH
+	long result = 1e9 + 1;
+	rep( i, N - 1 )
+	{
+		chmin( result, gcd( v[i], v[i + 1] ) );
+	}
+
+	cout << result << endl;
 
 	return ( 0 );
 }
