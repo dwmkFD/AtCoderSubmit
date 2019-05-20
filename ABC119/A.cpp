@@ -7,6 +7,8 @@
 #include <cmath>
 #include <map>
 
+#include <cstring>
+
 template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
@@ -36,7 +38,23 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	S[4] = '0';
+	S[7] = '0';
+
+	ll tmp = atoll( S.c_str() ) % 100000;
+	ll m = tmp / 1000;
+
+	if ( m >= 5 )
+	{
+		cout << "TBD" << endl;
+	}
+	else
+	{
+		cout << "Heisei" << endl;
+	}
 
 	return ( 0 );
 }
