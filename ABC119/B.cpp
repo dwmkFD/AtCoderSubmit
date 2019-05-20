@@ -6,6 +6,7 @@
 #include <tuple>
 #include <cmath>
 #include <map>
+#include <iomanip>
 
 template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
@@ -36,7 +37,27 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	double total = 0;
+	rep( i, N )
+	{
+		double d;
+		string s;
+		cin >> d >> s;
+
+		if ( s == "JPY" )
+		{
+			total += d;
+		}
+		else
+		{
+			total += d * 380000.0;
+		}
+	}
+
+	cout << fixed << setprecision( 8 ) << total << endl;
 
 	return ( 0 );
 }
