@@ -18,7 +18,7 @@ using ull = unsigned long long;
 using Pll  = pair<ll, ll>;
 using Pull = pair<ull, ull>;
 
-#define ep emplace_back
+#define eb emplace_back
 #define pb push_back
 #define mp( a, b ) make_pair( a, b )
 #define mt( ... ) make_tuple( __VA_ARGS__ )
