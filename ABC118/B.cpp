@@ -36,7 +36,33 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N, M;
+	cin >> N >> M;
 
+	map<int, int> m;
+	rep( i, N )
+	{
+		int K;
+		cin >> K;
+
+		rep( j, K )
+		{
+			int tmp;
+			cin >> tmp;
+			m[tmp]++;
+		}
+	}
+
+	long counter = 0;
+	for ( auto &&it : m )
+	{
+		if ( it.second >= N )
+		{
+			counter++;
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }
