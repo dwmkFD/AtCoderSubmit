@@ -1,9 +1,9 @@
 #include <iostream>
 #include <vector>
-#include <algorithm>
-
+ 
 using ull = unsigned long long;
-
+using ll = long long;
+ 
 // 1になっている最上位ビットを求める
 ull getmsb( ull x )
 {
@@ -13,10 +13,10 @@ ull getmsb( ull x )
 	x |= ( x >> 8  );
 	x |= ( x >> 16 );
 	x |= ( x >> 32 );
-
+ 
 	return ( x ^ ( x >> 1 ) );
 }
-
+ 
 // 1の数を求める
 ull popcnt( ull x )
 {
@@ -27,87 +27,78 @@ ull popcnt( ull x )
     t = ( t & 0x00ff00ff00ff00ff ) + ( ( t >> 8  ) & 0x00ff00ff00ff00ff );
     t = ( t & 0x0000ffff0000ffff ) + ( ( t >> 16 ) & 0x0000ffff0000ffff );
     t = ( t & 0x00000000ffffffff ) + ( ( t >> 32 ) & 0x00000000ffffffff );
-
+ 
     return ( t );
 }
-
+ 
 // 1になったビットがLSB側から何ビット目かを求める
 ull tzcnt( ull x )
 {
 	return ( popcnt( ~x & ( x - 1 ) ) );
 }
 
+template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
+ 
 int main()
 {
-	ull N, K;
+	ll N, K;
 	std::cin >> N >> K;
-
-	ull sum = 0;
-	std::vector<ull> v( N );
-	std::vector<ull> vv( 64 );
+ 
+	std::vector<ll> v( N );
 	for ( int i = 0; i < N; i++ )
 	{
 		std::cin >> v[i];
-		sum += v[i] ^ K;	//	X == Kが最適の可能性もある
-
-		for ( int j = 0; j < 64; j++ )
-		{
-			// jビット目が1？
-			v[i] & ( 1 << j ) ? vv[j]++ : 0;
-		}
 	}
 
-	// とりあえず、Kを考慮せずに最適っぽいXを求める
-	ull X = 0;
-	for ( int i = 0; i <= tzcnt( getmsb( K ) ); i++ )
-	{
-		if ( vv[i] < ( N + 1 ) / 2 )
-		{
-			// iビット目が1になっている値の方が少ないので
-			// Xのiビット目は1にするべき
-			X |= ( 1 << i );
-		}
-	}
+	std::vector<std::vector<ll> > dp( 128, std::vector<ll>( 2, -1 ) );
+	dp[0][0] = 0;
 
-	if ( X > K )
+	for ( int i = 0; i < 64; i++ )	//	上からi桁目の0/1を決める
 	{
-		for ( int i = tzcnt( getmsb( K ) ); i >= 0; --i )
+		ll d = 64 - ( i + 1 );
+		ll num = 0;
+		for ( int j = 0; j < N; j++ )
 		{
-			if ( K & ( 1 << i ) )
+			if ( v[j] & ( 1LL << d ) )
 			{
-				ull tmpK = K & ~( 1 << i );	//	iビット目を落とす
-				ull tmpSum = 0;
+				num++;
+			}
+		}
 
-				for ( int j = 0; j < N; j++ )
-				{
-					tmpSum += v[j] ^ tmpK;
-				}
+		// d桁目が0の場合、1の場合それぞれの結果
+		ll cost0 = num * ( 1LL << d );
+		ll cost1 = ( N - num ) * ( 1LL << d );
 
-				if ( tmpSum > sum )
-				{
-					// 今回の方が大きくなった＝Kのiビット目は落とした方が良い
-					// -> iビット目を落とした以上、i-1, i-2, ... 1ビット目は
-					// 好き勝手に選んでもKより大きくならないので、
-					// 先ほど求めた「理想のXの値」から流用して良い
-					K &= ~( ( 1 << ( i + 1 ) ) - 1 ); 			// iビット目以下を全部落とす
-					K |= ( ( ( 1 << ( i + 1 ) ) - 1 ) & X );	// iビット目以下は全部Xにする
-					break;
-				}
+		if ( dp[i][1] != -1 )
+		{
+			// 0/1をGreedyに決めて良い
+			chmax( dp[i + 1][1], dp[i][1] + std::max( cost0, cost1 ) );
+		}
+
+		if ( dp[i][0] != -1 )
+		{
+			// Kのiビット目が1だったら、Xのiビット目は0にする
+			if ( K & ( 1LL << d ) )
+			{
+				chmax( dp[i + 1][1], dp[i][0] + cost0 );
+			}
+		}
+
+		if ( dp[i][0] != -1 )
+		{
+			// KとXのiビット目を合わせる
+			if ( K & ( 1LL << d ) )
+			{
+				chmax( dp[i + 1][0], dp[i][0] + cost1 );
+			}
+			else
+			{
+				chmax( dp[i + 1][0], dp[i][0] + cost0 );
 			}
 		}
 	}
-	else
-	{
-		K = X;	//	理想のXがK以下の条件を満たしているので、そのまま採用する
-	}
 
-	ull result = 0;
-	for ( int i = 0; i < N; i++ )
-	{
-		result += v[i] ^ K;
-	}
-
-	std::cout << result << std::endl;
+	std::cout << std::max( dp[64][0], dp[64][1] ) << std::endl;
 
 	return ( 0 );
 }
