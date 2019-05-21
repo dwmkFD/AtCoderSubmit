@@ -36,7 +36,21 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int A, B, K;
+	cin >> A >> B >> K;
 
+	vector<int> v;
+
+	rreps( i, B )
+	{
+		if ( ( ( A % i ) == 0 )
+			 && ( ( B % i ) == 0 ) )
+		{
+			v.eb( i );
+		}
+	}
+
+	cout << v[K - 1] << endl;
 
 	return ( 0 );
 }
