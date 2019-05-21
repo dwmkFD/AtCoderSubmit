@@ -36,7 +36,17 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int A, B, C;
+	cin >> A >> B >> C;
 
+	int tmp = B / A;
+
+	if ( tmp >= C )
+	{
+		tmp = C;
+	}
+
+	cout << tmp << endl;
 
 	return ( 0 );
 }
