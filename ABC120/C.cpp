@@ -36,7 +36,21 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	int num0 = 0;
+	for ( int i = 0; i < S.size(); i++ )
+	{
+		if ( S[i] == '0' )
+		{
+			num0++;
+		}
+	}
+
+	int num1 = S.size() - num0;
+
+	cout << min( num0, num1 ) * 2 << endl;
 
 	return ( 0 );
 }
