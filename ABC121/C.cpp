@@ -20,6 +20,8 @@ using Pull = pair<ull, ull>;
 
 #define eb emplace_back
 #define pb push_back
+#define F first
+#define S second
 #define mp( a, b ) make_pair( a, b )
 #define mt( ... ) make_tuple( __VA_ARGS__ )
 
@@ -36,7 +38,38 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	vector<Pll> v( N );
+	rep( i, N )
+	{
+		ll a, b;
+		cin >> a >> b;
+		v[i] = { a, b };
+	}
+
+	sort( ALL( v ), []( Pll a, Pll b ) {
+			return( a.F < b.F );
+		} );
+
+	ll num = 0;
+	ll cost = 0;
+	rep( i, N )
+	{
+		if ( num + v[i].S < M )
+		{
+			cost += v[i].F * v[i].S;
+			num += v[i].S;
+		}
+		else
+		{
+			cost += v[i].F * ( M - num );
+			break;
+		}
+	}
+
+	cout << cost << endl;
 
 	return ( 0 );
 }
