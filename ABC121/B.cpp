@@ -36,7 +36,44 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N, M, C;
+	cin >> N >> M >> C;
 
+	vector<int> B( M );
+	rep( i, M )
+	{
+		cin >> B[i];
+	}
+
+	vector<vector<int>> A( N, vector<int>( M ) );
+	rep( i, N )
+	{
+		rep( j, M )
+		{
+			cin >> A[i][j];
+		}
+	}
+
+	vector<int> ans( N, 0 );
+	rep( i, N )
+	{
+		rep( j, M )
+		{
+			ans[i] += A[i][j] * B[j];
+		}
+		ans[i] += C;
+	}
+
+	int counter = 0;
+	rep( i, N )
+	{
+		if ( ans[i] > 0 )
+		{
+			counter++;
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }
