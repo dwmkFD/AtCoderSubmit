@@ -33,10 +33,37 @@ using Pull = pair<ull, ull>;
 
 #define MOD ( 1e9 + 7 )
 
+bool chkS( char c )
+{
+	switch ( c )
+	{
+	case 'A': case 'C': case 'G': case 'T': return ( true );
+	default: return( false );
+	}
+}
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	int s = 0;
+	int t = 0;
+	rep( i, S.size() )
+	{
+		if ( chkS( S[i] ) )
+		{
+			s++;
+		}
+		else
+		{
+			chmax( t, s );
+			s = 0;
+		}
+	}
+	chmax( t, s );
+
+	cout << t << endl;
 
 	return ( 0 );
 }
