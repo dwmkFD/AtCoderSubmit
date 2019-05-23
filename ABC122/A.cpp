@@ -36,7 +36,16 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	char b;
+	cin >> b;
 
+	switch ( b )
+	{
+	case 'A' : cout << "T" << endl; break;
+	case 'C' : cout << "G" << endl; break;
+	case 'G' : cout << "C" << endl; break;
+	case 'T' : cout << "A" << endl; break;
+	}
 
 	return ( 0 );
 }
