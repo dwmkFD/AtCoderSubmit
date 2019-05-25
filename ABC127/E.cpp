@@ -34,11 +34,24 @@ using Pull = pair<ull, ull>;
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 
-#define MOD ( 1e9 + 7 )
+#define MOD ( (ll)( 1e9 + 7 ) )
 
 
 int main()
 {
+	ll N, M, K;
+	cin >> N >> M >> K;
+
+	// コストは、v[i2][j2] - v[i1][j1] で計算できる？？
+	// -> できるとして、mnCk 通りも駒の置き方があるのに、どうやって求める？？
+	vector<vector<ll>> v( N, vector<ll>( M, 0 ) );
+	rep( i, N )
+	{
+		rep( j, M )
+		{
+			v[i][j] = i + j;
+		}
+	}
 
 
 	return ( 0 );

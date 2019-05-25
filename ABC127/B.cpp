@@ -39,7 +39,14 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int r, D, x;
+	cin >> r >> D >> x;
 
+	rep( i, 10 )
+	{
+		x = r * x - D;
+		cout << x << endl;
+	}
 
 	return ( 0 );
 }

@@ -39,7 +39,30 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	vector<Pll> v( M );
+	rep( i, M )
+	{
+		cin >> v[i].F >> v[i].S;
+	}
+
+	ll min = N, max = 0;
+
+	rep( i, M )
+	{
+		chmax( max, v[i].F );
+		chmin( min, v[i].S );
+	}
+
+	ll result = ( min - max ) + 1;
+	if ( result < 0 )
+	{
+		result = 0;
+	}
+
+	cout << result << endl;
 
 	return ( 0 );
 }
