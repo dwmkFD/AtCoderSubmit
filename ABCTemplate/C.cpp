@@ -23,6 +23,9 @@ using Pull = pair<ull, ull>;
 #define mp( a, b ) make_pair( a, b )
 #define mt( ... ) make_tuple( __VA_ARGS__ )
 
+#define F first
+#define S second
+
 #define rep( i, n ) for ( int i = 0; i < (int)( n ); ++i )
 #define reps( i, n ) for ( int i = 1; i <= (int)( n ); ++i )
 #define rrep( i, n ) for ( int i = (int)( ( n ) - 1 ); i >= 0; --i )
