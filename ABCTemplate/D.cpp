@@ -34,7 +34,7 @@ using Pull = pair<ull, ull>;
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 
-#define MOD ( 1e9 + 7 )
+#define MOD ( (ll)( 1e9 + 7 ) )
 
 
 int main()
