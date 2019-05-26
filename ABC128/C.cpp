@@ -36,10 +36,51 @@ using Pull = pair<ull, ull>;
 
 #define MOD ( (ll)( 1e9 + 7 ) )
 
-
 int main()
 {
+	int N, M;
+	cin >> N >> M;
 
+	int k;
+	vector<vector<int>> s( M );
+	vector<bitset<10>> b( M );
+	rep( i, M )
+	{
+		cin >> k;
+		s[i].resize( k );
+		rep( j, k )
+		{
+			// 各電球についてのマスクビットを作る
+			cin >> s[i][j];
+			b[i].set( s[i][j] - 1 );
+		}
+	}
+
+	vector<int> p( M );
+	rep( i, M )
+	{
+		cin >> p[i];
+	}
+
+	ll count = 0;
+	const int loop = pow( 2, N );
+	rep( i, loop )
+	{
+		bool chk = true;
+		rep( j, M )
+		{
+			bitset<10> tmp = i;
+			auto res = b[j] & tmp;
+			if ( ( res.count() % 2 ) != p[j] )
+			{
+				chk = false;
+				break;
+			}
+		}
+		if ( chk ) count++;
+	}
+
+	cout << count << endl;
 
 	return ( 0 );
 }

@@ -39,7 +39,30 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<tuple<string, ll, ll>> v( N );
+	rep( i, N )
+	{
+		string S;
+		ll P;
+		cin >> S >> P;
+		v[i] = mt( S, P, i + 1 );
+	}
+
+	sort( ALL( v ), []( tuple<string, ll, ll> a, tuple<string, ll, ll> b ) {
+			return ( get<1>( a ) > get<1>( b ) );
+		} );
+
+	stable_sort( ALL( v ), []( tuple<string, ll, ll> a, tuple<string, ll, ll> b ) {
+			return ( get<0>( a ) < get<0>( b ) );
+		} );
+
+	rep( i, N )
+	{
+		cout << get<2>( v[i] ) << endl;
+	}
 
 	return ( 0 );
 }
