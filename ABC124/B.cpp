@@ -7,7 +7,7 @@
 #include <cmath>
 #include <map>
 
-template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
@@ -39,7 +39,24 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) { cin >> v[i]; }
+
+	int counter = 0;
+	int max = 0;
+
+	rep( i, N )
+	{
+		if ( chmax( max, v[i] ) )
+		{
+			++counter;
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }
