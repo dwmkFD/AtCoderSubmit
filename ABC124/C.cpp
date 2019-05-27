@@ -39,7 +39,48 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	int cnt[2] = { 0 };
+	rep( i, S.size() )
+	{
+		if ( S[i] == '0' )
+		{
+			cnt[i % 2]++;
+		}
+	}
+
+	int eB, eW, oB, oW;
+	eB = cnt[0];
+	oB = cnt[1];
+	eW = ( ( S.size() + 1 ) / 2 ) - cnt[0];
+	oW = ( S.size() - ( ( S.size() + 1 ) / 2 ) ) - cnt[1];
+
+	int rB, rW;
+	if ( oB < eB )
+	{
+		rB = eW;
+		rB += oB;
+	}
+	else
+	{
+		rB = oW;
+		rB += eB;
+	}
+
+	if ( oW < eW )
+	{
+		rW = eB;
+		rW += oW;
+	}
+	else
+	{
+		rW = oB;
+		rW += eW;
+	}
+
+	cout << min( rB, rW ) << endl;
 
 	return ( 0 );
 }
