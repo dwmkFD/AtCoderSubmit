@@ -7,7 +7,7 @@
 #include <cmath>
 #include <map>
 
-template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
@@ -39,46 +39,24 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
-	ll X, Y, Z, K;
-	cin >> X >> Y >> Z >> K;
+	int N;
+	cin >> N;
 
-	vector<ll> A( X ), B( Y ), C( Z );
-	rep( i, X ) { cin >> A[i]; }
-	rep( i, Y ) { cin >> B[i]; }
-	rep( i, Z ) { cin >> C[i]; }
+	vector<int> v( N );
+	rep( i, N ) { cin >> v[i]; }
 
-	// A/B/Cを降順ソート
-	sort( ALL( A ), greater<ll>() );
-	sort( ALL( B ), greater<ll>() );
-	sort( ALL( C ), greater<ll>() );
+	int counter = 0;
+	int max = 0;
 
-	// A/B/Cからそれぞれi/j/k番目のケーキを選ぶパターンを
-	// i * j * k <= K となるように全て選び、最後にソートする
-	vector<ll> res;
-	rep( i, X )
+	rep( i, N )
 	{
-		rep( j, Y )
+		if ( chmax( max, v[i] ) )
 		{
-			rep( k, Z )
-			{
-				if ( ( i + 1 ) * ( j + 1 ) * ( k + 1 ) <= K )
-				{
-					res.eb( A[i] + B[j] + C[k] );
-				}
-				else
-				{
-					break;
-				}
-			}
+			++counter;
 		}
 	}
 
-	sort( ALL( res ), greater<ll>() );
-
-	rep( i, K )
-	{
-		cout << res[i] << endl;
-	}
+	cout << counter << endl;
 
 	return ( 0 );
 }

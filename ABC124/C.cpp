@@ -39,46 +39,48 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
-	ll X, Y, Z, K;
-	cin >> X >> Y >> Z >> K;
+	string S;
+	cin >> S;
 
-	vector<ll> A( X ), B( Y ), C( Z );
-	rep( i, X ) { cin >> A[i]; }
-	rep( i, Y ) { cin >> B[i]; }
-	rep( i, Z ) { cin >> C[i]; }
-
-	// A/B/Cを降順ソート
-	sort( ALL( A ), greater<ll>() );
-	sort( ALL( B ), greater<ll>() );
-	sort( ALL( C ), greater<ll>() );
-
-	// A/B/Cからそれぞれi/j/k番目のケーキを選ぶパターンを
-	// i * j * k <= K となるように全て選び、最後にソートする
-	vector<ll> res;
-	rep( i, X )
+	int cnt[2] = { 0 };
+	rep( i, S.size() )
 	{
-		rep( j, Y )
+		if ( S[i] == '0' )
 		{
-			rep( k, Z )
-			{
-				if ( ( i + 1 ) * ( j + 1 ) * ( k + 1 ) <= K )
-				{
-					res.eb( A[i] + B[j] + C[k] );
-				}
-				else
-				{
-					break;
-				}
-			}
+			cnt[i % 2]++;
 		}
 	}
 
-	sort( ALL( res ), greater<ll>() );
+	int eB, eW, oB, oW;
+	eB = cnt[0];
+	oB = cnt[1];
+	eW = ( ( S.size() + 1 ) / 2 ) - cnt[0];
+	oW = ( S.size() - ( ( S.size() + 1 ) / 2 ) ) - cnt[1];
 
-	rep( i, K )
+	int rB, rW;
+	if ( oB < eB )
 	{
-		cout << res[i] << endl;
+		rB = eW;
+		rB += oB;
 	}
+	else
+	{
+		rB = oW;
+		rB += eB;
+	}
+
+	if ( oW < eW )
+	{
+		rW = eB;
+		rW += oW;
+	}
+	else
+	{
+		rW = oB;
+		rW += eW;
+	}
+
+	cout << min( rB, rW ) << endl;
 
 	return ( 0 );
 }

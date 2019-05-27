@@ -39,46 +39,60 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
-	ll X, Y, Z, K;
-	cin >> X >> Y >> Z >> K;
+	int N, K;
+	cin >> N >> K;
 
-	vector<ll> A( X ), B( Y ), C( Z );
-	rep( i, X ) { cin >> A[i]; }
-	rep( i, Y ) { cin >> B[i]; }
-	rep( i, Z ) { cin >> C[i]; }
+	string S;
+	cin >> S;
 
-	// A/B/Cを降順ソート
-	sort( ALL( A ), greater<ll>() );
-	sort( ALL( B ), greater<ll>() );
-	sort( ALL( C ), greater<ll>() );
-
-	// A/B/Cからそれぞれi/j/k番目のケーキを選ぶパターンを
-	// i * j * k <= K となるように全て選び、最後にソートする
-	vector<ll> res;
-	rep( i, X )
+	vector<int> v;
+	v.eb( 0 );	//	最初の始点
+	reps( i, N - 1 )
 	{
-		rep( j, Y )
+		if ( S[i] != S[i - 1] )
 		{
-			rep( k, Z )
+			v.eb( i );
+		}
+	}
+	v.eb( N );
+
+	vector<int> max;
+	rep( i, v.size() )
+	{
+		if ( S[v[i]] == '0' )
+		{
+			if ( i + 2 * K > v.size() - 1 )
 			{
-				if ( ( i + 1 ) * ( j + 1 ) * ( k + 1 ) <= K )
-				{
-					res.eb( A[i] + B[j] + C[k] );
-				}
-				else
-				{
-					break;
-				}
+				// K回も操作をしなくても残り全部1になる場合
+				max.eb( N - v[i] );
+				break;
+			}
+			else
+			{
+				max.eb( v[i + 2 * K] - v[i] );
+			}
+		}
+		else
+		{
+			if ( i + 2 * K + 1 > v.size() - 1 )
+			{
+				max.eb( N - v[i] );
+				break;
+			}
+			else
+			{
+				max.eb( v[i + 2 * K + 1] - v[i] );
 			}
 		}
 	}
 
-	sort( ALL( res ), greater<ll>() );
-
-	rep( i, K )
+	int result = 1;
+	for ( auto &&it : max )
 	{
-		cout << res[i] << endl;
+		chmax( result, it );
 	}
+
+	cout << result << endl;
 
 	return ( 0 );
 }

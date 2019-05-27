@@ -39,46 +39,13 @@ using Pull = pair<ull, ull>;
 
 int main()
 {
-	ll X, Y, Z, K;
-	cin >> X >> Y >> Z >> K;
+	int A, B;
+	cin >> A >> B;
 
-	vector<ll> A( X ), B( Y ), C( Z );
-	rep( i, X ) { cin >> A[i]; }
-	rep( i, Y ) { cin >> B[i]; }
-	rep( i, Z ) { cin >> C[i]; }
+	int result = A > B ? A-- : B--;
+	result += A > B ? A : B;
 
-	// A/B/Cを降順ソート
-	sort( ALL( A ), greater<ll>() );
-	sort( ALL( B ), greater<ll>() );
-	sort( ALL( C ), greater<ll>() );
-
-	// A/B/Cからそれぞれi/j/k番目のケーキを選ぶパターンを
-	// i * j * k <= K となるように全て選び、最後にソートする
-	vector<ll> res;
-	rep( i, X )
-	{
-		rep( j, Y )
-		{
-			rep( k, Z )
-			{
-				if ( ( i + 1 ) * ( j + 1 ) * ( k + 1 ) <= K )
-				{
-					res.eb( A[i] + B[j] + C[k] );
-				}
-				else
-				{
-					break;
-				}
-			}
-		}
-	}
-
-	sort( ALL( res ), greater<ll>() );
-
-	rep( i, K )
-	{
-		cout << res[i] << endl;
-	}
+	cout << result << endl;
 
 	return ( 0 );
 }
