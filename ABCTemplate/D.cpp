@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <numeric>
 #include <vector>
 #include <string>
 #include <bitset>
@@ -7,8 +8,8 @@
 #include <cmath>
 #include <map>
 
-template<typename T> bool chmax( T &a, T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
 
@@ -30,11 +31,12 @@ using Pull = pair<ull, ull>;
 #define reps( i, n ) for ( int i = 1; i <= (int)( n ); ++i )
 #define rrep( i, n ) for ( int i = (int)( ( n ) - 1 ); i >= 0; --i )
 #define rreps( i, n ) for ( int i = (int)( ( n ) ); i > 0; --i )
+#define arep( i, v ) for ( auto &&i : v )
 
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 
-#define MOD ( (ll)( 1e9 + 7 ) )
+const ll MOD = 1000000007LL;
 
 
 int main()
