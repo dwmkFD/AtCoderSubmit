@@ -21,8 +21,8 @@ using Pull = pair<ull, ull>;
 
 #define eb emplace_back
 #define pb push_back
-#define mp( a, b ) make_pair( a, b )
-#define mt( ... ) make_tuple( __VA_ARGS__ )
+#define mp make_pair
+#define mt make_tuple
 
 #define F first
 #define S second
@@ -33,11 +33,19 @@ using Pull = pair<ull, ull>;
 #define rreps( i, n ) for ( int i = (int)( ( n ) ); i > 0; --i )
 #define arep( i, v ) for ( auto &&i : v )
 
+template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
+
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 
 const ll MOD = 1000000007LL;
 
+#define y0 y3487465
+#define y1 y8687969
+#define j0 j1347829
+#define j1 j234892
+#define next asdnext
+#define prev asdprev
 
 int main()
 {
