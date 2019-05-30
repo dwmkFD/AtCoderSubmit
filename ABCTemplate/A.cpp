@@ -37,6 +37,7 @@ template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b 
 
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
+#define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
 const ll MOD = 1000000007LL;
 
