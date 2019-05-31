@@ -68,7 +68,17 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	if ( N <= 999 )
+	{
+		cout << "ABC" << endl;
+	}
+	else
+	{
+		cout << "ABD" << endl;
+	}
 
 	return ( 0 );
 }
