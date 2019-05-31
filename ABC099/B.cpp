@@ -68,7 +68,17 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	int a, b;
+	cin >> a >> b;
 
+	int c = b - a;
+	int ans = 0;
+	reps( i, c )
+	{
+		ans += i;
+	}
+
+	cout << ans - b << endl;
 
 	return ( 0 );
 }
