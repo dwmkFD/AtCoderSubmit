@@ -31,7 +31,7 @@ using Pull = pair<ull, ull>;
 #define reps( i, n ) for ( int i = 1; i <= (int)( n ); ++i )
 #define rrep( i, n ) for ( int i = (int)( ( n ) - 1 ); i >= 0; --i )
 #define rreps( i, n ) for ( int i = (int)( ( n ) ); i > 0; --i )
-#define arep( i, v ) for ( auto &&i : v )
+#define arep( i, v ) for ( auto &&i : ( v ) )
 
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 
@@ -47,6 +47,24 @@ const ll MOD = 1000000007LL;
 #define j1 j234892
 #define next asdnext
 #define prev asdprev
+
+template<typename T = ll> class UnionFind {
+public:
+	UnionFind( T n ) { rep( i, n ) { par[i] = i; siz[i] = 1; } }
+	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
+	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
+		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
+private:
+	vector<T> par, siz;
+};
+
+template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
+	T res = 1;
+	while ( b > 0 ) { if ( b & 1 ) res = res * a % m;
+		a = a * a % m; b >>= 1; }
+	return ( res );
+}
+
 
 int main()
 {
