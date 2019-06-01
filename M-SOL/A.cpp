@@ -68,7 +68,10 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	cout << ( 180 * ( N - 2 ) ) << endl; 
 
 	return ( 0 );
 }

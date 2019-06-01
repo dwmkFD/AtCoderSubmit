@@ -68,6 +68,8 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	ll N, A, B, C;
+	cin >> N >> A >> B >> C;
 
 
 	return ( 0 );

@@ -39,7 +39,7 @@ template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b 
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
-const ll MOD = 1000000007LL;
+const ll MOD = 1000003LL;
 
 #define y0 y3487465
 #define y1 y8687969
@@ -65,10 +65,24 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 	return ( res );
 }
 
+ll fact[10000];
 
 int main()
 {
+	int Q;
+	cin >> Q;
 
+	vector<tuple<ll, ll, ll>> v;
+	rep( i, Q )
+	{
+		ll x, d, n;
+		cin >> x >> d >> n;
+
+
+		ll ans = 0;
+
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }

@@ -68,7 +68,58 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> vp( N, 0 );
+	vector<vector<ll>> vv( N, vector<ll>( N, 0 ) );
+	rep( i, N - 1 )
+	{
+		ll a, b;
+		cin >> a >> b;
+		--a, --b;
+		vv[a][b] = 1;
+		vv[b][a] = 1;
+		vp[a]++;
+		vp[b]++;
+	}
+
+	vector<Pll> v( N );
+	vector<ll> vc( N );
+	rep( i, N )
+	{
+		cin >> vc[i];
+		v[i].F = i; v[i].S = vp[i];
+	}
+
+	// 繋がってる辺が多い頂点には大きい点数を割り当てたい（各辺に相手の重みを採用してあげられる）
+	sort( ALL( vc ), []( ll a, ll b ) { return ( a > b ); } );
+	stable_sort( ALL( v ), []( Pll a, Pll b ) { return ( a.S > b.S ); } );
+
+	ll sum = 0;
+	rep( i, N )
+	{
+		v[i].S = vc[i];
+	}
+	rep ( i, N )
+	{
+		for ( int j = i + 1; j < N; j++ )
+		{
+			if ( vv[i][j] != 0 )
+			{
+				vv[i][j] = min( v[i].S, v[j].S );
+				sum += vv[i][j];
+				vv[j][i] = 0;
+			}
+		}
+	}
+	sort( ALL( v ) );
+	cout << sum << endl;
+	rep( i, N )
+	{
+		cout << v[i].S << " ";
+	}
+	cout << endl;
 
 	return ( 0 );
 }

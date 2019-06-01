@@ -68,7 +68,19 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	string S;
+	cin >> S;
 
+	ll cnt = 0;
+	rep( i, S.size() )
+	{
+		if ( S[i] == 'x' )
+		{
+			cnt++;
+		}
+	}
 
+	cout << ( ( cnt <= 7 ) ? "YES" : "NO" ) << endl;
+	
 	return ( 0 );
 }
