@@ -68,7 +68,89 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	int N, A, B, C, D;
+	string S;
+	cin >> N >> A >> B >> C >> D >> S;
+	--A, --B, --C, --D;
 
+	bitset<200000> b;
+	rep( i, N )
+	{
+		if ( S[i] == '.' )
+		{
+			b[i] = 0;
+		}
+		else
+		{
+			b[i] = 1;
+		}
+	}
+
+	bool ans = true;
+	// 左右が初期位置から入れ替わらない場合
+	// -> B->Dを先に移動させれば良い
+	// --> B<->D間に岩が2個連続で置かれていなければOK
+	// ---> 同様に、A<->C間に岩が2個連続で置かれていなければOK
+	for ( int i = A; i < C - 1; i++ )
+	{
+		if ( b[i] & b[i + 1] )
+		{
+			ans = false;
+			break;
+		}
+	}
+	for ( int i = B; i < D - 1; i++ )
+	{
+		if ( b[i] & b[i + 1] )
+		{
+			ans = false;
+			break;
+		}
+	}
+
+	if ( C < D )
+	{
+		// 上の検索だけで終わり
+	}
+	else
+	{
+		// 左右が初期位置から入れ替わる場合
+		// -> A->Cを移動させられなければNG
+		if ( ans )
+		{
+			// 連続配置はなかった
+			bool empty3 = false;
+			// A<->D間に岩が無い区間3つが必要（でないとBを追い越せない）
+			for ( int i = A; i <= D - 1; i++ )	// Dより左にしないと、BがDに置けない
+			{
+				if ( ( b[i] | b[i + 1] | b[i + 2] ) == 0 )
+				{
+					if ( B != i + 2 )
+					{
+						// Bの初期配置だったらダメ
+						empty3 = true;
+						break;
+					}
+				}
+			}
+
+			b[B] = 1;	//	Bを岩扱いにする
+			if ( empty3 == false )
+			{
+				// 3連続空いた場所はないけど、Bを岩扱いして2連続岩がなければOK
+				for ( int i = A; i < C - 1; i++ )
+				{
+					if ( b[i] & b[i + 1] )
+					{
+						ans = false;
+						break;
+					}
+				}
+			}
+		}
+	}
+
+	cout << ( ans ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }

@@ -65,10 +65,34 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 	return ( res );
 }
 
+ll rABC( string &s, string t, string r )
+{
+	string::size_type p = 0;
+	ll cnt = 0;
+	while ( ( p = s.find( t, p ) ) != string::npos )
+	{
+		s.replace( p, t.length(), r );
+		p += t.length();
+		++cnt;
+	}
+
+	return ( cnt );
+}
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	// BC‚ðX‚É’u‚«Š·‚¦‚é
+	rABC( s, "BC", "X" );
+	ll count = 0;
+	ll tmp = 0;
+	while ( ( tmp = rABC( s, "AX", "XA" ) ) != 0 )
+	{
+		count += tmp;
+	}
 
+	cout << count << endl;
 	return ( 0 );
 }
