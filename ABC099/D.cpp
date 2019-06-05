@@ -40,6 +40,7 @@ template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b 
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
 const ll MOD = 1000000007LL;
+const ll INF = 1000000010LL;
 
 #define y0 y3487465
 #define y1 y8687969
@@ -68,7 +69,54 @@ template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
 
 int main()
 {
+	int N, C;
+	cin >> N >> C;
 
+	vector<vector<int>> vD( C, vector<int>( C ) );
+	vector<vector<int>> vC( 3, vector<int>( C ) );
+
+	rep( i, C )
+	{
+		rep( j, C )
+		{
+			cin >> vD[i][j];
+		}
+	}
+
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			int c;
+			cin >> c;
+			vC[( i + j ) % 3][c - 1]++;
+		}
+	}
+
+	ll result = INF;
+	rep( i, C )
+	{
+		rep( j, C )
+		{
+			if ( i != j )	//	i‚Æj‚ª“™‚µ‚¢‚ÍF‚Í•Ï‚í‚ç‚È‚¢
+			{
+				rep( k, C )
+				{
+					if ( ( i != k ) && ( j != k ) )
+					{
+						ll total = 0;
+						rep ( l, C ) total += vD[l][i] * vC[0][l];
+						rep ( l, C ) total += vD[l][j] * vC[1][l];
+						rep ( l, C ) total += vD[l][k] * vC[2][l];
+
+						chmin( result, total );
+					}
+				}
+			}
+		}
+	}
+
+	cout << result << endl;
 
 	return ( 0 );
 }
