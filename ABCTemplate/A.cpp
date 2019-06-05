@@ -39,7 +39,7 @@ template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b 
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
-const ll MOD = 1000000007LL;
+constexpr ll MOD = 1000000007LL;
 
 #define y0 y3487465
 #define y1 y8687969
@@ -58,12 +58,37 @@ private:
 	vector<T> par, siz;
 };
 
-template<typename T = ll> T binpow( T a, T b, T m = MOD ) {
+template<typename T = ll> T power( T a, T b, T m = MOD ) {
 	T res = 1;
 	while ( b > 0 ) { if ( b & 1 ) res = res * a % m;
 		a = a * a % m; b >>= 1; }
 	return ( res );
 }
+
+/*
+constexpr ll MAX = 500010;
+ll fact[MAX];
+ll inv[MAX];
+ll inv_fact[MAX];
+
+template<typename T> void initComb( T n, T m = MOD )
+{
+	fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
+	inv[1] = 1;
+	for ( int i = 2; i < n; i++ ) {
+		fact[i] = ( fact[i - 1] * i ) % m;
+		inv[i] = m - inv[m % i] * ( m / i ) % m;
+		inv_fact[i] = inv_fact[i - 1] * inv[i] % m;
+	}
+}
+
+template<typename T> T comb( T n, T r, T m = MOD )
+{
+	if ( n < r ) return ( 0 );
+	if ( n < 0 || r < 0 ) return ( 0 );
+	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
+}
+*/
 
 void replace( string &s, string t, string r ) {
 	string::size_type p = 0;
