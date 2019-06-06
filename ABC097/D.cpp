@@ -50,7 +50,7 @@ constexpr ll MOD = 1000000007LL;
 
 template<typename T = ll> class UnionFind {
 public:
-	UnionFind( T n ) { rep( i, n ) { par[i] = i; siz[i] = 1; } }
+	UnionFind( T n ) { rep( i, n ) { par.resize( n ); siz.resize( n ); par[i] = i; siz[i] = 1; } }
 	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
 	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
 		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
@@ -101,7 +101,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, M;
+	cin >> N >> M;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	UnionFind<int> uf( N );
+	rep( i, M )
+	{
+		int x, y;
+		cin >> x >> y;
+		--x, --y;
+
+		uf.unite( x, y );
+	}
+
+	ll cnt = 0;
+	rep( i, N )
+	{
+		if ( uf.find( i ) == uf.find( v[i] - 1 ) )
+		{
+			cnt++;
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
