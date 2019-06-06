@@ -6,6 +6,7 @@
 #include <bitset>
 #include <tuple>
 #include <cmath>
+#include <queue>
 #include <map>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
@@ -101,7 +102,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	int K;
+	cin >> s >> K;
 
+	priority_queue<string, vector<string>, greater<string>> q;
+	map<string, int> m;
+
+	int N = s.size();
+	rep( i, N )
+	{
+		for ( int j = 1; j <= K; j++ )
+		{
+			m[s.substr( i, j )] = 1;
+		}
+	}
+
+	arep( it, m )
+	{
+		q.emplace( it.F );
+	}
+
+	rep( i, K - 1 )
+	{
+		q.pop();
+	}
+
+	cout << q.top() << endl;
 
 	return ( 0 );
 }
