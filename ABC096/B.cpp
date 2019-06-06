@@ -101,7 +101,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, K;
+	cin >> A >> B >> C >> K;
 
+	int x = max( { A, B, C } );
+	int y = x;
+	x *= pow( 2, K );
+
+	cout << ( A + B + C + x - y ) << endl;
 
 	return ( 0 );
 }
