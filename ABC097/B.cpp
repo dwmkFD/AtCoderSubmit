@@ -5,6 +5,7 @@
 #include <string>
 #include <bitset>
 #include <tuple>
+#include <queue>
 #include <cmath>
 #include <map>
 
@@ -101,7 +102,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int X;
+	cin >> X;
 
+	priority_queue<int> q;
+
+	reps( i, X )
+	{
+		for ( int j = 2; ; j++ )
+		{
+			int tmp = pow( i, j );
+			if ( tmp < X )
+			{
+				q.emplace( tmp );
+				if ( i == 1 ) { break; }
+			}
+			else if ( tmp == X )
+			{
+				cout << X << endl;
+				return ( 0 );
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	cout << q.top() << endl;
 
 	return ( 0 );
 }
