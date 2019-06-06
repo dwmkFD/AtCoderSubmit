@@ -101,7 +101,31 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	string S;
+	cin >> N >> S;
 
+	int count = 0;
+	rep( i, N - 1 )
+	{
+		string x = S.substr( 0, i + 1 );
+		string y = S.substr( i + 1 );
+
+		int tmp = 0;
+		map<char, int> m;
+		rep( j, x.size() )
+		{
+			if ( ( y.find( x[j] ) != string::npos )
+				 && ( m[x[j]] == 0 ) )
+			{
+				tmp++;
+				m[x[j]]++;
+			}
+		}
+		chmax( count, tmp );
+	}
+
+	cout << count << endl;
 
 	return ( 0 );
 }
