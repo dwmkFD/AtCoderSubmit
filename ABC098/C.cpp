@@ -101,7 +101,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	string S;
+	cin >> N >> S;
 
+	vector<int> v( N );
+	vector<int> vv( N + 1 );
+	vv[0] = 0;
+	rep( i, N )
+	{
+		v[i] = ( S[i] == 'E' ? 1 : 0 );
+		vv[i + 1] = vv[i] + v[i];	//	東を向いている人数の累計
+	}
+
+	int cnt = 1 << 20;
+	rep( i, N + 1 )
+	{
+		// i番目の人をリーダーにする時
+		int tmp1 = i - vv[i];		//	i-1番目までの人は東向きにする
+		int tmp2 = vv[N] - vv[i];	//	i+1番目以降の人は西向きにする
+
+		chmin( cnt, tmp1 + tmp2 );
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
