@@ -101,7 +101,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int P, Q, R;
+	cin >> P >> Q >> R;
 
+	cout << P + Q + R - max( { P, Q, R } ) << endl;
 
 	return ( 0 );
 }

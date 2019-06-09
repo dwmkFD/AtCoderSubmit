@@ -101,7 +101,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) { cin >> v[i]; }
+
+	vector<int> vv( N + 1 );
+	vv[0] = 0;
+	rep( i, N )
+	{
+		vv[i + 1] = vv[i] + v[i];
+	}
+
+	int cnt = 10000000;
+	reps( i, N )
+	{
+		int s1 = vv[i] - vv[0];
+		int s2 = vv[N] - vv[i];
+
+		chmin( cnt, abs( s1 - s2 ) );
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

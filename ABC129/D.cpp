@@ -101,7 +101,81 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W;
+	cin >> H >> W;
 
+	vector<vector<int>> v( H, vector<int>( W, 0 ) );
+	vector<vector<int>> v2( H, vector<int>( W, 0 ) );
+	vector<bitset<2001>> b( H );
+	int max = 0;
+	rep( i, H )
+	{
+		int count = 0;
+		int pos = 0;
+		rep( j, W )
+		{
+			char tmp;
+			cin >> tmp;
+			b[i][j] = ( tmp == '#' ? 1 : 0 );
+			if ( tmp == '#' )
+			{
+				for ( int k = pos; k < j; k++ )
+				{
+					v[i][k] = count;
+				}
+				v[i][j] = 0;
+				chmax( max, count );
+				count = 0;
+				pos = j + 1;
+			}
+			else count++;
+		}
+
+		for ( int k = pos; k < W; k++ )
+		{
+			v[i][k] = count;
+		}
+		chmax( max, count );
+	}
+
+	int max2 = 0;
+	rep( i, W )
+	{
+		int count = 0;
+		int pos = 0;
+		rep( j, H )
+		{
+			if ( b[j][i] )
+			{
+				for ( int k = pos; k < j; k++ )
+				{
+					v2[k][i] = count;
+				}
+				v2[j][i] = 0;
+				chmax( max2, count );
+				count = 0;
+				pos = j + 1;
+			}
+			else count++;
+		}
+
+		for ( int k = pos; k < H; k++ )
+		{
+			v2[k][i] = count;
+		}
+		chmax( max2, count );
+	}
+
+	int max3 = 0;
+	rep( i, H )
+	{
+		rep( j, W )
+		{
+			chmax( max3, v[i][j] + v2[i][j] );
+		}
+	}
+
+	cout << max3 - 1 << endl;
 
 	return ( 0 );
 }

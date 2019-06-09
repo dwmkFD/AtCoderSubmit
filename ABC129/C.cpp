@@ -101,7 +101,35 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	vector<ll> v( M );
+	rep( i, M ) { cin >> v[i]; }
+
+	vector<ll> dp( N + 3 );
+	dp[0] = 1;
+
+	rep( i, N )
+	{
+		bool it1 = true, it2 = true;
+		for ( auto it = lower_bound( ALL( v ), i ); ( it != v.end() ) && ( *it <= i + 2 ); it++ )
+		{
+			if ( *it == i + 1 ) it1 = false;
+			if ( *it == i + 2 ) it2 = false;
+		}
+
+		if ( it1 )
+		{
+			dp[i + 1] = ( dp[i + 1] + dp[i] ) % MOD;
+		}
+		if ( it2 )
+		{
+			dp[i + 2] = ( dp[i + 2] + dp[i] ) % MOD;
+		}
+	}
+
+	cout << dp[N] << endl;
 
 	return ( 0 );
 }

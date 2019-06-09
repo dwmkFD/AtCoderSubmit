@@ -71,7 +71,7 @@ ll fact[MAX];
 ll inv[MAX];
 ll inv_fact[MAX];
 
-template<typename T> void initComb( T n, T m = MOD )
+template<typename T> void initComb( T n = MAX, T m = MOD )
 {
 	fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
 	inv[1] = 1;
@@ -101,7 +101,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	bitset<100001> b;
+	cin >> b;
 
+	vector<vector<int>> dp( 100002, vector<int>( 2, -1 ) );
+	dp[0][0] = 0;
+
+	for ( int d = 0; d < 100002; d++ )
+	{
+		ll mask = 1LL << ( 100002 - d - 1 );
+	}
 
 	return ( 0 );
 }
