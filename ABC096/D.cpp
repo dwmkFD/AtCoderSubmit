@@ -101,7 +101,35 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	bool b[55556] = { 0 };
+	b[0] = b[1] = true;
+	for ( int i = 2; i < 55556; i++ )
+	{
+		for ( int j = 2; i * j <= 55555; j++ )
+		{
+			b[i * j] = true;
+		}
+	}
+
+	vector<int> prime;
+	rep( i, 55556 )
+	{
+		if ( b[i] == false ) prime.eb( i );
+	}
+
+	rep( i, prime.size() )
+	{
+		if ( ( prime[i] % 5 ) == 1 )
+		{
+			cout << prime[i];
+			--N;
+			if ( N > 0 ) cout << " ";
+			else { cout << endl; break; }
+		}
+	}
 
 	return ( 0 );
 }
