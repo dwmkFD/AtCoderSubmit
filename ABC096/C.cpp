@@ -101,7 +101,52 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W;
+	cin >> H >> W;
+	vector<bitset<52>> vb( H + 2 );
 
+	reps( i, H )
+	{
+		reps( j, W )
+		{
+			char tmp;
+			cin >> tmp;
+			vb[i][j] = ( tmp == '#' ? 1 : 0 );
+		}
+	}
+
+	vector<bitset<52>> vvb( H + 2, 0 );
+	reps( i, H )
+	{
+		reps( j, W )
+		{
+			if ( vb[i][j] == 0 )
+				vvb[i][j] = true;
+			else
+			{
+				if ( ( vb[i - 1][j] )
+					 || ( vb[i + 1][j] )
+					 || ( vb[i][j - 1] )
+					 || ( vb[i][j + 1] )
+					)
+				{
+					vvb[i][j] = true;
+				}
+			}
+		}
+	}
+
+	bool ok = true;
+	reps( i, H )
+	{
+		if ( vvb[i].count() < W )
+		{
+			ok = false;
+			break;
+		}
+	}
+
+	cout << ( ok ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }
