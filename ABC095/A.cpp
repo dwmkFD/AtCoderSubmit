@@ -101,7 +101,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	int p = 700;
+	rep( i, s.size() )
+	{
+		if ( s[i] == 'o' )
+		{
+			p += 100;
+		}
+	}
+
+	cout << p << endl;
 
 	return ( 0 );
 }
