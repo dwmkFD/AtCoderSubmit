@@ -101,7 +101,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, X;
+	cin >> N >> X;
 
+	vector<int> m( N );
+	ll total = 0;
+	rep( i, N )
+	{
+		cin >> m[i];
+		total += m[i];
+	}
+
+	sort( ALL( m ) );
+	X -= total;
+
+	ll num = N;
+	while ( X >= m[0] )
+	{
+		++num;
+		X -= m[0];
+	}
+
+	cout << num << endl;
 
 	return ( 0 );
 }
