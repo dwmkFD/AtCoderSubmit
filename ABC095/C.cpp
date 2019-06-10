@@ -101,7 +101,43 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, X, Y;
+	cin >> A >> B >> C >> X >> Y;
 
+	ll total = 0;
+	if ( A + B <= 2 * C )
+	{
+		total = A * X + B * Y;
+	}
+	else
+	{
+		if ( X >= Y )
+		{
+			if ( A <= 2 * C )
+			{
+				total = Y * 2 * C;
+				total += ( X - Y ) * A;
+			}
+			else
+			{
+				total = max( X, Y ) * 2 * C;
+			}
+		}
+		else
+		{
+			if ( B <= 2 * C )
+			{
+				total += X * 2 * C;
+				total += ( Y - X ) * B;
+			}
+			else
+			{
+				total = max( X, Y ) * 2 * C;
+			}
+		}
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }
