@@ -101,7 +101,111 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	int counter = 0;
+	vector<int> v( N );
+	rep( i, N )
+	{
+		cin >> v[i];
+		if ( v[i] < 0 )
+		{
+			++counter;
+		}
+	}
+
+	if ( N == 2 )
+	{
+		// 入力が2個しかなければ、max( a, b ) - min( a, b )で終わり
+		cout << max( v[0], v[1] ) - min( v[0], v[1] ) << endl;
+		cout << max( v[0], v[1] ) << " " << min( v[0], v[1] ) << endl;
+		return ( 0 );
+	}
+	// 負の数の個数で場合分け
+	ll total = 0;
+	sort( ALL( v ) );
+	if ( counter == 0 )
+	{
+		rep( i, N )
+		{
+			total += abs( v[i] );
+		}
+		total -= v[0] * 2;
+
+		cout << total << endl;
+		cout << v[0] << " " << v[N - 1] << endl;
+		ll tmp = v[0] - v[N - 1];
+		for ( int i = 1; i < N - 2; i++ )
+		{
+			cout << tmp << " " << v[i] << endl;
+			tmp -= v[i];
+		}
+		cout << v[N - 2] << " " << tmp << endl;
+	}
+	else if ( counter == N )
+	{
+		// 全部負の数の場合
+		// 基本的に負の数がゼロの場合と同じ（絶対値が一番小さいやつを除いて全部足す）
+		rep( i, N )
+		{
+			total += abs( v[i] );
+		}
+		total += v[N - 1] * 2;	// 全部負の数なので、負の数がゼロの場合と逆になる
+
+		cout << total << endl;
+		cout << v[N - 1] << " " << v[0] << endl;
+		ll tmp = v[N - 1] - v[0];
+		for ( int i = 1; i < N - 2; i++ )
+		{
+			cout << tmp << " " << v[i] << endl;
+			tmp -= v[i];
+		}
+		cout << tmp << " " << v[N - 2] << endl;
+	}
+	else if ( counter == N - 1 )
+	{
+		rep( i, N )
+		{
+			total += abs( v[i] );
+		}
+		cout << total << endl;
+
+		ll tmp = v[N - 1];
+		for ( int i = 0; i < N - 1; i++ )
+		{
+			cout << tmp << " " << v[i] << endl;
+			tmp -= v[i];
+		}
+	}
+	else
+	{
+		rep( i, N )
+		{
+			total += abs( v[i] );
+		}
+
+		cout << total << endl;
+		auto it = lower_bound( ALL( v ), 0 );
+		int index = distance( v.begin(), it );
+
+		// v[index - 1]の負の数をひとつだけ残す
+		ll tmp = v[index];
+		for ( int i = 0; i < index - 1; i++ )
+		{
+			cout << tmp << " " << v[i] << endl;
+			tmp -= v[i];
+		}
+		cout << v[index - 1] << " " << tmp << endl;
+		tmp -= v[index - 1];
+
+		for ( int i = index + 1; i < N - 1; i++ )
+		{
+			cout << -tmp << " " << v[i] << endl;
+			tmp = v[i] + tmp;
+		}
+		cout << v[N - 1] << " " << -tmp << endl;
+	}
 
 	return ( 0 );
 }

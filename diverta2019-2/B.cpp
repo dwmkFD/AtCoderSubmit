@@ -101,7 +101,43 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
+
+	// Y座標→X座標の順に降順ソート(1,1),(1,2),(2,1),...みたいに並べたい
+	sort( ALL( v ), []( Pll a, Pll b ) { return ( a.S < b.S ); } );
+	stable_sort( ALL( v ), []( Pll a, Pll b ) { return ( a.F < b.F ); } );
+
+	// x,yの差分として最頻出の値を調べる
+	map<ll, ll> mx, my;
+	for ( int i = 1; i < N; i++ )
+	{
+		mx[abs( v[i].F - v[i - 1].F )]++;
+		my[abs( v[i].S - v[i - 1].S )]++;
+	}
+
+	ll maxX = 0, maxY = 0;
+	ll idxX, idxY;
+	arep( it, mx ) { if ( maxX < it.S ) idxX = it.F; }
+	arep( it, my ) { if ( maxY < it.S ) idxY = it.F; }
+
+	// p = idxX, q = idxYとしてコストを計算する
+	ll cost = 1;
+	for ( int i = 1; i < N; i++ )
+	{
+		ll tmpX = abs( v[i].F - v[i - 1].F );
+		ll tmpY = abs( v[i].S - v[i - 1].S );
+
+		if ( ( tmpX != idxX ) || ( tmpY != idxY ) )
+		{
+			cost++;
+		}
+	}
+
+	cout << cost << endl;
 
 	return ( 0 );
 }

@@ -101,7 +101,31 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	int A[3];
+	int B[3];
+	cin >> N;
+	rep( i, 3 ) cin >> A[i];
+	rep( i, 3 ) cin >> B[i];
 
+	double gC[9];
+	rep( i, 3 )
+	{
+		rep( j, 3 )
+		{
+			gC[i * 3 + j] = (double)B[j] / A[i];
+		}
+	}
+
+	double max = 0.0;
+	int index = 0;
+	rep( i, 9 )
+	{
+		if ( chmax( max, gC[i] ) ) index = i;
+	}
+
+	// ‚Ü‚¸A‚ÅgC[index]ƒŒ[ƒg‚ÅŒğŠ·‚·‚é
+	ll ans = N * (ll)gC[index];
 
 	return ( 0 );
 }
