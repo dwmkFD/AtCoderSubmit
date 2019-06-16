@@ -101,7 +101,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, X;
+	cin >> N >> X;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<int> vv( N + 1 );
+	vv[0] = 0;
+	rep( i, N ) vv[i + 1] = vv[i] + v[i];
+
+	int res = 0;
+	for ( res = 0; ( vv[res] <= X ) && ( res <= N ); res++ )
+	{
+	}
+	cout << res << endl;
 
 	return ( 0 );
 }

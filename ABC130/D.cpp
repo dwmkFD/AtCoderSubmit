@@ -101,7 +101,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K;
+	cin >> N >> K;
 
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<ll> vv( N + 1 );
+	rep( i, N )
+	{
+		vv[i + 1] = vv[i] + v[i];
+	}
+
+	ll counter = 0;
+	ll index = 1;
+	for ( int i = 0; i < N; i++ )
+	{
+		for ( int j = index; j <= N; j++ )
+		{
+			if ( vv[j] - vv[i] >= K )
+			{
+				counter += ( N - ( j - 1 ) );
+				index = j;
+				break;
+			}
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }

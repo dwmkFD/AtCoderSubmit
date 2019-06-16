@@ -1,5 +1,6 @@
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 #include <numeric>
 #include <vector>
 #include <string>
@@ -7,6 +8,7 @@
 #include <tuple>
 #include <cmath>
 #include <map>
+#include <cstdio>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
@@ -101,7 +103,49 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll W, H, x, y;
+	cin >> W >> H >> x >> y;
 
+	ll tmpW = min( W - x, x );
+	ll tmpH = min( H - y, y );
+
+	double res2 = (double)tmpW * H;
+	double res3 = (double)tmpH * W;
+	double org = (double)H * W;
+
+	bool pattern = false;
+	double r1 = 0;
+	double r2 = min( org - res2, res2 );
+	double r3 = min( org - res3, res3 );
+
+	if ( ( r2 == r3 ) && ( r2 != 0 ) )
+	{
+		pattern = true;
+	}
+	else if ( W * y == H * x )
+	{
+		// ”ä‚ªˆê‚È‚ç‚Ç^‚ñ’†‚ÅØ‚ê‚é
+		r1 = org / 2;
+
+		if ( ( x == (double)W / 2 ) && ( y == (double)H / 2 ) )
+		{
+			pattern = true;
+		}
+		else
+		{
+			pattern = false;
+		}
+	}
+	else if ( ( x == 0 ) || ( y == 0 ) || ( x == W ) || ( y == H ) )
+	{
+		// ’·•ûŒ`ã‚Ì“_‚Ì
+		r1 = org / 2;
+		pattern = false;
+	}
+
+	double result = max( { r1, r2, r3 } );
+
+	printf( "%.9lf %d\n", result, pattern ? 1 : 0 );
 
 	return ( 0 );
 }
