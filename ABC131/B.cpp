@@ -101,7 +101,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, L;
+	cin >> N >> L;
 
+	int org = 0;
+	rep( i, N )
+	{
+		org += L + ( i + 1 ) - 1;
+	}
+
+	int aji = 10000;
+	int result = 10000000;
+	rep( i, N )
+	{
+		if ( abs( L + i ) <= aji )
+		{
+			result = org - ( L + i );
+			aji = abs( L + i );
+		}
+	}
+
+	cout << result << endl;
 
 	return ( 0 );
 }

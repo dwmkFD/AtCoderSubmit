@@ -101,7 +101,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, C, D;
+	cin >> A >> B >> C >> D;
 
+	ll tmp1 = ( B - A + 2 ) / C;
+	ll tmp2 = ( B - A + 2 ) / D;
+	ll tmp3 = 0;
+	ll cd = ( C * D ) / gcd( C, D );
+
+	if ( ( A <= cd ) && ( B >= cd ) )
+	{
+		tmp3 = ( B - A + ( D - C ) ) / cd;
+	}
+
+	cout << ( B - A + 1 ) - ( tmp1 + tmp2 - tmp3 ) << endl;
 
 	return ( 0 );
 }

@@ -101,7 +101,65 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
+
+	// 締切が厳しい順にソート
+	sort( ALL( v ), []( Pll a, Pll b ) { return ( a.S < b.S ); } );
+
+	ll nowtime = 0;
+	vector<ll> vv( N, 0 );
+	rep( i, N )
+	{
+		if ( vv[i] == 0 ) // まだ終わってない仕事
+		{
+			ll time = v[i].S - nowtime - v[i].F;	//	これがこの仕事までに余裕のある時間
+			for ( int j = i + 1; j < N; j++ )
+			{
+				if ( vv[j] == 0 )
+				{
+					if ( v[j].F <= time )
+					{
+						vv[j] = 1;
+						time -= v[j].F;
+						nowtime += v[j].F;
+					}
+					else
+					{
+						break;
+					}
+				}
+			}
+
+			if ( nowtime + v[i].F <= v[i].S )
+			{
+				vv[i] = 1;
+				nowtime += v[i].F;
+			}
+			else
+			{
+				// cout << "now:" << nowtime << endl;
+				// cout << "v[" << i << "].F = " << v[i].F << endl;
+				// cout << "v[" << i << "].S = " << v[i].S << endl;
+			}
+		}
+	}
+
+//	arep( it, vv ) cout << it << endl;
+
+	rep( i, N )
+	{
+		if ( vv[i] == 0 )
+		{
+			cout << "No" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "Yes" << endl;
 
 	return ( 0 );
 }
