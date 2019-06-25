@@ -88,7 +88,7 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
-*/
+
 
 void replace( string &s, string t, string r ) {
 	string::size_type p = 0;
@@ -97,11 +97,35 @@ void replace( string &s, string t, string r ) {
 		p += r.length();
 	}
 }
-
+*/
 
 int main()
 {
+	ll n;
+	cin >> n;
 
+	vector<ll> v( n );
+	rep( i, n ) cin >> v[i];
+
+	Pll p( max( v[0], v[1] ), min( v[0], v[1] ) );
+
+	if ( n > 2 )
+	{
+		sort( ALL( v ) );
+
+		ll halfN = -1;;
+		rep( i, n - 1 )
+		{
+			if ( min( v[i], v[n - 1] - v[i] ) > halfN )
+			{
+				halfN = v[i];
+			}
+		}
+
+		p.F = v[n - 1]; p.S = halfN;
+	}
+
+	cout << p.F << " " << p.S << endl;
 
 	return ( 0 );
 }
