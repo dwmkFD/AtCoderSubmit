@@ -101,7 +101,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N ), vv( N );
+	rep( i, N ) { cin >> v[i]; vv[i] = v[i]; }
+
+	sort( ALL( v ) );
+
+	// ‘S‘Ì‚Ì’†‰›’l
+	ll midMin = v[( N - 1 ) / 2];
+	ll midMax = v[( N - 1 ) / 2 + 1];
+
+	rep( i, N )
+	{
+		if ( vv[i] <= midMin )
+		{
+			cout << midMax << endl;
+		}
+		else
+		{
+			cout << midMin << endl;
+		}
+	}
 
 	return ( 0 );
 }

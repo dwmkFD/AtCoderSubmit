@@ -101,7 +101,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, M, X;
+	cin >> N >> M >> X;
 
+	vector<int> v( N, 0 );
+	rep( i, M )
+	{
+		int tmp;
+		cin >> tmp;
+		v[tmp] = 1;
+	}
+
+	vector<int> vv( N + 1 );
+	rep( i, N )
+	{
+		vv[i + 1] = vv[i] + v[i];
+	}
+
+	int result = min( vv[N] - vv[X], vv[X] - vv[0] );
+	cout << result << endl;
 
 	return ( 0 );
 }
