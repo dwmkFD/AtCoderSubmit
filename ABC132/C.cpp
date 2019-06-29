@@ -101,7 +101,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ) );
+
+	ll counter = 0;
+	rep( i, v[N - 1] )
+	{
+		auto it1 = lower_bound( ALL( v ), i );
+		ll dist1 = distance( v.begin(), it1 );
+		ll dist2 = distance( it1, v.end() );
+
+		if ( dist1 == dist2 )
+		{
+			counter++;
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }

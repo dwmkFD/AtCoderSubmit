@@ -101,7 +101,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int n;
+	cin >> n;
 
+	vector<int> v( n );
+	rep( i, n ) cin >> v[i];
+
+	ll counter = 0;
+	reps( i, n - 2 )
+	{
+		int t1 = v[i - 1];
+		int t2 = v[i];
+		int t3 = v[i + 1];
+		if ( ( t2 > t1 ) && ( t2 < t3 ) )
+		{
+			counter++;
+		}
+		else if ( ( t2 > t3 ) && ( t2 < t1 ) )
+		{
+			counter++;
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }
