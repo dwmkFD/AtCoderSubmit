@@ -101,7 +101,47 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C;
+	cin >> A >> B >> C;
 
+	int m = max( { A, B, C } );
+	int t1 = ( m - A ) / 2;
+	int t2 = ( m - B ) / 2;
+	int t3 = ( m - C ) / 2;
+
+	int m1 = ( A % 2 );
+	int m2 = ( B % 2 );
+	int m3 = ( C % 2 );
+
+	switch ( m1 + m2 + m3 )
+	{
+	case 0:
+	case 3 :
+		cout << ( t1 + t2 + t3 ) << endl;
+		break;
+
+	case 1:
+		if ( m % 2 )
+		{
+			cout << ( t1 + t2 + t3 + 1 ) << endl;
+		}
+		else
+		{
+			cout << ( t1 + t2 + t3 + 2 ) << endl;
+		}
+		break;
+
+	case 2:
+		if ( m % 2 )
+		{
+			cout << ( t1 + t2 + t3 + 2 ) << endl;
+		}
+		else
+		{
+			cout << ( t1 + t2 + t3 + 1 ) << endl;
+		}
+		break;
+	}
 
 	return ( 0 );
 }

@@ -101,7 +101,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string S;
+	cin >> S;
+	map<char, int> m;
+	rep( i, S.size() )
+	{
+		m[S[i]]++;
+	}
 
+	arep( it, m )
+	{
+		if ( it.second != 1 )
+		{
+			cout << "No" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "Yes" << endl;
 
 	return ( 0 );
 }

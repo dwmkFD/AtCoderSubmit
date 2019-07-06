@@ -101,7 +101,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, K;
+	cin >> A >> B >> K;
 
+	vector<ll> v;
+
+	for ( int i = A; i < A + K; i++ )
+	{
+		if ( i > B ) break;
+		v.eb( i );
+	}
+	for ( int i = B; i > B - K; i-- )
+	{
+		if ( i < A ) break;
+		v.eb( i );
+	}
+	sort( ALL( v ) );
+	UNIQUE( v );
+
+	arep( it, v ) cout << it << endl;
 
 	return ( 0 );
 }
