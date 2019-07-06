@@ -101,7 +101,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	int D, X;
+	cin >> N >> D >> X;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	ll total = 0;
+	rep( i, N )
+	{
+		for ( int j = 1; j <= D; j += v[i] )
+		{
+			total += 1;
+		}
+	}
+	total += X;
+
+	cout << total << endl;
 
 	return ( 0 );
 }

@@ -101,7 +101,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, D;
+	cin >> A >> B >> C >> D;
 
+	int e, f;
+	e = min( A, B );
+	f = min( C, D );
+
+	cout << ( e + f ) << endl;
 
 	return ( 0 );
 }
