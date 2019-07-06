@@ -101,7 +101,59 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B;
+	cin >> A >> B;
 
+	// 出力を100行100列で固定する
+	vector<vector<int>> v( 100, vector<int>( 100, 0 ) );
 
+	// 白と黒で半々に塗り分ける
+	for ( int i = 0; i < 50; i++ )
+	{
+		for ( int j = 0; j < 100; j++ )
+		{
+			v[i][j] = 1;
+		}
+	}
+
+	// 白の領域に黒い点を入れていく
+	--A, --B;	//	それぞれ1つずつはすでに領域があるので
+	int black = 0;
+	for ( ; black < B / 50; black++ )
+	{
+		for ( int j = 1; j < 100; j += 2 )
+		{
+			v[2 * black + 51][j] = 1;
+		}
+	}
+	for ( int i = 0; i < B % 50; i++ )
+	{
+		v[2 * black + 51][i * 2 + 1] = 1;
+	}
+
+	// 黒の領域に白い点を入れていく
+	int white = 0;
+	for ( ; white < A / 50; white++ )
+	{
+		for ( int j = 1; j < 100; j += 2 )
+		{
+			v[2 * white + 1][j] = 0;
+		}
+	}
+	for ( int i = 0; i < A % 50; i++ )
+	{
+		v[2 * white + 1][i * 2 + 1] = 0;
+	}
+
+	cout << "100 100" << endl;
+	vector<string> res( 100 );
+	for ( int i = 0; i < 100; i++ )
+	{
+		for ( int j = 0; j < 100; j++ )
+		{
+			res[i] += ( v[i][j] ? '#' : '.' );
+		}
+	}
+	arep( it, res ) cout << it << endl;
 	return ( 0 );
 }
