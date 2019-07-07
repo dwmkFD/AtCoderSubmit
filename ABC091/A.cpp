@@ -101,7 +101,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C;
+	cin >> A >> B >> C;
 
+	if ( A + B >= C )
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 
 	return ( 0 );
 }

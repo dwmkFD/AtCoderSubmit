@@ -101,7 +101,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, M;
+	cin >> N;
+	vector<string> vn( N );
+	rep( i, N ) cin >> vn[i];
 
+	cin >> M;
+	vector<string> vm( M );
+	rep( i, M ) cin >> vm[i];
+
+	map<string, int> m;
+	rep( i, N ) m[vn[i]]++;
+	rep( i, M ) m[vm[i]]--;
+
+	int total = 0;
+	arep( it, m )
+	{
+		chmax( total, it.second );
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }
