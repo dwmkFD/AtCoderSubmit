@@ -101,7 +101,44 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<Pll> vab( N );
+	vector<Pll> vcd( N );
+
+	rep( i, N ) cin >> vab[i].F >> vab[i].S;
+	rep( i, N ) cin >> vcd[i].F >> vcd[i].S;
+
+	sort( ALL( vab ), []( Pll a, Pll b ) { return ( a.S > b.S ); } );
+//	stable_sort( ALL( vab ), []( Pll a, Pll b ) { return ( a.F < b.F ); } );
+
+	sort( ALL( vcd ), []( Pll a, Pll b ) { return ( a.S < b.S ); } );
+	stable_sort( ALL( vcd ), []( Pll a, Pll b ) { return ( a.F < b.F ); } );
+
+	// arep( it, vab ) cout << "vab( " << it.F << ", " << it.S << " )" << endl;
+	// arep( it, vcd ) cout << "vcd( " << it.F << ", " << it.S << " )" << endl;
+
+	ll counter = 0;
+	vector<bool> vb( N, false );
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			if ( vb[j] == false )
+			{
+				if ( ( vab[j].F < vcd[i].F ) && ( vab[j].S < vcd[i].S ) )
+				{
+//					cout << "vab( " << vab[j].F << ", " << vab[j].S << " )" << " - " << "vcd( " << vcd[i].F << ", " << vcd[i].S << " )" << endl;
+					vb[j] = true;
+					++counter;
+					break;
+				}
+			}
+		}
+	}
+
+	cout << counter << endl;
 
 	return ( 0 );
 }
