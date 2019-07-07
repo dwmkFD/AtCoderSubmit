@@ -101,7 +101,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, D;
+	cin >> N >> D;
 
+	vector<vector<int>> v( N, vector<int>( D ) );
+	rep( i, N ) rep( j, D ) cin >> v[i][j];
+
+	int cnt = 0;
+	rep( i, N )
+	{
+		rep( l, N )
+		{
+			if ( i == l ) break;
+			int total = 0;
+			rep( j, D )
+			{
+				total += pow( v[i][j] - v[l][j], 2 );
+			}
+
+			for ( int k = 1; k * k <= total; k++ )
+			{
+				if ( k * k == total ) { cnt++; break; }
+			}
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

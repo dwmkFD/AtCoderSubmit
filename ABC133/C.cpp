@@ -101,7 +101,47 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll L, R;
+	cin >> L >> R;
 
+	ll res = L % 673;
+	ll memo = L;
+	for ( int i = L + 1; i < R; i++ )
+	{
+		ll tmp = i % 673;
+		if ( chmin( res, tmp ) )
+		{
+			memo = i;
+			break;
+		}
+	}
+
+	if ( res == 0 )
+	{
+		for ( int i = L; i < memo; i++ )
+		{
+			if ( ( i % 3 ) == 0 )
+			{
+				cout << "0" << endl;
+				return ( 0 );
+			}
+		}
+
+		for ( int j = memo; j <= R; j++ )
+		{
+			if ( ( j % 3 ) == 0 )
+			{
+				cout << "0" << endl;
+				return ( 0 );
+			}
+		}
+
+		cout << ( memo * ( memo + 1 ) ) % 2019 << endl;
+	}
+	else
+	{
+		cout << ( res * ( res + 1 ) ) % 2019 << endl;
+	}
 
 	return ( 0 );
 }
