@@ -101,7 +101,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K;
+	cin >> N >> K;
 
+	if ( K != 0 )
+	{
+		ll total = 0;
+		reps( i, N )
+		{
+			total += ( N / i ) * max( 0LL, (ll)i - K );
+			total += max( 0LL, N % i - K + 1 );
+		}
+
+		cout << total << endl;
+	}
+	else
+	{
+		cout << ( N * N ) << endl;
+	}
 
 	return ( 0 );
 }
