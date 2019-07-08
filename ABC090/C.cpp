@@ -101,6 +101,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
+
+	// 4隅は必ず表になる
+	// 4隅を除く外周の辺は必ず表になる
+	// 内側は全て表になる
+
+	ll tN = N - 2, tM = M - 2;
+	if ( tN < 0 )
+	{
+		tN = 1;
+	}
+	if ( tM < 0 )
+	{
+		tM = 1;
+	}
+
+	cout << ( tN * tM ) << endl;
 
 
 	return ( 0 );

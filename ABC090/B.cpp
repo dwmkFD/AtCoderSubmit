@@ -101,7 +101,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B;
+	cin >> A >> B;
 
+	ll cnt = 0;
+	ll tA = 10001;
+	for ( int i = 0; tA <= B; i++, tA += 10001 )
+	{
+		ll tB = tA;
+		for ( int j = 0; ( tB <= B ) && ( j <= 9 ); j++, tB += 1010 )
+		{
+			ll tC = tB;
+			for ( int k = 0; ( tC <= B ) && ( k <= 9 ); k++, tC += 100 )
+			{
+				if ( ( tC <= B ) && ( tC >= A ) )
+				{
+					++cnt;
+				}
+			}
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

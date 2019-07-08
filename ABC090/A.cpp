@@ -101,7 +101,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string S[3];
+	rep( i, 3 ) cin >> S[i];
 
+	cout << S[0].c_str()[0] << S[1].c_str()[1] << S[2].c_str()[2] << endl;
 
 	return ( 0 );
 }
