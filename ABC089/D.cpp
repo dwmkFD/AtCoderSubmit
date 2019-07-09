@@ -101,7 +101,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll H, W, D;
+	cin >> H >> W >> D;
 
+	map<ll, Pll> m;
+	rep( i, H )
+	{
+		rep( j, W )
+		{
+			ll tmp; cin >> tmp;
+			m[tmp] = mp( i, j );
+		}
+	}
+
+	vector<ll> d( H * W + 1, 0 );
+	for ( int i = D + 1; i <= H * W; i++ )
+	{
+		d[i] = d[i - D] + abs( m[i].F - m[i - D].F ) + abs( m[i].S - m[i - D].S );
+	}
+
+	ll Q;
+	cin >> Q;
+	vector<Pll> vlr( Q );
+	rep( i, Q ) cin >> vlr[i].F >> vlr[i].S;
+
+	rep( i, Q )
+	{
+		cout << ( d[vlr[i].S] - d[vlr[i].F] ) << endl;
+	}
 
 	return ( 0 );
 }
