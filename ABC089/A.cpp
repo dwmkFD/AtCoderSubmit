@@ -101,7 +101,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	cout << ( N / 3 ) << endl;
 
 	return ( 0 );
 }

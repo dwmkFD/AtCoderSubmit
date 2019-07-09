@@ -101,7 +101,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<string> v( N );
+	rep( i, N ) cin >> v[i];
+
+	map<char, ll> m;
+	rep( i, N )
+	{
+		m[v[i][0]]++;
+	}
+
+	ll total = 0;
+	const char ccc[] = { 'M', 'A', 'R', 'C', 'H' };
+	for ( int i = 0; i < 3; i++ )
+	{
+		for ( int j = i + 1; j < 5; j++ )
+		{
+			for ( int k = j + 1; k < 5; k++ )
+			{
+				total += m[ccc[i]] * m[ccc[j]] * m[ccc[k]];
+			}
+		}
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }

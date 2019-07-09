@@ -101,7 +101,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<char> v( N );
+	rep( i, N ) cin >> v[i];
+
+	rep( i, N )
+	{
+		if ( v[i] == 'Y' )
+		{
+			cout << "Four" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "Three" << endl;
 
 	return ( 0 );
 }
