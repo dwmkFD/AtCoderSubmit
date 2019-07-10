@@ -8,6 +8,7 @@
 #include <tuple>
 #include <cmath>
 #include <map>
+#include <cstring>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
