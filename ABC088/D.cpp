@@ -4,9 +4,11 @@
 #include <vector>
 #include <string>
 #include <bitset>
+#include <queue>
 #include <tuple>
 #include <cmath>
 #include <map>
+#include <cstring>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
@@ -16,6 +18,7 @@ using namespace std;
 using ll = long long;
 using ull = unsigned long long;
 
+using Pint = pair<int, int>;
 using Pll  = pair<ll, ll>;
 using Pull = pair<ull, ull>;
 
@@ -101,7 +104,52 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W;
+	cin >> H >> W;
 
+	ll total = 0;
+	vector<string> v( H );
+	rep( i, H )
+	{
+		cin >> v[i];
+		rep( j, W )
+		{
+			if ( v[i][j] == '.' ) ++total;
+		}
+	}
+
+	int visit[51][51];
+	memset( visit, -1, sizeof( visit ) );
+	visit[0][0] = 1;
+
+	queue<Pint> q;
+	q.emplace( mp( 0, 0 ) );
+
+	const int dx[] = { 1, 0, -1, 0 };
+	const int dy[] = { 0, 1, 0, -1 };
+
+	while ( q.empty() == false )
+	{
+		Pint tmp = q.front();
+		q.pop();
+
+		int x = tmp.F;
+		int y = tmp.S;
+
+		for ( int i = 0; i < 4; i++ )
+		{
+			int nx = x + dx[i];
+			int ny = y + dy[i];
+
+			if ( nx < 0 || nx >= H || ny < 0 || ny >= W ) continue;
+			if ( ( visit[nx][ny] != -1 ) || ( v[nx][ny] == '#' ) ) continue;
+			visit[nx][ny] = visit[x][y] + 1;
+			q.emplace( mp( nx, ny ) );
+		}
+	}
+
+	if ( visit[H - 1][W - 1] == -1 ) cout << -1 << endl;
+	else cout << total - visit[H - 1][W - 1] << endl;
 
 	return ( 0 );
 }
