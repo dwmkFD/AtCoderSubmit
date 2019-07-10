@@ -101,7 +101,43 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	vector<vector<int>> v( 3, vector<int>( 3 ) );
+	rep( i, 3 ) rep( j, 3 ) cin >> v[i][j];
 
+	vector<vector<int>> va( 3, vector<int>( 3, 0 ) );
+	vector<vector<int>> vb( 3, vector<int>( 3, 0 ) );
+	rep( i, 3 )
+	{
+		rep( j, 3 )
+		{
+			va[j][i] = v[(j + 1) % 3][i] - v[j][i];
+		}
+	}
+	rep( i, 3 )
+	{
+		rep( j, 3 )
+		{
+			vb[i][j] = v[i][(j + 1) % 3] - v[i][j];
+		}
+	}
+
+	bool flg = true;
+	rep( i, 3 )
+	{
+		rep( j, 2 )
+		{
+			if ( va[i][j] != va[i][j + 1] ) flg = false;
+		}
+	}
+	rep( i, 2 )
+	{
+		rep( j, 3 )
+		{
+			if ( vb[i][j] != vb[i + 1][j] ) flg = false;
+		}
+	}
+
+	cout << ( flg ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }

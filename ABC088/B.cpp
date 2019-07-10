@@ -101,7 +101,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ), []( int a, int b ) { return ( a > b ); } );
+
+	int alice = 0, bob = 0;
+	rep( i, N )
+	{
+		if ( i % 2 ) bob += v[i];
+		else alice += v[i];
+	}
+
+	cout << ( alice - bob ) << endl;
 
 	return ( 0 );
 }
