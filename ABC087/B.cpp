@@ -104,7 +104,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, X;
+	cin >> A >> B >> C >> X;
 
+	int cnt = 0;
+	for ( int i = 0; i <= A; i++ )
+	{
+		if ( i * 500 > X ) break;
+		for ( int j = 0; j <= B; j++ )
+		{
+			if ( i * 500 + j * 100 <= X )
+			{
+				if ( ( ( X - ( ( i * 500 ) + ( j * 100 ) ) ) / 50 ) <= C )
+				{
+					++cnt;
+				}
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

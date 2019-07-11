@@ -104,7 +104,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v1( N );
+	vector<ll> v2( N );
+	rep( i, N ) cin >> v1[i];
+	rep( i, N ) cin >> v2[i];
+
+	vector<ll> vv1( N + 1 );
+	vector<ll> vv2( N + 1 );
+
+	vv1[0] = vv2[0] = 0;
+	rep( i, N )
+	{
+		vv1[i + 1] = vv1[i] + v1[i];
+		vv2[i + 1] = vv2[i] + v2[i];
+	}
+
+	ll total = 0;
+	rep( i, N )
+	{
+		ll tmp = vv1[i + 1] + vv2[N] - vv2[i];
+		chmax( total, tmp );
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }
