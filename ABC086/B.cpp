@@ -104,7 +104,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s1, s2;
+	cin >> s1 >> s2;
 
+	s1 += s2;
+	ll ab = atoi( s1.c_str() );
 
+	bool flg = false;
+	for ( int i = 1; i * i <= ab; i++ )
+	{
+		if ( i * i == ab )
+		{
+			flg = true;
+			break;
+		}
+	}
+
+	cout << ( flg ? "Yes" : "No" ) << endl;
 	return ( 0 );
 }

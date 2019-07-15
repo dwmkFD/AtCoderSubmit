@@ -104,7 +104,53 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<tuple<int, int, int>> v;
+	rep( i, N )
+	{
+		int t1, t2, t3;
+		cin >> t1 >> t2 >> t3;
+		v.eb( mt( t1, t2, t3 ) );
+	}
+
+	bool flg = true;
+	int bfrt = 0, bfrxy = 0;
+	rep( i, N )
+	{
+		int t = get<0>( v[i] );
+		int x = get<1>( v[i] );
+		int y = get<2>( v[i] );
+
+		if ( ( t - bfrt ) < abs( ( x + y ) - bfrxy ) )
+		{
+			flg = false;
+			break;
+		}
+
+		if ( ( t - bfrt ) % 2 )
+		{
+			if ( ( abs( ( x + y ) - bfrxy ) % 2 ) == 0 )
+			{
+				flg = false;
+				break;
+			}
+		}
+		else
+		{
+			if ( abs( ( x + y ) - bfrxy ) % 2 )
+			{
+				flg = false;
+				break;
+			}
+		}
+
+		bfrxy = x + y;
+		bfrt = t;
+	}
+
+	cout << ( flg ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }
