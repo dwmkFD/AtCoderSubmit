@@ -104,7 +104,11 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	s[3] = '8';
+	cout << s << endl;
 
 	return ( 0 );
 }

@@ -104,7 +104,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ), []( int a, int b ) { return ( a > b ); } );
+	UNIQUE( v );
+
+	cout << v.size() << endl;
 
 	return ( 0 );
 }

@@ -104,7 +104,38 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, Y;
+	cin >> N >> Y;
 
+	ll x = Y / 10000;
+	ll y = Y / 5000;
+	ll z;
+
+	bool flg = false;
+
+	for ( int i = 0; i <= x; ++i )
+	{
+		for ( int j = 0; j <= y; ++j )
+		{
+			if ( i + j > N ) break;
+			if ( 10000 * i + 5000 * j + ( N - ( i + j ) ) * 1000 == Y )
+			{
+				flg = true;
+				x = i; y = j; z = N - ( i + j );
+				goto end;
+			}
+		}
+	}
+
+end:
+	if ( flg )
+	{
+		cout << x << " " << y << " " << z << endl;
+	}
+	else
+	{
+		cout << "-1 -1 -1" << endl;
+	}
 
 	return ( 0 );
 }
