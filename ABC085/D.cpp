@@ -104,7 +104,55 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, H;
+	cin >> N >> H;
 
+	vector<ll> va;
+	vector<ll> vb;
+	rep( i, N )
+	{
+		ll a, b;
+		cin >> a >> b;
+
+		if ( a < b )
+		{
+			vb.eb( b );
+		}
+		va.eb( a );
+	}
+
+	sort( ALL( va ), []( ll a, ll b ) { return ( a > b ); } );
+	sort( ALL( vb ), []( ll a, ll b ) { return ( a > b ); } );
+
+	ll b_atk = 0, b_cnt = 0;
+	rep( i, vb.size() )
+	{
+		if ( va[0] < vb[i] )
+		{
+			if ( H > b_atk )
+			{
+				b_atk += vb[i];
+				++b_cnt;
+			}
+			else
+			{
+				break;
+			}
+		}
+	}
+
+	ll a_cnt;
+	if ( H <= b_atk )
+	{
+		a_cnt = 0;
+	}
+	else
+	{
+		H -= b_atk;
+		a_cnt = (ll)ceil( (double)H / va[0] );
+	}
+
+	cout << ( a_cnt + b_cnt ) << endl;
 
 	return ( 0 );
 }
