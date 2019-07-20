@@ -101,10 +101,39 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
-
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N + 1 );
+	vector<ll> vv( N + 1, 0 );
+	rep( i, N ) cin >> v[i + 1];
+
+	for ( ll i = N; i > N / 2; --i )
+	{
+		vv[i] = v[i];
+	}
+
+	for ( ll i = N / 2; i >= 1; --i )
+	{
+		ll tmpcnt = 0;
+		for ( ll j = 1; i * j <= N; ++j )
+		{
+			tmpcnt += vv[i * j];
+		}
+		vv[i] = ( tmpcnt % 2 != v[i] );
+	}
+
+	ll cnt = 0;
+	reps( i, N ) if ( vv[i] ) cnt++;
+
+	cout << cnt << endl;
+	reps( i, N )
+	{
+		if ( vv[i] ) cout << i << " ";
+	}
+	cout << endl;
 
 	return ( 0 );
 }

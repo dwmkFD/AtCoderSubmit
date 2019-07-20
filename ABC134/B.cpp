@@ -104,7 +104,11 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, D;
+	cin >> N >> D;
 
+	ll ans = (ll)ceil( (double)N / ( 2 * D + 1 ) );
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -104,7 +104,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<ll> vv( 4 * N, 0 );
+	auto update = [&]( ll i, ll x ) {
+		i += N - 1;
+		vv[i] = x;
+		while ( i > 0 ) {
+			i = ( i - 1 ) / 2;
+			vv[i] = max( vv[i * 2 + 1], vv[i * 2 + 2] );
+		}
+	};
+
+	rep( i, N )
+	{
+		update( N + i - 1, v[i] );
+	}
+
+	rep( i, N )
+	{
+		ll backup = v[i];
+		update( N + i - 1, 0 );
+		cout << vv[0] << endl;
+		update( N + i - 1, backup );
+	}
 
 	return ( 0 );
 }
