@@ -127,7 +127,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, D;
+	string input;
+	cin >> input;
 
+	A = input[0] - '0';
+	B = input[1] - '0';
+	C = input[2] - '0';
+	D = input[3] - '0';
+
+	string op[] = { "+", "-" };
+
+	for ( int i = 0; i < 8; i++ )
+	{
+		int tmp;
+		if ( i & 1 ) tmp = A + B;
+		else tmp = A - B;
+		if ( i & 2 ) tmp += C;
+		else tmp -= C;
+		if ( i & 4 ) tmp += D;
+		else tmp -= D;
+
+		if ( tmp == 7 )
+		{
+			cout << A << op[(i & 1) == 0] << B << op[(i & 2) == 0]
+				 << C << op[(i & 4) == 0] << D << "=7" << endl;
+			break;
+		}
+	}
 
 	return ( 0 );
 }

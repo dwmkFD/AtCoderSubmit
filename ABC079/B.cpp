@@ -127,7 +127,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( 87 );
+	v[0] = 2; v[1] = 1;
+	for ( ll i = 2; i <= 86; i++ )
+	{
+		v[i] = v[i - 1] + v[i - 2];
+	}
+
+	cout << v[N] << endl;
 
 	return ( 0 );
 }
