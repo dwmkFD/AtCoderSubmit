@@ -53,12 +53,35 @@ constexpr ll MOD = 1000000007LL;
 
 template<typename T = ll> class UnionFind {
 public:
-	UnionFind( T n ) { rep( i, n ) { par.resize( n ); siz.resize( n ); par[i] = i; siz[i] = 1; } }
+	UnionFind( T n ) { par.resize( n ); siz.resize( n ); rep( i, n ) { par[i] = i; siz[i] = 1; } }
 	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
 	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
 		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
 private:
 	vector<T> par, siz;
+};
+
+template<typename T = ll> class CompareMax {
+public:	T operator()( T a, T b ) { return ( max( a, b ) ); }
+};
+template<typename T = ll> class CompareMin {
+public:	T operator()( T a, T b ) { return ( min( a, b ) ); }
+};
+
+template<typename T = ll, typename F = CompareMax<T>, T I = 0> class SegTree {
+public:
+	SegTree( T n ) { N = n; v.resize( 4 * n ); rep( i, 4 * n ) v[i] = I; }
+	void update( T i, T x ) { i += N - 1; v[i] = x; while ( i > 0 ) {
+			i = ( i - 1 ) / 2; v[i] = func( v[i * 2 + 1], v[i * 2 + 2] ); } }
+	T query( T a, T b, T k, T l, T r ) {
+		if ( r <= a || b <= l ) return ( I );
+		if ( a <= l && r <= b ) return ( v[k] );
+		else { T vl = query( a, b, k * 2 + 1, l, ( l + r ) / 2 );
+			T vr = query( a, b, k * 2 + 2, ( l + r ) / 2, r );
+			return ( func( vl, vr ) ); }
+	}
+private:
+	T N; F func; vector<T> v;
 };
 
 template<typename T = ll> T power( T a, T b, T m = MOD ) {
