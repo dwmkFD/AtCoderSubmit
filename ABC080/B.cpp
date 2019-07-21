@@ -127,7 +127,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
+	int x = atoi( s.c_str() );
 
+	int tmp = 0;
+	rep( i, s.size() )
+	{
+		tmp += s[i] - '0';
+	}
+
+	if ( x % tmp == 0 )
+	{
+		cout << "Yes" << endl;
+	}
+	else
+	{
+		cout << "No" << endl;
+	}
 
 	return ( 0 );
 }
