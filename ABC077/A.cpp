@@ -127,7 +127,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s[2];
+	cin >> s[0] >> s[1];
 
+// 1 2 3    6 5 4
+// 4 5 6 -> 3 2 1
+	bool flg = true;
+	rep( i, 3 )
+	{
+		if ( s[0][i] != s[1][2 - i] )
+		{
+			flg = false;
+			break;
+		}
+		if ( s[0][2 - i] != s[1][i] )
+		{
+			flg = false;
+			break;
+		}
+	}
+
+	cout << ( flg ? "YES" : "NO" ) << endl;
 
 	return ( 0 );
 }

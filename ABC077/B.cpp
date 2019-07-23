@@ -127,7 +127,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	ll i = 1;
+	for ( ; i * i <= N; i++ )
+	{
+	}
+
+	--i;
+	cout << ( i * i ) << endl;
 
 	return ( 0 );
 }
