@@ -127,7 +127,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> a( N ), b( N ), c( N );
+	rep( i, N ) cin >> a[i];
+	rep( i, N ) cin >> b[i];
+	rep( i, N ) cin >> c[i];
+
+	sort( ALL( a ) );
+	sort( ALL( b ), []( ll x, ll y ) { return ( x > y ); } );
+	sort( ALL( c ) );
+
+	ll cnt = 0;
+	rep( i, N )
+	{
+		auto it1 = upper_bound( ALL( c ), b[i] );
+		auto it2 = lower_bound( ALL( a ), b[i] );
+
+		cnt += ( N - distance( c.begin(), it1 ) ) * ( distance( a.begin(), it2 ) );
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
