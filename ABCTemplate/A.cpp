@@ -84,6 +84,14 @@ private:
 	T N; F func; vector<T> v;
 };
 
+template<typename T = ll> T solveLIS( const vector<T> &v ) {
+	vector<T> dp( v.size(), numeric_limits<T>::max() );
+	rep( i, v.size() ) {
+		*lower_bound( ALL( dp ), v[i] ) = v[i];
+	}
+	return ( distance( dp.begin(), lower_bound( ALL( dp ), numeric_limits<T>::max() ) ) );
+}
+
 template<typename T = ll> T power( T a, T b, T m = MOD ) {
 	T res = 1;
 	while ( b > 0 ) { if ( b & 1 ) res = res * a % m;
