@@ -135,7 +135,42 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W;
+	cin >> H >> W;
 
+	vector<string> v( H );
+	rep( i, H ) cin >> v[i];
+
+	const int dx[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+	const int dy[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+	rep( i, H )
+	{
+		rep( j, W )
+		{
+			if ( v[i][j] == '.' )
+			{
+				int cnt = 0;
+				rep ( k, 8 )
+				{
+					int idxI = i + dx[k];
+					int idxJ = j + dy[k];
+
+					if ( idxI >= 0 && idxI <= H - 1 && idxJ >= 0 && idxJ <= W - 1 )
+					{
+						if ( v[idxI][idxJ] == '#' ) ++cnt;
+					}
+				}
+
+				v[i][j] = '0' + cnt;
+			}
+		}
+	}
+
+	rep( i, H )
+	{
+		cout << v[i] << endl;
+	}
 
 	return ( 0 );
 }

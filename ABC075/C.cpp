@@ -135,7 +135,36 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, M;
+	cin >> N >> M;
 
+	vector<Pint> v( M );
+	rep( i, M ) cin >> v[i].F >> v[i].S;
+
+	int cnt = 0;
+	rep( i, M )
+	{
+		UnionFind<int> uf( N + 1 );
+		rep( j, M )
+		{
+			if ( i != j )
+			{
+				uf.unite( v[j].F, v[j].S );
+			}
+		}
+
+		int memo = uf.find( N );
+		reps( j , N - 1 )
+		{
+			if ( uf.find( j ) != memo )
+			{
+				++cnt;
+				break;
+			}
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

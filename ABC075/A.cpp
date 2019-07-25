@@ -135,7 +135,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	int A, B, C;
+	cin >> A >> B >> C;
+	if ( A == B )
+	{
+		cout << C << endl;
+	}
+	else if ( A == C )
+	{
+		cout << B << endl;
+	}
+	else
+	{
+		cout << A << endl;
+	}
 
 	return ( 0 );
 }
