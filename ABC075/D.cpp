@@ -135,7 +135,58 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, K;
+	cin >> N >> K;
 
+	vector<ll> vx( N ), tx( N );
+	vector<ll> vy( N ), ty( N );
+	rep( i, N )
+	{
+		cin >> vx[i] >> vy[i];
+		tx[i] = vx[i];
+		ty[i] = vy[i];
+	}
+
+	sort( ALL( tx ) );
+	sort( ALL( ty ) );
+
+	vector<ll> vres;
+
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			rep( k, N )
+			{
+				rep( l, N )
+				{
+					// 上下左右から範囲を狭めていく
+					ll minX = tx[l];
+					ll minY = ty[k];
+					ll maxX = tx[N - 1 - j];
+					ll maxY = ty[N - 1 - i];
+
+					ll cnt = 0;
+					rep( m, N )
+					{
+						if ( vx[m] >= minX && vx[m] <= maxX && vy[m] >= minY && vy[m] <= maxY )
+						{
+							// ( xm, ym )が含まれればカウント
+							++cnt;
+						}
+					}
+					if ( cnt >= K )
+					{
+						// OKなので面積を求めて答え候補に追加
+						vres.eb( abs( maxX - minX ) * abs( maxY - minY ) );
+					}
+				}
+			}
+		}
+	}
+
+	sort( ALL( vres ) );
+	cout << vres[0] << endl;
 
 	return ( 0 );
 }
