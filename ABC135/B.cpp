@@ -135,7 +135,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<int> cpy = v;
+	sort( ALL( cpy ) );
+
+	ll cnt = 0;
+	rep( i, N )
+	{
+		if ( v[i] != cpy[i] ) ++cnt;
+	}
+
+	if ( ( cnt == 2 ) || ( cnt == 0 ) )
+	{
+		cout << "YES" << endl;
+	}
+	else
+	{
+		cout << "NO" << endl;
+	}
 
 	return ( 0 );
 }

@@ -135,7 +135,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> a( N + 1 ), b( N );
+	rep( i, N + 1 ) cin >> a[i];
+	rep( i, N ) cin >> b[i];
+
+	ll cnt = 0;
+	rep( i, N )
+	{
+		if ( a[i] > b[i] )
+		{
+			cnt += b[i];
+		}
+		else
+		{
+			cnt += a[i];
+			if ( a[i + 1] >= b[i] - a[i] )
+			{
+				a[i + 1] -= ( b[i] - a[i] );
+				cnt += ( b[i] - a[i] );
+			}
+			else
+			{
+				cnt += a[i + 1];
+				a[i + 1] = 0;
+			}
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
