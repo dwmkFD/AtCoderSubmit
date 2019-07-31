@@ -135,7 +135,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	map<int, int> m;
+	rep( i, N )
+	{
+		m[v[i] - 1]++;
+		m[v[i]]++;
+		m[v[i] + 1]++;
+	}
+
+	int res = -100;
+	arep( it, m )
+	{
+		chmax( res, it.second );
+	}
+
+	cout << res << endl;
 
 	return ( 0 );
 }

@@ -135,7 +135,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	bitset<100001> b( 0 );
+	rep( i, N )
+	{
+		int a; cin >> a;
+		if ( a == ( i + 1 ) ) b[i] = 1;
+	}
+
+	ll cnt = b.count();
+
+	rep( i, N )
+	{
+		if ( ( b[i] == 1 ) && ( b[i + 1] == 1 ) )
+		{
+			--cnt;
+			b[i + 1] = 0;
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

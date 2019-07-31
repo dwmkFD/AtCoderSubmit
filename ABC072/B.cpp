@@ -135,7 +135,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s, t = "";
+	cin >> s;
 
+	rep( i, s.size() )
+	{
+		if ( i % 2 == 0 ) t += s[i];
+	}
+
+	cout << t << endl;
 
 	return ( 0 );
 }
