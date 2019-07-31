@@ -135,7 +135,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	ll cnt = 0;
+	rep( i, N )
+	{
+		ll l, r;
+		cin >> l >> r;
+		cnt += ( r - l + 1 );
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
