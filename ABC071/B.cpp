@@ -135,7 +135,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	map<char, int> m;
+	rep( i, s.size() ) m[s[i]]++;
 
+	for ( char c = 'a'; c <= 'z'; c++ )
+	{
+		if ( m[c] == 0 )
+		{
+			cout << c << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "None" << endl;
 	return ( 0 );
 }

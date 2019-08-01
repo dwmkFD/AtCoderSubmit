@@ -135,7 +135,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int x, a, b;
+	cin >> x >> a >> b;
 
+	int A = abs( x - a );
+	int B = abs( x - b );
+
+	cout << ( A > B ? "B" : "A" ) << endl;
 
 	return ( 0 );
 }

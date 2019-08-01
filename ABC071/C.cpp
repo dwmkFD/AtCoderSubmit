@@ -135,7 +135,56 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ), []( ll a, ll b ) { return ( a > b ); } );
+
+	ll x = v[0];
+	ll i = 1;
+	for ( ; i < N; ++i )
+	{
+		if ( x == v[i] )
+		{
+			++i;
+			break;
+		}
+		else
+		{
+			x = v[i];
+		}
+	}
+
+	if ( i >= N )
+	{
+		cout << "0" << endl;
+		return ( 0 );
+	}
+
+	ll y = v[i]; i++;
+	for ( ; i < N; ++i )
+	{
+		if ( y == v[i] )
+		{
+			break;
+		}
+		else
+		{
+			y = v[i];
+		}
+	}
+
+	if ( i < N )
+	{
+		cout << x * y << endl;
+	}
+	else
+	{
+		cout << 0 << endl;
+	}
 
 	return ( 0 );
 }
