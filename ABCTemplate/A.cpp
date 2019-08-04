@@ -37,6 +37,7 @@ using Pull = pair<ull, ull>;
 #define arep( i, v ) for ( auto &&i : ( v ) )
 
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
+template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
