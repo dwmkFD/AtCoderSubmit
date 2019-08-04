@@ -135,7 +135,39 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
+
+	ll tmp = v[0];
+	rep( i, N - 1 )
+	{
+		if ( v[i] > v[i + 1] )
+		{
+			--v[i];
+			if ( ( v[i] < tmp ) && ( i != 0 ) )
+			{
+				cout << "No" << endl;
+				return ( 0 );
+			}
+			else
+			{
+				if ( v[i] > v[i + 1] )
+				{
+					cout << "No" << endl;
+					return ( 0 );
+				}
+				else
+				{
+					tmp = v[i];
+				}
+			}
+		}
+	}
+
+	cout << "Yes" << endl;
 
 	return ( 0 );
 }

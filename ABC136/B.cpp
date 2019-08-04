@@ -135,7 +135,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	auto func = []( ll x ) {
+		ll cnt = 0;
+		while ( x > 0 )
+		{
+			x /= 10;
+			++cnt;
+		}
+
+		return ( cnt );
+	};
+
+	ll res = 0;
+	for ( ll i = 0; i <= N; ++i )
+	{
+		if ( func( i ) % 2 )
+		{
+			++res;
+		}
+	}
+
+	cout << res << endl;
 
 	return ( 0 );
 }

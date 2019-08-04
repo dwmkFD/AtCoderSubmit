@@ -135,7 +135,72 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	vector<ll> v( s.size(), 0 );
+
+	ll Lcnt = 0, Rcnt = 0;
+	ll idx = 0;
+	rep( i, s.size() )
+	{
+		if ( s[i] == 'L' )
+		{
+			++Lcnt;
+			if ( idx == 0 ) idx = i - 1;
+		}
+		else
+		{
+			if ( Lcnt > 0 )
+			{
+				if ( ( Lcnt + Rcnt ) % 2 )
+				{
+					if ( Rcnt % 2 )
+					{
+						v[idx + 1] = Lcnt;
+						v[idx] = Rcnt;
+					}
+					else
+					{
+						v[idx + 1] = Rcnt;
+						v[idx] = Lcnt;
+					}
+				}
+				else
+				{
+					v[idx] = v[idx + 1] = ( Lcnt + Rcnt ) / 2;
+				}
+
+				idx = 0;
+				Lcnt = Rcnt = 0;
+			}
+			++Rcnt;
+		}
+	}
+
+	if ( ( Lcnt + Rcnt ) % 2 )
+	{
+		if ( Rcnt % 2 )
+		{
+			v[idx + 1] = Lcnt;
+			v[idx] = Rcnt;
+		}
+		else
+		{
+			v[idx + 1] = Rcnt;
+			v[idx] = Lcnt;
+		}
+	}
+	else
+	{
+		v[idx] = v[idx + 1] = ( Lcnt + Rcnt ) / 2;
+	}
+
+	arep( it, v )
+	{
+		cout << it << " ";
+	}
+	cout << endl;
 
 	return ( 0 );
 }
