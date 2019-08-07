@@ -133,10 +133,49 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+template<typename T = ll> class UnionFindX {
+public:
+	UnionFindX( T n, T v = 1 ) { par.resize( n ); val = v; rep( i, n ) par[i] = i; }
+	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
+	void unite( T x, T y ) {
+		if ( x == val ) par[y] = x;
+		else if ( y == val ) par[x] = y;
+	}
+private:
+	T val;
+	vector<T> par;
+};
+
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	UnionFindX<ll> uf1( N + 1, 1 );
+	UnionFindX<ll> ufN( N + 1, N );
+
+	rep( i, M )
+	{
+		ll a, b;
+		cin >> a >> b;
+
+		if ( a == 1 ) uf1.unite( a, b );
+		if ( b == N ) ufN.unite( a, b );
+	}
+
+	for ( int i = 2; i < N; ++i )
+	{
+		if ( ( uf1.find( i ) == 1 )
+			 && ( ufN.find( i ) == N )
+			)
+		{
+			cout << "POSSIBLE" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "IMPOSSIBLE" << endl;
 
 	return ( 0 );
 }

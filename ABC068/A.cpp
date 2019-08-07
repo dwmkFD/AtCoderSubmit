@@ -136,7 +136,11 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
+	string s = "ABC";
 
+	cout << s + to_string( N ) << endl;
 
 	return ( 0 );
 }

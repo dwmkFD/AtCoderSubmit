@@ -136,7 +136,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	Pint res( 0, 0 );
+	for ( int i = 1; i <= N; ++i )
+	{
+		int cnt = 0, tmp = i;
+		while ( tmp > 1 )
+		{
+			if ( tmp % 2 )
+				break;
+			else
+				++cnt;
+			tmp /= 2;
+		}
+		if ( chmax( res.S, cnt ) ) res.F = i;
+	}
+
+	cout << res.F << endl;
 
 	return ( 0 );
 }
