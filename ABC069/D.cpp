@@ -136,7 +136,38 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W, N;
+	cin >> H >> W >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<vector<int>> res( H, vector<int>( W , 0 ) );
+
+	int j = 0, k = 0, vect = 1;
+	rep( i, N )
+	{
+		for ( ; v[i] > 0; --v[i] )
+		{
+			res[j][k] = ( i + 1 );
+			if ( ( ( k == 0 ) && ( vect == -1 ) )
+				 || ( ( k == W - 1 ) && ( vect == 1 ) )
+				)
+			{
+				++j, vect *= -1;
+			}
+			else
+			{
+				k += vect;
+			}
+		}
+	}
+
+	rep( i, H )
+	{
+		rep( j, W ) cout << res[i][j] << " ";
+		cout << endl;
+	}
 
 	return ( 0 );
 }

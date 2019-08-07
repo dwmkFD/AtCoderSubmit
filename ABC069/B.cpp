@@ -136,7 +136,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	string t = "";
+	t += s.front();
+	t += to_string( s.size() - 2 );
+	t += s.back();
+	cout << t << endl;
 
 	return ( 0 );
 }

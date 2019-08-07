@@ -136,7 +136,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	ll cnt1 = 0, cnt2 = 0;
+	vector<ll> v( N );
+	rep( i, N )
+	{
+		cin >> v[i];
+		if ( v[i] % 2 ) ++cnt1;
+		else if ( ( v[i] % 4 ) == 0 ) ++cnt2;
+	}
+
+	if ( cnt2 < N / 2 )
+	{
+		if ( cnt1 <= cnt2 )
+		{
+			cout << "Yes" << endl;
+		}
+		else
+		{
+			cout << "No" << endl;
+		}
+	}
+	else
+	{
+		cout << "Yes" << endl;
+	}
 
 	return ( 0 );
 }
