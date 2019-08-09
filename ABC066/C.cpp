@@ -137,7 +137,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n;
+	cin >> n;
 
+	vector<ll> v( n );
+	rep( i, n ) cin >> v[i];
+
+	for ( int i = n - 1; i >= 0; i -= 2 )
+	{
+		cout << v[i] << " ";
+	}
+	for ( int i = n % 2; i < n - 1; i += 2 )
+	{
+		cout << v[i] << " ";
+	}
+
+	cout << endl;
 
 	return ( 0 );
 }

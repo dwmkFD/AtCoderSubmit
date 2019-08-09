@@ -137,7 +137,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	for ( int i = 1; i <= s.size() / 2; ++i )
+	{
+		string s1 = s.substr( 0, s.size() / 2 - i );
+		string s2 = s.substr( s.size() / 2 - i, s.size() / 2 - i );
+
+		if ( s1 == s2 )
+		{
+			cout << ( s.size() / 2 - i ) * 2 << endl;
+			return ( 0 );
+		}
+	}
 
 	return ( 0 );
 }
