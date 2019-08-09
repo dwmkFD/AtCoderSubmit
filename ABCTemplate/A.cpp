@@ -102,10 +102,10 @@ template<typename T = ll> T power( T a, T b, T m = MOD ) {
 }
 
 /*
-constexpr ll MAX = 500010;
-ll fact[MAX];
-ll inv[MAX];
-ll inv_fact[MAX];
+constexpr ll COMBSIZE = 500010;
+ll fact[COMBSIZE];
+ll inv[COMBSIZE];
+ll inv_fact[COMBSIZE];
 
 template<typename T> void initComb( T n, T m = MOD )
 {
