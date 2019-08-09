@@ -136,7 +136,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, K;
+	cin >> N >> K;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ), []( int a, int b ) { return ( a > b ); } );
+
+	ll cnt = 0;
+	rep( i, K ) cnt += v[i];
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

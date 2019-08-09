@@ -44,6 +44,7 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
 constexpr ll MOD = 1000000007LL;
+template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 
 #define y0 y3487465
 #define y1 y8687969
@@ -136,7 +137,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<ll> v( N );
+	ll total = 0;
+	rep( i, N ) { cin >> v[i]; total += v[i]; }
+
+	vector<ll> vv( N + 1 );
+	vv[0] = 0;
+	rep( i, N ) vv[i + 1] = vv[i] + v[i];
+
+	ll res = MAX<ll>;
+	reps( i, N - 1 )
+	{
+		ll tmp = abs( ( total - vv[i] ) - vv[i] );
+		chmin( res, tmp );
+	}
+
+	cout << res << endl;
 
 	return ( 0 );
 }

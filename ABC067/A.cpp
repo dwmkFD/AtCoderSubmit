@@ -136,7 +136,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B;
+	cin >> A >> B;
 
+	if ( A % 3 )
+	{
+		if ( B % 3 )
+		{
+			if ( ( A + B ) % 3 )
+			{
+				cout << "Impossible" << endl;
+				return ( 0 );
+			}
+		}
+	}
+
+	cout << "Possible" << endl;
 
 	return ( 0 );
 }
