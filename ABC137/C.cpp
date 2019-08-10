@@ -101,8 +101,8 @@ template<typename T = ll> T power( T a, T b, T m = MOD ) {
 	return ( res );
 }
 
-/*
-constexpr ll COMBSIZE = 500010;
+
+constexpr ll COMBSIZE = 200010;
 ll fact[COMBSIZE];
 ll inv[COMBSIZE];
 ll inv_fact[COMBSIZE];
@@ -124,7 +124,7 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
-*/
+
 
 void replace( string &s, string t, string r ) {
 	string::size_type p = 0;
@@ -137,7 +137,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N;
+	cin >> N;
 
+	vector<string> v( N );
+	rep( i, N ) cin >> v[i];
+	rep( i, N ) sort( ALL( v[i] ) );
+
+	ll res = 0;
+//	initComb( COMBSIZE );
+
+	map<string, ll> m;
+	rep( i, N ) m[v[i]]++;
+
+	arep( it, m ) res += ( it.S * ( it.S - 1 ) / 2 );
+
+	cout << res << endl;
 
 	return ( 0 );
 }

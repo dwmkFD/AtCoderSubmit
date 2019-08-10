@@ -134,10 +134,37 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
-
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
+
+#if 0
+	sort( ALL( v ), []( Pll a, Pll b ) {
+			return ( (double)a.S / (double)a.F > (double)b.S / (double)b.F );
+		} );
+#else
+	sort( ALL( v ), []( Pll a, Pll b ) { return ( a.S > b.S ); } );
+//	stable_sort( ALL( v ), []( Pll a, Pll b ) { return ( a.F > b.F ); } );
+#endif
+
+//	arep( it, v ) cout << it.F << ", " << it.S << endl;
+
+	ll res = 0;
+	map<ll, ll> m;
+	rep( i, min( M, N ) )
+	{
+		if ( i + ( v[i].F - m[v[i].F] ) <= M )
+		{
+			res += v[i].S;
+			m[v[i].F]++;
+		}
+	}
+
+	cout << res << endl;
 
 	return ( 0 );
 }

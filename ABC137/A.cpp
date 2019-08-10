@@ -137,7 +137,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B;
+	cin >> A >> B;
 
+	cout << max( { A + B, A - B, A * B } ) << endl;
 
 	return ( 0 );
 }
