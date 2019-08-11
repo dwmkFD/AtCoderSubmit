@@ -137,7 +137,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int r, g, b;
+	cin >> r >> g >> b;
 
+	int x = r * 100 + g * 10 + b;
+
+	cout << ( x % 4 ? "NO" : "YES" ) << endl;
 
 	return ( 0 );
 }

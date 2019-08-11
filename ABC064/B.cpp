@@ -137,7 +137,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	sort( ALL( v ) );
+
+	cout << abs( v[0] - v[N - 1] ) << endl;
 
 	return ( 0 );
 }

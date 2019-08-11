@@ -137,7 +137,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
+
+	vector<int> vv( 100, 0 );
+	rep( i, N ) vv[v[i] / 400]++;
+
+	ll cnt = 0, cnt2 = 0;
+	rep( i, 8 ) if ( vv[i] != 0 ) ++cnt;
+	for ( int i = 8; i < 15; ++i ) if ( vv[i] != 0 ) cnt2 += vv[i];
+
+	if ( cnt > 0 )
+	{
+		cout << cnt << " " << cnt + cnt2 << endl;
+	}
+	else
+	{
+		cout << 1 << " " << cnt + cnt2 << endl;
+	}
 
 	return ( 0 );
 }
