@@ -137,7 +137,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N;
+	cin >> N;
 
+	vector<int> v( N );
+	rep( i, N ) { cin >> v[i]; --v[i]; }
 
+	vector<bool> b( N, false );
+	int idx = 0, cnt = 0;
+
+	while ( idx != 1 )
+	{
+		if ( b[idx] == false )
+		{
+			b[idx] = true;
+			idx = v[idx];
+			++cnt;
+		}
+		else
+		{
+			cout << -1 << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << cnt << endl;
 	return ( 0 );
 }
