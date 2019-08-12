@@ -137,7 +137,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W; cin >> H >> W;
+	vector<string> v( H + 2 );
+	reps( i, H ) cin >> v[i];
 
+	rep( i, W ) v[0] += '#';
+	rep( i, W ) v[H + 1] += '#';
+	rep( i, H + 2 ) v[i].insert( 0, "#" );
+	rep( i, H + 2 ) v[i] += '#';
+
+	rep( i, H + 2 )
+	{
+		cout << v[i] << endl;
+	}
 
 	return ( 0 );
 }

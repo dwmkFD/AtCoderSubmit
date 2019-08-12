@@ -137,7 +137,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int x, y;
+	cin >> x >> y;
 
+	UnionFind<ll> uf( 13 );
+	uf.unite( 1, 3 );
+	uf.unite( 1, 5 );
+	uf.unite( 1, 7 );
+	uf.unite( 1, 8 );
+	uf.unite( 1, 10 );
+	uf.unite( 1, 12 );
+	uf.unite( 4, 6 );
+	uf.unite( 4, 9 );
+	uf.unite( 4, 11 );
+
+	if ( uf.find( x ) == uf.find( y ) )
+	{
+		cout << "Yes" << endl;
+	}
+	else
+	{
+		cout << "No" << endl;
+	}
 
 	return ( 0 );
 }
