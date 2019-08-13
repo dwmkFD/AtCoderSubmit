@@ -137,7 +137,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K;
+	cin >> N >> K;
 
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
+
+	sort( ALL( v ), []( Pll a, Pll b ) {
+			return( a.F < b.F );
+		} );
+
+	rep( i, N )
+	{
+		if ( v[i].S < K )
+		{
+			K -= v[i].S;
+		}
+		else
+		{
+			cout << v[i].F << endl;
+			break;
+		}
+	}
 
 	return ( 0 );
 }

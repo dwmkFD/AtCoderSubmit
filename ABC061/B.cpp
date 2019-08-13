@@ -137,7 +137,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, M; cin >> N >> M;
+	vector<vector<int>> v( N + 1 );
 
+	rep( i, M )
+	{
+		int a, b; cin >> a >> b;
+		v[a].eb( b );
+		v[b].eb( a );
+	}
+
+	reps( i, N )
+	{
+		int cnt = 0;
+		arep( it, v[i] )
+		{
+			if ( it != 0 ) ++cnt;
+		}
+
+		cout << cnt << endl;
+	}
 
 	return ( 0 );
 }
