@@ -137,7 +137,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string a, b, c;
+	cin >> a >> b >> c;
 
+	if ( a.back() == b.front() )
+	{
+		if ( b.back() == c.front() )
+		{
+			cout << "YES" << endl;
+			return ( 0 );
+		}
+	}
 
+	cout << "NO" << endl;
 	return ( 0 );
 }

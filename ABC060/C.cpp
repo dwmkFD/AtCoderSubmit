@@ -137,7 +137,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, T; cin >> N >> T;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	vector<ll> vv( N );
+	rep( i, N - 1 ) vv[i] = v[i + 1] - v[i];
+
+	ll total = T;
+	rep( i, N - 1 )
+	{
+		if ( vv[i] < T )
+		{
+			total += vv[i];
+		}
+		else
+		{
+			total += T;
+		}
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }

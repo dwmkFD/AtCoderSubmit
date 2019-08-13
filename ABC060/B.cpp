@@ -137,7 +137,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C;
+	cin >> A >> B >> C;
 
+	ll s = A;
+	bool b[1000] = { false };
+	while( 1 )
+	{
+		if ( s % B == C )
+		{
+			cout << "YES" << endl;
+			break;
+		}
+		else
+		{
+			if ( b[s % B] )
+			{
+				cout << "NO" << endl;
+				break;
+			}
+			else
+			{
+				b[s % B] = true;
+				s += A;
+			}
+		}
+	}
 
 	return ( 0 );
 }
