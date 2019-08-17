@@ -137,7 +137,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s;
+	cin >> s;
 
+	ll cnt = 0;
+	string bfr = "", aft = "";
+	bfr += s.back();
+	rreps( i, s.size() - 1 )
+	{
+		string ins = "";
+		ins = s[i - 1];
+		aft.insert( 0, ins );
+		if ( bfr != aft )
+		{
+//			cout << bfr << ", " << aft << endl;
+			++cnt;
+			bfr = aft;
+			aft = "";
+		}
+	}
+
+	cout << ( cnt + 1 ) << endl;
 
 	return ( 0 );
 }

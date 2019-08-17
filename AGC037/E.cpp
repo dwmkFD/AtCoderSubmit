@@ -137,7 +137,124 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	string s; cin >> s;
+	string t = s;
 
+	sort( ALL( t ) );
+
+	ll cnt = 0, cnttmp = 0;
+	vector<int> v( 26 );
+	rep( i, N )
+	{
+		if ( s[i] == t[0] )
+		{
+			++cnttmp;
+		}
+		else
+		{
+			chmax( cnt, cnttmp );
+			cnttmp = 0;
+		}
+	}
+	chmax( cnt, cnttmp );
+
+	string ans = "";
+	if ( ( K >= 13 ) || ( K >= N ) )
+	{
+		rep( i, N ) ans += t[0];
+	}
+	else
+	{
+		rep( k, K - 1 )
+		{
+			string tmp = s;
+			rrep( i, N ) tmp += s[i];
+
+			vector<pair<string, string>> vtmp;
+			rrep( i, N * 2 )
+			{
+				if ( ( tmp[i] == t[0] ) && ( i >= N - 1 ) )
+				{
+					bool ok = true;
+					rep( j, cnt - 1 )
+					{
+						if ( tmp[i] != tmp[i - 1 - j] )
+						{
+							ok = false; break;
+						}
+					}
+
+					if ( ok )
+					{
+						string p1 = tmp.substr( i + 1 - N, N );
+						string p2 = ""; rrep( i, N ) p2 += p1[i];
+						vtmp.eb( mp( p1, p2 ) );
+					}
+				}
+			}
+			sort( ALL( vtmp ), []( pair<string, string> a, pair<string, string> b ) {
+					return ( a.S < b.S );
+				} );
+			s = vtmp[0].F;
+			cnt *= 2;
+			vtmp.clear();
+		}
+
+		if ( K == 1 )
+		{
+			if ( s.back() == t[0] )
+			{
+				ll tmpcnt = 0;
+				rrep( i, N )
+				{
+					if ( s[i] == t[0] )
+					{
+						++tmpcnt;
+					}
+					else
+					{
+						break;
+					}
+				}
+				if ( tmpcnt == cnt ) cnt *= 2;
+			}
+		}
+		string tmp = s;
+		rrep( i, N ) tmp += s[i];
+		vector<string> vtmp;
+		rep( i, N )
+		{
+			if ( tmp[i] == t[0] )
+			{
+				bool ok = true;
+				rep( j, cnt - 1 )
+				{
+					if ( tmp[i] != tmp[i + 1 + j] )
+					{
+						ok = false; break;
+					}
+				}
+
+				if ( ok )
+				{
+					vtmp.eb( tmp.substr( i, N ) );
+				}
+			}
+		}
+
+		if ( vtmp.size() == 0 )
+		{
+			ans = s;
+		}
+		else
+		{
+			sort( ALL( vtmp ) );
+			ans = vtmp[0];
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
