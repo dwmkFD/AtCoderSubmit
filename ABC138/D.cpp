@@ -55,12 +55,12 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 
 template<typename T = ll> class UnionFind {
 public:
-	UnionFind( T n ) { par.resize( n ); siz.resize( n ); rep( i, n ) { par[i] = i; siz[i] = 1; } }
+	UnionFind( T n ) { par.resize( n ); rep( i, n ) { par[i] = i; } }
 	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
 	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
-		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
-private:
-	vector<T> par, siz;
+		par[yy] = xx; }
+public:
+	vector<T> par;
 };
 
 template<typename T = ll> class CompareMax {
@@ -134,10 +134,45 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+ll find( vector<ll> &v, ll x ) {
+	if ( v[x] == x ) return ( x );
+	else return ( find( v, v[x] ) );
+};
 
 int main()
 {
+	ll N, Q; cin >> N >> Q;
+	vector<ll> par( N + 1 );
+	reps( i, N ) par[i] = i;
 
+	rep( i, N - 1 )
+	{
+		ll a, b;
+		cin >> a >> b;
+		par[b] = a;
+	}
+
+	vector<ll> v( N + 1, 0 );
+
+	rep( i, Q )
+	{
+		ll p, x;
+		cin >> p >> x;
+
+		v[p] += x;
+	}
+
+	reps( i, N )
+	{
+		if ( par[i] != i )
+			v[i] += v[par[i]];
+	}
+
+	reps( i, N )
+	{
+		cout << v[i] << " ";
+	}
+	cout << endl;
 
 	return ( 0 );
 }

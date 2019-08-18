@@ -137,7 +137,46 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s, t;
+	cin >> s >> t;
 
+	multimap<char, ll> m;
+	rep( i, s.size() )
+	{
+		m.emplace( s[i], i );
+	}
+
+	ll index = 0;
+	rep( i, t.size() )
+	{
+		auto range = m.equal_range( t[i] );
+		if ( range.F == range.S )
+		{
+			cout << -1 << endl;
+			return ( 0 );
+		}
+		else
+		{
+			bool ok = false;
+			ll idx1 = index % s.size(), idx2 = 0;
+			for ( auto it = range.F; it != range.S; ++it )
+			{
+				idx2 = it->S;
+				if ( idx1 <= idx2 )
+				{
+					index += ( idx2 - idx1 + 1 );
+					ok = true;
+					break;
+				}
+			}
+			if ( !ok )
+			{
+				index += ( ( s.size() - idx1 ) + ( idx2 + 1 ) );
+			}
+		}
+	}
+
+	cout << index << endl;
 
 	return ( 0 );
 }
