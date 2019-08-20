@@ -11,7 +11,7 @@
 #include <cstring>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T &b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
 
@@ -137,7 +137,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
 
+	vector<Pll> v1( N );
+	vector<Pll> v2( M );
+	rep( i, N ) cin >> v1[i].F >> v1[i].S;
+	rep( i, M ) cin >> v2[i].F >> v2[i].S;
+
+	rep( i, N )
+	{
+		ll idx = MOD, ans = MOD;
+		rep( j, M )
+		{
+			ll tmp = abs( v1[i].F - v2[j].F ) + abs( v1[i].S - v2[j].S );
+			if ( chmin( ans, tmp ) )
+			{
+				idx = j + 1;
+			}
+		}
+
+		cout << idx << endl;
+	}
 
 	return ( 0 );
 }

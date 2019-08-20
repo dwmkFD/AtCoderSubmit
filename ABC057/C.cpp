@@ -134,10 +134,38 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+ll solve( ll A, ll B )
+{
+	ll cntA = 0, cntB = 0;
+	while ( A > 0 )
+	{
+		++cntA;
+		A /= 10;
+	}
+
+	while ( B > 0 )
+	{
+		++cntB;
+		B /= 10;
+	}
+
+	return ( max( cntA, cntB ) );
+}
 
 int main()
 {
+	ll N; cin >> N;
 
+	ll maxnum = 0;
+	for ( ll i = 1; i * i <= N; ++i )
+	{
+		if ( ( N % i ) == 0 )
+		{
+			maxnum = i;
+		}
+	}
+
+	cout << solve( maxnum, N / maxnum ) << endl;
 
 	return ( 0 );
 }
