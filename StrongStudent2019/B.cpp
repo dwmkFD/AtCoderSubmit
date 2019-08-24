@@ -137,7 +137,42 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> v( N * 2 );
+	rep( i, N ) cin >> v[i];
+	rep( i, N ) v[i + N] = v[i];
 
+	ll cnt = 0;
+	for ( int i = 0; i < N; ++i )
+	{
+		for ( int j = i + 1; j < N; ++j )
+		{
+			if ( v[i] > v[j] )
+			{
+				++cnt;
+			}
+		}
+	}
 
+	ll cnt2 = 0;
+	for ( int i = 0; i < N * 2; ++i )
+	{
+		for ( int j = i + 1; j < N * 2; ++j )
+		{
+			if ( v[i] > v[j] )
+			{
+				++cnt2;
+			}
+		}
+	}
+
+	ll num = ( K * ( K + 1 ) / 2 ) % MOD;
+	ll ans = ( cnt * num ) % MOD;
+
+	ll cnt3 = cnt2 - cnt * 3;
+	ll num2 = ( K * ( K - 1 ) / 2 ) % MOD;
+	ans = ( ans + ( num2 * cnt3 ) ) % MOD;
+
+	cout << ans << endl;
 	return ( 0 );
 }

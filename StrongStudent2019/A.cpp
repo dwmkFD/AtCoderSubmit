@@ -137,7 +137,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int M, D; cin >> M >> D;
 
+	int cnt = 0;
 
+	for ( int m = 4; m <= M; ++m )
+	{
+		for ( int d10 = 2; d10 * 10 <= D; ++d10 )
+		{
+			for ( int d1 = 2; d1 < 10; ++d1 )
+			{
+				if ( d10 * 10 + d1 > D ) break;
+				if ( d1 * d10 == m )
+				{
+					++cnt;
+				}
+			}
+		}
+	}
+loopend:
+
+	cout << cnt << endl;
 	return ( 0 );
 }
