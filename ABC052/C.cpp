@@ -134,10 +134,63 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
-
 int main()
 {
+	int N; cin >> N;
+	vector<int> v;
+	map<int, int> m;
 
+	auto aliq = []( int x ) {
+		vector<Pint> tmp;
+
+		for ( int i = 2; i <= x; ++i )
+		{
+			int cnt = 0;
+			while ( x % i == 0 )
+			{
+				++cnt;
+				x /= i;
+			}
+			if ( cnt > 0 )
+			{
+				tmp.eb( mp( i, cnt ) );
+			}
+		}
+
+		return ( tmp );
+	};
+
+	ll ans = 1;
+	for ( int i = 2; i <= N; ++i )
+	{
+		vector<Pint> res;
+		int x = i;
+		for ( int j = 2; j <= i; ++j )
+		{
+			int cnt = 0;
+			while ( x % j == 0 )
+			{
+				++cnt;
+				x /= j;
+			}
+			if ( cnt > 0 )
+			{
+				res.eb( mp( j, cnt ) );
+			}
+		}
+
+		arep( it, res )
+		{
+			m[it.F] += it.S;
+		}
+	}
+
+	for ( int i = 2; i <= N; ++i )
+	{
+		ans = ( ans * ( m[i] + 1 ) ) % MOD;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

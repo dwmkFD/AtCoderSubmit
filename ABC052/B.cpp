@@ -137,7 +137,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int x = 0, y = 0, n;
+	string s; cin >> n >> s;
 
+	rep( i, s.size() )
+	{
+		int tmp = y;
+		if ( s[i] == 'I' )
+			++tmp, ++y;
+		else
+			--tmp, --y;
 
+		chmax( x, tmp );
+	}
+
+	cout << x << endl;
 	return ( 0 );
 }

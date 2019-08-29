@@ -137,7 +137,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, A, B;
+	cin >> N >> A >> B;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	vector<ll> vv( N );
+	rep( i, N - 1 ) vv[i] = v[i + 1] - v[i];
+
+	ll ans = 0;
+	rep( i, N - 1 )
+	{
+		if ( vv[i] * A < B )
+		{
+			ans += vv[i] * A;
+		}
+		else
+		{
+			ans += B;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
