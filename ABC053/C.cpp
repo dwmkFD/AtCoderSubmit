@@ -137,7 +137,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x; cin >> x;
 
+	ll t1 = x / 11;
+	ll t2 = x % 11;
+
+	if ( t2 == 0 )
+	{
+		cout << t1 * 2 << endl;
+	}
+	else if ( t2 <= 6 )
+	{
+		cout << t1 * 2 + 1 << endl;
+	}
+	else
+	{
+		cout << t1 * 2 + 2 << endl;
+	}
 
 	return ( 0 );
 }

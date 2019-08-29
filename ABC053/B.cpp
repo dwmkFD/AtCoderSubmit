@@ -137,7 +137,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
 
+	auto t = s.find( 'A' );
+	auto l = s.rfind( 'Z' );
+
+	cout << l - t + 1 << endl;;
 
 	return ( 0 );
 }
