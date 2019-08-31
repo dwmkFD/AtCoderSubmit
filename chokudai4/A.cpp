@@ -10,6 +10,8 @@
 #include <map>
 #include <cstring>
 
+#include <random>
+
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
@@ -137,7 +139,146 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	int B1, B2, B3; cin >> B1 >> B2 >> B3;
+	vector<vector<int>> l( N, vector<int>( N ) );
+	vector<vector<int>> r( N, vector<int>( N ) );
+	rep( i, N ) rep( j, N ) cin >> l[i][j];
+	rep( i, N ) rep( j, N ) cin >> r[i][j];
 
+	random_device gen;
+	mt19937 eng( gen() );
+
+#if 0
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+#if 0
+			// 1. とりあえずランダムに出してみる
+			auto res = ( eng() % ( r[i][j] - l[i][j] + 1 ) ) + l[i][j];
+#endif
+#if 0
+			// 2. 30マス固定なので、B3を満たすように作ると
+			// 途中でB1もB2も満たす可能性が高いことを利用したい
+			// 可能な限りlで埋めると、B3が最小の30でも900点で、
+			// B1, B2も満たしやすくて良いのでは？
+			// 一応、最後の方のマスは大きめの値を入れて埋め合わせるｗ
+			int res = l[i][j];
+			if ( i >= 27 ) res = r[i][j];
+			if ( j >= 27 ) res = r[i][j];
+#endif
+#if 0
+			// 3. lが小さめなマスはlを、lが大きめなマスは(l + r) / 2を採用してみる
+			// lが小さい値を取れる場合は、できるだけ小さい値の方が良い（数が増えるので）
+			// lを小さくできないなら、むしろ諦めて補正用rを取った方が良いのでは？
+			// すると、端の方のマスでの微調整が不要になって、より有効に使える気がする
+			int res;
+			if ( l[i][j] <= 4 ) res = l[i][j];
+			else res = ( l[i][j] + r[i][j] ) / 2;
+#endif
+#if 0
+			// 4. 閾値調整する
+			int res;
+			if ( l[i][j] <= 6 ) res = l[i][j];
+			else res = ( l[i][j] + r[i][j] ) / 2;
+#endif
+#if 0
+			// 5. 全部lにしてみる
+			int res = l[i][j];
+#endif
+#if 0
+			// 6. 適度にrを混ぜる
+			int res = l[i][j];
+			if ( ( i % 5 == 0 ) && ( j % 5 == 0 ) ) res = r[i][j];
+#endif
+#if 0
+			// 7. 混ぜる量を減らす
+			int res = l[i][j];
+			if ( ( i == 0 ) || ( i == 29 ) ) if ( j % 5 == 0 ) res = r[i][j];
+			if ( ( j == 0 ) || ( j == 29 ) ) if ( i % 5 == 0 ) res = r[i][j];
+#endif
+#if 0
+			// 8. 混ぜる値をrより小さくする
+			int res = l[i][j];
+			if ( ( i == 0 ) || ( i == 29 ) ) if ( j % 5 == 0 ) res = ( l[i][j] + r[i][j] ) / 2;
+			if ( ( j == 0 ) || ( j == 29 ) ) if ( i % 5 == 0 ) res = ( l[i][j] + r[i][j] ) / 2;
+#endif
+			cout << res << " ";
+		}
+		cout << endl;
+	}
+#endif
+
+	// 9. しゃくとり法を使って、B1を満たす有効な区間を求める（横方向のみ）
+	// 10. 縦方向も考える（ざっくり）
+	// 有効に使えなさそうなところにrを入れて、改善されないか？を見てみる
+	vector<vector<int>> ans( N, vector<int>( N ) );
+	vector<vector<bool>> flg( N, vector<bool>( N, false ) );
+	rep( i, N ) rep( j, N ) ans[i][j] = l[i][j];
+
+	rep( i, N )
+	{
+		int sum = 0;
+		int right = 0;
+		rep( left, N )
+		{
+			while ( right < N && sum + ans[i][right] <= B1 )
+			{
+				sum += ans[i][right];
+				++right;
+			}
+			if ( sum == B1 )
+			{
+				for ( int k = left; k < right; ++k )
+				{
+					flg[i][k] = true;
+				}
+			}
+
+			if ( right == left ) ++right;
+			else sum -= ans[i][left];
+		}
+	}
+
+	rep( i, N )
+	{
+		int sum = 0;
+		int right = 0;
+		rep( left, N )
+		{
+			while ( right < N && sum + ans[right][i] <= B1 )
+			{
+				sum += ans[right][i];
+				++right;
+			}
+			if ( sum == B1 )
+			{
+				for ( int k = left; k < right; ++k )
+				{
+					flg[k][i] = true;
+				}
+			}
+
+			if ( right == left ) ++right;
+			else sum -= ans[left][i];
+		}
+	}
+
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			if ( flg[i][j] == false )
+			{
+				// 計算に不要そうなマスにlより大きな値を入れてみる
+				ans[i][j] = ( l[i][j] + r[i][j] ) / 2;
+			}
+
+			cout << ans[i][j] << " ";
+		}
+		cout << endl;
+	}
 
 	return ( 0 );
 }
