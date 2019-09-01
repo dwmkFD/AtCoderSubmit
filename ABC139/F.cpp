@@ -9,6 +9,7 @@
 #include <cmath>
 #include <map>
 #include <cstring>
+#include <iomanip>
 
 template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
@@ -137,7 +138,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<Pll> v( N );
+	rep( i, N )
+	{
+		cin >> v[i].F >> v[i].S;
+	}
 
+
+	x *= x; y *= y;
+	cout << setprecision( 16 );
+	cout << (double)sqrt( x + y ) << endl;
 
 	return ( 0 );
 }

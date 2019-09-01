@@ -137,7 +137,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<vector<int>> v( N, vector<int>( N ) );
+	rep( i, N ) rep( j, N ) cin >> v[i][j];
+	vector<vector<bool>> b( N, vector<bool>( N, false ) );
 
+	bool flg = true;
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			if ( b[i][j] == false )
+			{
+				b[i][j] = true;
+			}
+			else
+			{
+				flg = false;
+				break;
+			}
+		}
+	}
+
+	cout << ( flg ? N : -1 ) << endl;
 
 	return ( 0 );
 }

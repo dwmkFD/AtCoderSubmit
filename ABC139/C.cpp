@@ -137,7 +137,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll cnt = 0, res = 0;
+	ll tmp = 0;
+	rep( i, N )
+	{
+		if ( v[i] <= tmp )
+		{
+			++cnt;
+		}
+		else
+		{
+			cnt = 0;
+		}
+		tmp = v[i];
+		chmax( res, cnt );
+	}
+
+	cout << res << endl;
 
 	return ( 0 );
 }

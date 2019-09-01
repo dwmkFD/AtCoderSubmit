@@ -137,7 +137,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
 
+	ll ans = ( N - 1 ) * N / 2;
+	cout << ans << endl;
 
 	return ( 0 );
 }

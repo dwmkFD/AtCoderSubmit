@@ -137,7 +137,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B;
+	cin >> A >> B;
 
+	if ( B == 1 ) {
+		cout << 0 << endl;
+		return ( 0 );
+	}
+
+	int cnt = A;
+	int ans = 1;
+	while ( cnt < B )
+	{
+		++ans;
+		cnt += ( A - 1 );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
