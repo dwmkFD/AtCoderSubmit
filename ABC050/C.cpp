@@ -137,7 +137,49 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N )
+	{
+		cin >> v[i];
+	}
 
+	map<ll, ll> m;
+	rep( i, N )
+	{
+		if ( ( v[i] % 2 ) == ( N % 2 ) )
+		{
+			cout << 0 << endl;
+			return ( 0 );
+		}
+		else
+		{
+			m[v[i]]++;
+		}
+	}
+
+	arep( it, m )
+	{
+		if ( it.F != 0 )
+		{
+			if ( it.S != 2 )
+			{
+				cout << 0 << endl;
+				return ( 0 );
+			}
+		}
+		else
+		{
+			if ( it.S >= 2 )
+			{
+				cout << 0 << endl;
+				return ( 0 );
+			}
+		}
+	}
+
+	ll p = N / 2;
+	cout << power( 2ll, p ) << endl;
 
 	return ( 0 );
 }
