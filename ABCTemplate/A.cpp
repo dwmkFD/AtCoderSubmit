@@ -1,11 +1,13 @@
 #include <algorithm>
 #include <iostream>
+#include <iomanip>
 #include <numeric>
 #include <vector>
 #include <string>
 #include <bitset>
 #include <queue>
 #include <tuple>
+#include <regex>
 #include <cmath>
 #include <map>
 #include <cstring>
@@ -124,6 +126,24 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
+*/
+
+/*
+	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
+	smatch m;
+
+	if ( regex_match( s, m, reg ) )
+	{
+		cout << "YES" << endl;
+	}
+	else
+	{
+		cout << "NO" << endl;
+	}
+*/
+/*
+	cout << setprecision( 16 );
+	cout << fixed << setprecision( 16 );
 */
 
 void replace( string &s, string t, string r ) {
