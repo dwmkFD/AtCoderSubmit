@@ -157,7 +157,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, K; cin >> N >> K;
+	ll ans = K;
 
+	rep( i, N - 1 )
+	{
+		ans *= ( K - 1 );
+	}
 
+	cout << ans << endl;
 	return ( 0 );
 }

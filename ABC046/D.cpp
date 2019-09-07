@@ -157,7 +157,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
 
+	ll gcnt = 0, pcnt = 0;
+	rep( i, s.size() )
+	{
+		if ( s[i] == 'g' ) gcnt++;
+		if ( s[i] == 'p' ) pcnt++;
+	}
+
+	if ( gcnt > pcnt )
+	{
+		cout << ( gcnt - pcnt ) / 2 << endl;
+	}
+	else if ( gcnt == pcnt )
+	{
+		cout << 0 << endl;
+	}
+	else
+	{
+		cout << gcnt - pcnt << endl;
+	}
 
 	return ( 0 );
 }

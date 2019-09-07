@@ -157,7 +157,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int a, b, c;
+	cin >> a >> b >> c;
 
+	map<int, int> m;
+	m[a]++; m[b]++; m[c]++;
+
+	int cnt = 0;
+	arep( it, m )
+	{
+		++cnt;
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

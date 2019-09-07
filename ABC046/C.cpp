@@ -157,7 +157,35 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<ll> t( N ), a( N );
+	rep( i, N )
+	{
+		cin >> t[i];
+		cin >> a[i];
+	}
 
+	ll tans = t[0], aans = a[0];
+	reps( i, N - 1 )
+	{
+		if ( tans % t[i] )
+			tans += t[i] - ( tans % t[i] );
+		if ( aans % a[i] )
+			aans += a[i] - ( aans % a[i] );
+
+		ll tmul = tans / t[i];
+		ll amul = aans / a[i];
+		if ( tmul > amul )
+		{
+			aans = a[i] * tmul;
+		}
+		else if ( tmul < amul )
+		{
+			tans = t[i] * amul;
+		}
+	}
+
+	cout << tans + aans << endl;
 
 	return ( 0 );
 }
