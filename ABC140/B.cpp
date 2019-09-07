@@ -157,7 +157,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<int> a( N ), b( N ), c( N );
+	rep( i, N ) cin >> a[i];
+	rep( i, N ) cin >> b[i];
+	rep( i, N - 1 ) cin >> c[i];
 
+	ll total = 0;
+	rep( i, N )
+	{
+		total += b[a[i] - 1];
+		if ( ( i > 0 ) && ( a[i - 1] == a[i] - 1 ) )
+		{
+			total += c[a[i] - 2];
+		}
+	}
 
+	cout << total << endl;
 	return ( 0 );
 }

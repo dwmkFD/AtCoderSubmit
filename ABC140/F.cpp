@@ -157,7 +157,68 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<int> v( power( 2, N ) );
+	map<int, int, greater<int>> m;
+	rep( i, pow( 2, N ) ) cin >> v[i];
 
+	int vMax = 0, vMin = MAX<int>;
+	rep( i, v.size() )
+	{
+		chmax( vMax, v[i] );
+		chmin( vMin, v[i] );
+		m[v[i]]++;
+	}
+
+	bool ok = true;
+	int largecnt = 0;
+	int loopcnt = 0;
+	arep( it, m )
+	{
+		if ( loopcnt == 0 )
+		{
+			if ( it.S > 1 )
+			{
+				ok = false;
+				break;
+			}
+			else
+			{
+				largecnt += it.S;
+			}
+		}
+		else if ( loopcnt == 1 )
+		{
+			if ( it.S > N )
+			{
+				ok = false;
+				break;
+			}
+			else
+			{
+				largecnt += it.S;
+			}
+		}
+		else
+		{
+			if ( ( it.S > largecnt * ( N - loopcnt ) ) && ( loopcnt < N ) )
+			{
+				ok = false;
+				break;
+			}
+			else
+			{
+				if ( loopcnt < N )
+				{
+					largecnt *= 2;
+					largecnt -= it.S / ( N - loopcnt );
+				}
+			}
+		}
+		++loopcnt;
+	}
+
+	cout << ( ok ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }

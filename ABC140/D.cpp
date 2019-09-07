@@ -157,7 +157,46 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, K; cin >> N >> K;
+	string s; cin >> s;
+	vector<int> v;
 
+	ll cnt = 0;
+	ll cnt2 = 1;
+	ll cnt3 = 0;
+	char c = s[0];
+	reps( i, s.size() - 1 )
+	{
+		if ( s[i] == 'L' ) ++cnt3;
+		if ( s[i] != c )
+		{
+			++cnt;
+			c = s[i];
+			v.eb( cnt2 );
+			cnt2 = 0;
+		}
+		else
+		{
+			++cnt2;
+		}
+	}
+
+	sort( ALL( v ), []( int a, int b ) { return ( a > b ); } );
+
+	if ( cnt <= K )
+	{
+		cout << N - 1 << endl;
+	}
+	else
+	{
+		ll ans = 0;
+		rep( i, K )
+		{
+			ans += v[i];
+		}
+
+		cout << ans + max( cnt3, N - cnt3 ) << endl;
+	}
 
 	return ( 0 );
 }

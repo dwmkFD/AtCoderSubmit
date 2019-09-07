@@ -157,7 +157,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
 
+	cout << N * N * N << endl;
 
 	return ( 0 );
 }
