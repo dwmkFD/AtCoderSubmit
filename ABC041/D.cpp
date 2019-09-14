@@ -157,7 +157,47 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
+	vector<Pll> v( M );
+	rep( i, M )
+	{
+		cin >> v[i].F >> v[i].S;
+		--v[i].F; --v[i].S;
+	}
 
+	auto bit = []( ll i ) {
+		return ( 1 << i );
+	};
+
+	ll dp[65537] = { 0 };
+	dp[0] = 1;
+
+	reps( i, power( 2ll, N ) - 1 )
+	{
+		rep( j, N )
+		{
+			if ( i & bit( j ) )
+			{
+				bool ok = true;
+				rep( k, M )
+				{
+					if ( ( v[k].F == j ) && ( i & bit( v[k].S ) ) )
+					{
+						ok = false;
+						break;
+					}
+				}
+				if ( ok )
+				{
+					dp[i] += dp[i & ~bit( j )];
+				}
+			}
+		}
+	}
+
+
+	cout << dp[power( 2ll, N ) - 1] << endl;
 
 	return ( 0 );
 }
