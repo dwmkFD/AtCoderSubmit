@@ -157,7 +157,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, C;
+	cin >> A >> B >> C;
 
+	ll ans = ( A * B ) % MOD;
+	ans = ( ans * C ) % MOD;
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

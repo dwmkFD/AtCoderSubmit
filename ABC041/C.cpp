@@ -157,7 +157,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<Pll> v( N );
+	rep( i, N )
+	{
+		v[i].F = i + 1;
+		cin >> v[i].S;
+	}
 
+	sort( ALL( v ), []( Pll a, Pll b ) {
+			return ( a.S > b.S );
+		} );
+
+	arep( it, v ) cout << it.F << endl;
 
 	return ( 0 );
 }
