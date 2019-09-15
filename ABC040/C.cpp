@@ -157,7 +157,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll dp[100002] = { 0 };
+	dp[1] = abs( v[1] - v[0] );
+	reps( i, N )
+	{
+		dp[i + 1] = min( dp[i - 1] + abs( v[i - 1] - v[i + 1] ),
+						 dp[i] + abs( v[i + 1] - v[i] ) );
+	}
+
+	cout << dp[N - 1] << endl;
 
 	return ( 0 );
 }

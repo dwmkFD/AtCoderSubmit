@@ -157,7 +157,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
 
+	ll ans = MAX<ll>;
+
+	for ( ll i = 1; i * i <= n; ++i )
+	{
+		ll x = i;
+		ll y = n / i;
+		ll m = n - x * y;
+
+		chmin( ans, abs( x - y ) + m );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
