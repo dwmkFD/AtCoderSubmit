@@ -61,6 +61,7 @@ public:
 	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
 	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
 		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
+	T size( T x ) { return ( siz[find( x )] ); }
 private:
 	vector<T> par, siz;
 };
@@ -157,7 +158,51 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	vector<tuple<ll, ll, ll>> t;
+	rep( i, M )
+	{
+		ll a, b, y;
+		cin >> a >> b >> y;
+		t.eb( mt( a, b, y ) );
+	}
 
+	sort( ALL( t ), []( tuple<ll, ll, ll> a, tuple<ll, ll, ll> b ) {
+			return ( get<2>( a ) > get<2>( b ) );
+		} );
+
+	ll Q; cin >> Q;
+	vector<tuple<ll, ll, ll>> q;
+	rep( i, Q )
+	{
+		ll v, w; cin >> v >> w;
+		q.eb( mt( i, v, w ) );
+	}
+
+	sort( ALL( q ), []( tuple<ll, ll, ll> a, tuple<ll, ll, ll> b ) {
+			return ( get<2>( a ) > get<2>( b ) );
+		} );
+
+	UnionFind<ll> uf( N + 1 );
+	vector<ll> ans( Q, 0 );
+	ll j = 0;
+	rep( i, Q )
+	{
+		for ( ; j < M; ++j )
+		{
+			if ( get<2>( t[j] ) > get<2>( q[i] ) )
+			{
+				uf.unite( get<0>( t[j] ), get<1>( t[j] ) );
+			}
+			else
+			{
+				break;
+			}
+		}
+		ans[get<0>( q[i] )] = uf.size( get<1>( q[i] ) );
+	}
+
+	arep( it, ans ) cout << it << endl;
 
 	return ( 0 );
 }
