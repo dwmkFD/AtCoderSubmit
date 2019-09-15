@@ -157,7 +157,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	priority_queue<ll, vector<ll>> q;
+	rep( i, N )
+	{
+		ll tmp; cin >> tmp;
+		q.emplace( tmp );
+	}
 
+	while ( M > 0 )
+	{
+		auto tmp = q.top(); q.pop();
+		q.emplace( tmp / 2 );
+		--M;
+	}
+
+	ll ans = 0;
+	while ( !q.empty() )
+	{
+		ans += q.top();
+		q.pop();
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -157,7 +157,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	ll tmp = 0;
+	rep( i, N )
+	{
+		cin >> v[i];
+		tmp ^= v[i];
+	}
 
+	auto bit = []( ll i ) {
+		return ( 1ll << i );
+	};
+
+	ll dp[2][100001] = { 0 };
+	tmp ^= v[0];
+	ll tmp2 = tmp;
+	dp[0][0] = tmp + v[0];
+	reps( i, N )
+	{
+		dp[0][i] = dp[0][i - 1];
+		dp[1][i] = ( ( dp[0][i - 1] - tmp ) ^ v[i] ) + ( tmp2 ^ v[i] );
+		if ( dp[1][i] > dp[0][i] ) tmp2 ^= v[i];
+
+		cout << dp[0][i] << ", " << dp[1][i] << endl;
+	}
+
+	cout << max( dp[0][N], dp[1][N] ) << endl;
 
 	return ( 0 );
 }

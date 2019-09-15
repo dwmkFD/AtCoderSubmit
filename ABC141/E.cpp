@@ -157,6 +157,8 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	string s; cin >> s;
 
 
 	return ( 0 );

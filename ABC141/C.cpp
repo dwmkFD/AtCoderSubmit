@@ -157,7 +157,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K, Q;
+	cin >> N >> K >> Q;
+	vector<ll> v( Q );
+	rep( i, Q ) cin >> v[i];
 
+	vector<ll> ans( N + 1, 0 );
+	rep( i, Q )
+	{
+		ans[v[i]]++;
+	}
+
+	reps( i, N )
+	{
+		if ( K - Q + ans[i] > 0 )
+		{
+			cout << "Yes" << endl;
+		}
+		else
+		{
+			cout << "No" << endl;
+		}
+	}
 
 	return ( 0 );
 }

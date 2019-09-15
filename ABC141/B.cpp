@@ -157,7 +157,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
 
+	bool ok = true;
+	rep( i, s.size() )
+	{
+		if ( i % 2 )
+		{
+			if ( s[i] == 'R' )
+			{
+				ok = false;
+				break;
+			}
+		}
+		else
+		{
+			if ( s[i] == 'L' )
+			{
+				ok = false;
+				break;
+			}
+		}
+	}
+
+	cout << ( ok ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }
