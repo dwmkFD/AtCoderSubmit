@@ -157,7 +157,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll X; cin >> X;
 
+	cout << sqrt( sqrt( X ) ) << endl;
 
 	return ( 0 );
 }

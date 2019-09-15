@@ -157,7 +157,87 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W; cin >> H >> W;
+	vector<string> v( H );
+	vector<string> ans( H, "" );
+	rep( i, H ) cin >> v[i];
 
+	const int dx[] = { -1, -1, -1, 0, 0, 1, 1, 1 };
+	const int dy[] = { -1, 0, 1, -1, 1, -1, 0, 1 };
+
+	rep( i, H )
+	{
+		rep( j, W )
+		{
+			bool black = ( v[i][j] == '#' );
+			if ( black )
+			{
+				rep( k, 8 )
+				{
+					int nx = j + dx[k];
+					int ny = i + dy[k];
+					if ( nx >= 0 && nx < W && ny >= 0 && ny < H )
+					{
+						if ( v[ny][nx] == '.' )
+						{
+							black = false;
+							break;
+						}
+					}
+				}
+			}
+			ans[i] += ( black ? "#" : "." );
+		}
+	}
+
+	vector<string> reverse( H, "" );
+	rep( i, H )
+	{
+		rep( j, W )
+		{
+			bool white = ( ans[i][j] == '.' );
+			rep( k, 8 )
+			{
+				int nx = j + dx[k];
+				int ny = i + dy[k];
+				if ( nx >= 0 && nx < W && ny >= 0 && ny < H )
+				{
+					if ( ans[ny][nx] == '#' )
+					{
+						white = false;
+						break;
+					}
+				}
+			}
+			reverse[i] += ( white ? "." : "#" );
+		}
+	}
+
+#if 0
+	rep( i, H ) cout << ans[i] << endl;
+	cout << "---------------" << endl;
+	rep( i, H ) cout << reverse[i] << endl;
+#endif
+
+	bool ok = true;
+	rep( i, H )
+	{
+		if ( v[i] != reverse[i] )
+		{
+			ok = false;
+			break;
+		}
+	}
+
+	if ( ok )
+	{
+		cout << "possible" << endl;
+		rep( i, H ) cout << ans[i] << endl;
+	}
+	else
+	{
+		cout << "impossible" << endl;
+	}
 
 	return ( 0 );
 }

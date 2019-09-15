@@ -157,7 +157,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	const string t = "WBWBWWBWBWBWWBWBWWBWBWBWWBWBWWBWBWBWWBWBWWBWBWBW";
+	const string ans[] = {
+		"Do", "Do", "Re", "Re", "Mi", "Fa",
+		"Fa", "So", "So", "La", "La", "Si"
+	};
 
+	auto idx = t.find( s );
+
+	cout << ans[idx % 12] << endl;
 
 	return ( 0 );
 }
