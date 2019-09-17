@@ -154,10 +154,42 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+ll grid[1002][1002];
+ll dp[1002][1002];
+
+ll solve( ll x, ll y )
+{
+	if ( dp[x][y] != 0 ) return ( dp[x][y] );
+
+	ll ans1 = 0, ans2 = 0, ans3 = 0, ans4 = 0;
+	if ( grid[x - 1][y] > grid[x][y] )
+		ans1 = solve( x - 1, y );
+	if ( grid[x + 1][y] > grid[x][y] )
+		ans2 = solve( x + 1, y );
+	if ( grid[x][y - 1] > grid[x][y] )
+		ans3 = solve( x, y - 1 );
+	if ( grid[x][y + 1] > grid[x][y] )
+		ans4 = solve( x, y + 1 );
+
+	dp[x][y] = ( ans1 + ans2 + ans3 + ans4 + 1 ) % MOD;
+	return ( dp[x][y] );
+}
 
 int main()
 {
+	ll H, W; cin >> H >> W;
+	reps( i, H ) reps( j, W ) cin >> grid[i][j];
 
+	ll ans = 0;
+	reps( i, H )
+	{
+		reps( j, W )
+		{
+			ans = ( ans + solve( i, j ) ) % MOD;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
