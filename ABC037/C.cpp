@@ -157,7 +157,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K;
+	cin >> N >> K;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	vector<ll> vv( N + 1 );
+	vv[0] = 0;
+	reps( i, N ) vv[i] = vv[i - 1] + v[i - 1];
+
+	ll total = 0;
+	for ( ll i = 0; i + K <= N; ++i )
+	{
+		total += ( vv[i + K] - vv[i] );
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }

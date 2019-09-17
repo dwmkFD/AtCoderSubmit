@@ -157,7 +157,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, Q;
+	cin >> N >> Q;
+	vector<int> v( N, 0 );
 
+	rep( i, Q )
+	{
+		int l, r, t;
+		cin >> l >> r >> t;
+		for ( int j = l - 1; j <= r - 1; ++j )
+			v[j] = t;
+	}
+
+	rep( i, N ) cout << v[i] << endl;
 
 	return ( 0 );
 }
