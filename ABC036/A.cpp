@@ -157,7 +157,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B;
+	cin >> A >> B;
 
+	cout << ceil( (double)B / A ) << endl;
 
 	return ( 0 );
 }
