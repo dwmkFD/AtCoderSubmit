@@ -157,7 +157,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int W, H;
+	cin >> W >> H;
 
+	if ( W % 16 )
+	{
+		cout << "4:3" << endl;
+	}
+	else
+	{
+		if ( H % 9 )
+			cout << "4:3" << endl;
+		else
+			cout << "16:9" << endl;
+	}
 
 	return ( 0 );
 }

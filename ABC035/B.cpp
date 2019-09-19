@@ -157,7 +157,41 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	ll t; cin >> t;
 
+	ll ans = 0;
+	ll x = 0, y = 0;
+	rep( i, s.size() )
+	{
+		switch ( s[i] )
+		{
+		case 'L': --x; break;
+		case 'R': ++x; break;
+		case 'U': ++y; break;
+		case 'D': --y; break;
+		default:
+			if ( t == 1 )
+				++ans;
+			else
+				--ans;
+				break;
+		}
+	}
+
+	if ( t == 1 )
+		cout << abs( x ) + abs( y ) + ans << endl;
+	else
+	{
+		ll tmp = abs( x ) + abs( y ) + ans;
+
+		if ( tmp > 0 )
+			cout << tmp << endl;
+		else
+		{
+			cout << abs( tmp ) % 2 << endl;
+		}
+	}
 
 	return ( 0 );
 }
