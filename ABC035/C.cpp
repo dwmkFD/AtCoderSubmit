@@ -157,7 +157,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, Q; cin >> N >> Q;
+	vector<ll> v( N + 1, 0 );
 
+	rep( i, Q )
+	{
+		ll a, b;
+		cin >> a >> b;
+
+		v[a - 1] += 1;
+		v[b] -= 1;
+	}
+
+	vector<ll> ans( N + 2, 0 );
+	rep( i, N + 1 )
+		ans[i + 1] = ans[i] + v[i];
+
+	reps( i, N )
+	{
+		if ( ans[i] % 2 )
+			cout << 1;
+		else
+			cout << 0;
+	}
+	cout << endl;
 
 	return ( 0 );
 }
