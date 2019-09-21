@@ -173,7 +173,111 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W; cin >> H >> W;
+	int A, B; cin >> A >> B;
+	vector<vector<int>> ans( H, vector<int>( W, 0 ) );
+	vector<int> judge( W, 0 );
 
+	if ( H == 1 && W == 1 )
+	{
+		if ( A != 0 || B != 0 )
+		{
+			cout << "No" << endl;
+		}
+		else
+		{
+			cout << 1 << endl;
+		}
+		return ( 0 );
+	}
+	if ( H == 1 )
+	{
+		rep( i, A ) cout << 1;
+		rep( i, W - A ) cout << 0;
+		cout << endl;
+	}
+	else if ( W == 1 )
+	{
+		rep( i, B ) cout << 1 << endl;
+		rep( i, H - B ) cout << 0 << endl;
+	}
+#if 0
+	else if ( H * A != W * B )
+	{
+		cout << "No" << endl;
+		return ( 0 );
+	}
+#endif
+	else if ( A == 0 )
+	{
+		rep( i, H )
+		{
+			if ( i < B )
+			{
+				rep( j, W ) cout << 1;
+				cout << endl;
+			}
+			else
+			{
+				rep( j, W ) cout << 0;
+				cout << endl;
+			}
+		}
+	}
+	else if ( B == 0 )
+	{
+		rep( i, H )
+		{
+			rep( j, W )
+			{
+				if ( j < A ) cout << 1;
+				else cout << 0;
+			}
+			cout << endl;
+		}
+	}
+	else
+	{
+		rep( i, H )
+		{
+			int Acnt = 0;
+			for ( int j = i % W, cnt = 0; cnt < W; j = ( j + 1 ) % W, ++cnt )
+			{
+				if ( Acnt < A )
+				{
+					if ( cnt % ( W / A ) == 0 )
+					{
+						ans[i][j] = 1;
+						judge[j]++;
+						++Acnt;
+					}
+				}
+			}
+		}
+
+#if 0
+		rep( i, H )
+		{
+			rep( j, W ) cout << ans[i][j];
+			cout << endl;
+		}
+#endif
+
+		rep( i, W )
+		{
+			if ( min( judge[i], H - judge[i] ) != B )
+			{
+				cout << "No" << endl;
+				return ( 0 );
+			}
+		}
+
+		rep( i, H )
+		{
+			rep( j, W ) cout << ans[i][j];
+			cout << endl;
+		}
+	}
 
 	return ( 0 );
 }
