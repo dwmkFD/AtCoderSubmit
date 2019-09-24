@@ -157,7 +157,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int a, b, n;
+	cin >> a >> b >> n;
 
+	int x = lcm( a, b );
+	int ans = x;
+	while ( ans < n )
+		ans += x;
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

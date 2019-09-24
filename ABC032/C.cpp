@@ -12,7 +12,7 @@
 #include <map>
 #include <cstring>
 
-template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
@@ -157,7 +157,39 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> v( N );
+	bool zeroflg = false;
+	rep( i, N )
+	{
+		cin >> v[i];
+		if ( v[i] == 0 ) zeroflg = true;
+	}
 
+	if ( zeroflg )
+	{
+		cout << N << endl;
+		return ( 0 );
+	}
+
+	ll right = 0;
+	ll mul = 1;
+	ll longest = 0;
+	rep( left, N )
+	{
+		if ( left > right ) right = left;
+		while ( ( right < N ) && ( mul <= K / v[right] ) )
+		{
+			mul *= v[right];
+			++right;
+		}
+		if ( chmax( longest, right - left ) )
+		{
+		}
+		mul = max( mul / v[left], 1ll );
+	}
+
+	cout << longest << endl;
 
 	return ( 0 );
 }

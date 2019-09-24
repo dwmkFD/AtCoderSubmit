@@ -157,7 +157,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	ll k; cin >> k;
 
+	map<string, ll> m;
+	rep( i, s.size() - k + 1 )
+	{
+		string tmp = s.substr( i, k );
+		m[tmp]++;
+	}
+
+	cout << m.size() << endl;
 
 	return ( 0 );
 }
