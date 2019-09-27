@@ -157,7 +157,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int n, m;
+	cin >> n >> m;
 
+	cout << setprecision( 16 );
+	double tmp = abs( (double)( n * 30 + (double)m / 2 ) - 6 * m );
+
+	while ( tmp > 360 )
+		tmp -= 360;
+
+	cout << min( tmp, 360 - tmp ) << endl;
 
 	return ( 0 );
 }

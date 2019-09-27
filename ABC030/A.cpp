@@ -157,7 +157,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B, C, D;
+	cin >> A >> B >> C >> D;
 
+	double x = (double)B / A;
+	double y = (double)D / C;
+
+	if ( x > y )
+		cout << "TAKAHASHI" << endl;
+	else if ( x == y )
+		cout << "DRAW" << endl;
+	else
+		cout << "AOKI" << endl;
 
 	return ( 0 );
 }

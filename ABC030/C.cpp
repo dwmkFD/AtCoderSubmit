@@ -157,7 +157,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	ll X, Y; cin >> X >> Y;
+	vector<ll> vn( N );
+	vector<ll> vm( M );
+	rep( i, N ) cin >> vn[i];
+	rep( i, M ) cin >> vm[i];
 
+	ll ans = 0;
+	ll t = 0;
+
+	auto it1 = lower_bound( ALL( vn ), t );
+	auto it2 = vm.begin();
+	while ( it1 != vn.end() )
+	{
+		t = *it1;
+		t += X;
+		it2 = lower_bound( it2, vm.end(), t );
+		if ( it2 != vm.end() )
+		{
+			t = *it2;
+			t += Y;
+			++ans;
+			it1 = lower_bound( it1, vn.end(), t );
+		}
+		else
+		{
+			break;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
