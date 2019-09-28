@@ -157,7 +157,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	vector<int> v( 5 );
+	rep( i, 5 ) cin >> v[i];
+	vector<int> ans;
 
+	sort( ALL( v ), greater<int>() );
+
+	for ( int i = 0; i < 3; ++i )
+	{
+		for ( int j = i + 1; j < 4; ++j )
+		{
+			for ( int k = j + 1; k < 5; ++k )
+			{
+				ans.eb( v[i] + v[j] + v[k] );
+			}
+		}
+	}
+
+	sort ( ALL( ans ), greater<int>() );
+	cout << ans[2] << endl;
 
 	return ( 0 );
 }

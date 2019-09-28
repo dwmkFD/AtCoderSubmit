@@ -157,7 +157,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	map<char, int> m;
 
+	rep( i, s.size() )
+	{
+		m[s[i]]++;
+	}
+
+	vector<char> v = { 'A', 'B', 'C', 'D', 'E' };
+	rep( i, v.size() )
+		cout << m[v[i]] << " ";
+	cout << m['F'] << endl;
 
 	return ( 0 );
 }

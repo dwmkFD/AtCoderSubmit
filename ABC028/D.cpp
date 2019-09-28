@@ -157,7 +157,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K;
+	cin >> N >> K;
 
+	ll p1 = N - K;
+	p1 *= ( K - 1 );
+	p1 *= 6;
+
+	ll p2 = K - 1;
+	p2 *= 3;
+
+	ll p3 = N - K;
+	p3 *= 3;
+
+	ll p4 = 1;
+
+	cout << setprecision( 16 );
+	cout << (double)( p1 + p2 + p3 + p4 ) / ( N * N * N ) << endl;
 
 	return ( 0 );
 }
