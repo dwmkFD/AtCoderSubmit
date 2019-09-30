@@ -157,7 +157,31 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	ll total = 0;
+	rep( i, N ) { cin >> v[i]; total += v[i]; }
 
+	if ( total % N )
+	{
+		cout << -1 << endl;
+	}
+	else
+	{
+		const ll avg = total / N;
+		ll ans = 0;
+		rep( i, N )
+		{
+			if ( v[i] != avg )
+			{
+				v[i + 1] += v[i] - avg;
+				v[i] = avg;
+				++ans;
+			}
+		}
+
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }
