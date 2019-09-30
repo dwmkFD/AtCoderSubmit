@@ -157,7 +157,39 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	int winner = 0;
 
+	ll d = 0;
+	for ( ll n = N; n > 0; n /= 2 ) ++d;
+
+	ll x = 1;
+	if ( d % 2 )
+	{
+		while ( x <= N )
+		{
+			x *= 2; x += 1;
+			if ( x > N ) break;
+			winner ^= 1;
+			x *= 2;
+			if ( x > N ) break;
+			winner ^= 1;
+		}
+	}
+	else
+	{
+		while ( x <= N )
+		{
+			x *= 2;
+			if ( x > N ) break;
+			winner ^= 1;
+			x *= 2; x += 1;
+			if ( x > N ) break;
+			winner ^= 1;
+		}
+	}
+
+	cout << ( winner ? "Takahashi" : "Aoki" ) << endl;
 
 	return ( 0 );
 }
