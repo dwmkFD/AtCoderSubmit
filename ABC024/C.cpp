@@ -157,7 +157,44 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, D, K;
+	cin >> N >> D >> K;
+	vector<Pll> v( D );
+	rep( i, D ) cin >> v[i].F >> v[i].S;
+	vector<Pll> vv( K );
+	rep( i, K )
+	{
+		cin >> vv[i].F >> vv[i].S;
 
+		ll pos = vv[i].F;
+		rep( j, D )
+		{
+			if ( vv[i].F < vv[i].S )
+			{
+				if ( v[j].F <= pos )
+				{
+					pos = max( pos, v[j].S );
+					if ( pos >= vv[i].S )
+					{
+						cout << j + 1 << endl;
+						break;
+					}
+				}
+			}
+			else
+			{
+				if ( v[j].S >= pos )
+				{
+					pos = min( pos, v[j].F );
+					if ( pos <= vv[i].S )
+					{
+						cout << j + 1 << endl;
+						break;
+					}
+				}
+			}
+		}
+	}
 
 	return ( 0 );
 }

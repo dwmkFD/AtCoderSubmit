@@ -157,7 +157,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, T; cin >> N >> T;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll total = T;
+	rep( i, N - 1 )
+	{
+		total += min( abs( v[i + 1] - v[i] ), T );
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }
