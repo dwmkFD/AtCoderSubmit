@@ -157,7 +157,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, S, T;
+	cin >> N >> S >> T;
+	int W; cin >> W;
+	vector<int> v( N );
+	v[0] = 0;
+	rep( i, N - 1 ) cin >> v[i + 1];
 
+	int cnt = 0;
+	rep( i, N )
+	{
+		int tmp = W + v[i];
+		if ( tmp >= S && tmp <= T )
+		{
+			++cnt;
+		}
+		W = tmp;
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

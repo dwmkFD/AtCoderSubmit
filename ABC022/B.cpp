@@ -157,7 +157,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll cnt = 0;
+	map<ll, ll> m;
+	rep( i, N )
+	{
+		if ( m[v[i]]++ > 0 )
+		{
+			++cnt;
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
