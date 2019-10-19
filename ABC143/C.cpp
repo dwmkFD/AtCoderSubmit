@@ -173,7 +173,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	string s; cin >> s;
 
+	ll cnt = 1;
+	char tmp = s[0];
+	reps( i, s.size() - 1 )
+	{
+		if ( s[i] != tmp )
+		{
+			++cnt;
+			tmp = s[i];
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

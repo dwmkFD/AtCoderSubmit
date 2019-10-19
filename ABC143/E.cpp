@@ -173,7 +173,36 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M, L;
+	cin >> N >> M >> L;
 
+	vector<vector<ll>> cost( N, vector<ll>( N, MAX<ll> / 2 ) );
+	vector<vector<ll>> oil( N, vector<ll>( N, 0 ) );
+	rep( i, N ) rep( j, N ) if ( i == j ) v[i][j] = 0;
+
+	rep( i, M )
+	{
+		ll a, b, c;
+		cin >> a >> b >> c;
+		--a; --b;
+		cost[a][b] = cost[b][a] = c;
+	}
+
+	rep( k, N )
+	{
+		rep( i, N )
+		{
+			rep( j, N )
+			{
+				cost[i][j] = min( cost[i][j], cost[i][k] + cost[k][j] );
+			}
+		}
+	}
+
+	ll Q; cin >> Q;
+	rep( i, Q )
+	{
+	}
 
 	return ( 0 );
 }

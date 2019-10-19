@@ -173,7 +173,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<int> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll total = 0;
+	rep( i, N )
+	{
+		rep( j, N )
+		{
+			if ( i != j )
+			{
+				total += v[i] * v[j];
+			}
+		}
+	}
+
+	cout << total / 2 << endl;
 
 	return ( 0 );
 }

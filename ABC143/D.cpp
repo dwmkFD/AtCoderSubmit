@@ -173,7 +173,44 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll cnt = 0;
+	sort( ALL( v ) );
+
+	auto func = []( int a, int b, int c ) {
+		return ( ( a < b + c ) && ( b < a + c ) && ( c < a + b ) );
+	};
+
+	auto upper = []( const vector<ll> &v, ll val ) {
+		int index = v.size() - 1;
+
+		while ( 100 )
+		{
+			while ( v[index] > val )
+				index /= 2;
+
+			while ( v[index] < val )
+				index = ( index + v.size() - 1 ) / 2;
+		}
+
+		return ( index );
+	};
+
+	rep( i, N )
+	{
+		for ( int j = i + 1; j < N; ++j )
+		{
+			int k = upper( v, v[i] + v[j] );
+			if ( k <= j ) k = j + 1;
+			if ( func( v[i], v[j], v[k] ) )
+				 cnt += k - j;
+		}
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }
