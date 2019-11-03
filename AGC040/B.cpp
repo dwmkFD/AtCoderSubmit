@@ -173,7 +173,48 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<tuple<ll, ll, ll>> v;
 
+	rep( i, N )
+	{
+		ll l, r; cin >> l >> r;
+		v.eb( mt( r - l, l, r ) );
+	}
+	sort( ALL( v ), []( tuple<ll, ll, ll> a, tuple<ll, ll, ll> b ) {
+			return ( get<0>( a ) > get<0>( b ) );
+		} );
+
+	tuple<ll, ll, ll> t1 = mt( -1, -1, -1 ), t2 = mt( -1, -1, -1 );
+	rep( i, N )
+	{
+		if ( get<0>( t1 ) == -1 )
+		{
+			t1 = v[i];
+		}
+		else if ( get<0>( t2 ) == -1 )
+		{
+			t2 = v[i];
+		}
+		else
+		{
+			ll l = get<1>( v[i] ), r = get<2>( v[i] );
+			ll tmp1 = min( r, get<2>( t1 ) ) - max( l, get<1>( t1 ) );
+			ll tmp2 = min( r, get<2>( t2 ) ) - max( l, get<1>( t2 ) );
+
+			if ( get<0>( t1 ) - tmp1 > get<0>( t2 ) - tmp2 )
+				t2 = mt( max( tmp2, 0ll ), max( l, get<1>( t2 ) ), min( r, get<2>( t2 ) ) );
+			else if ( get<0>( t1 ) - tmp1 < get<0>( t2 ) - tmp2 )
+				t1 = mt( max( tmp1, 0ll ), max( l, get<1>( t1 ) ), min( r, get<2>( t1 ) ) );
+		}
+	}
+
+//	cout << get<0>( t1 ) << ", " << get<1>( t1 ) << ", " << get<2>( t1 ) << endl;
+	ll ans = get<0>( t1 ) + get<0>( t2 );
+	if ( get<0>( t1 ) != 0 ) ++ans;
+	if ( get<0>( t2 ) != 0 ) ++ans;
+	if ( ans == 0 ) ans = 1;
+	cout << ans << endl;
 
 	return ( 0 );
 }

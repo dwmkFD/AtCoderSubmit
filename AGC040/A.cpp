@@ -173,7 +173,62 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	vector<ll> v;
 
+	ll num = 0;
+	char bfr = s[0];
+
+	rep( i, s.size() )
+	{
+		if ( s[i] != bfr )
+		{
+			v.eb( num );
+			num = 1;
+			bfr = s[i];
+		}
+		else
+		{
+			++num;
+		}
+	}
+	v.eb( num );
+
+	ll total = 0;
+	if ( s[0] == '<' )
+	{
+		for ( int i = 0; i + 1 < v.size(); i += 2 )
+		{
+			ll t1 = min( v[i], v[i + 1] );
+			ll t2 = max( v[i], v[i + 1] );
+			total += ( t1 * ( t1 - 1 ) ) / 2
+				+ ( t2 * ( t2 + 1 ) ) /2;
+		}
+
+		if ( v.size() % 2 )
+		{
+			total += ( v.back() * ( v.back() + 1 ) ) / 2;
+		}
+	}
+	else
+	{
+		total += ( v[0] * ( v[0] + 1 ) ) / 2;
+
+		for ( int i = 1; i + 1 < v.size(); i += 2 )
+		{
+			ll t1 = min( v[i], v[i + 1] );
+			ll t2 = max( v[i], v[i + 1] );
+			total += ( t1 * ( t1 - 1 ) ) / 2
+				+ ( t2 * ( t2 + 1 ) ) /2;
+		}
+
+		if ( ( v.size() - 1 ) % 2 )
+		{
+			total += ( v.back() * ( v.back() + 1 ) ) / 2;
+		}
+	}
+
+	cout << total << endl;
 
 	return ( 0 );
 }
