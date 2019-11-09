@@ -45,7 +45,7 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
-constexpr ll MOD = 1000000007LL;
+constexpr ll MOD = 998244353LL;
 template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 
 #define y0 y3487465
@@ -127,7 +127,6 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
 */
-
 /*
 	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
 	smatch m;
@@ -173,7 +172,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	map<ll, ll> m;
+	rep( i, N )
+	{
+		cin >> v[i];
+		m[v[i]]++;
+	}
 
+	ll ans = 1;
+	if ( v[0] != 0 )
+	{
+		cout << 0 << endl;
+		return ( 0 );
+	}
+	else
+	{
+		if ( m[0] > 1 )
+		{
+			cout << 0 << endl;
+			return ( 0 );
+		}
+
+		sort( ALL( v ) );
+		for ( int i = 2; i <= v.back(); ++i )
+		{
+			ans = ( ans * power( m[i - 1], m[i] ) ) % MOD;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

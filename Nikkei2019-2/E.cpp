@@ -173,7 +173,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<tuple<ll, ll, ll>> v;
 
+	bool ok = true;
+	rep( i, N )
+	{
+		if ( K + i + K + i + N > K + i + N + N )
+		{
+			ok = false;
+			break;
+		}
+		else
+		{
+			v.eb( mt( K + i, K + i + N, K + i + N + N ) );
+		}
+	}
+
+	if ( ok )
+	{
+		arep( it, v )
+		{
+			cout << get<0>( it ) << " " << get<1>( it ) << " " << get<2>( it ) << endl;
+		}
+	}
+	else
+	{
+		cout << -1 << endl;
+	}
 
 	return ( 0 );
 }

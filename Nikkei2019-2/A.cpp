@@ -173,7 +173,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
 
+	ll ans = 0;
+	reps( i, N / 2 )
+	{
+		if ( i != N - i )
+			++ans;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -173,6 +173,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	SegTree<> segt( N );
+	rep( i, M )
+	{
+		ll l, r, c;
+		cin >> l >> r >> c;
+		if ( segt.query( l, r, 0, 0, N ) > c )
+		{
+			segt.update( l, c );
+			segt.update( r, c );
+		}
+	}
 
 
 	return ( 0 );
