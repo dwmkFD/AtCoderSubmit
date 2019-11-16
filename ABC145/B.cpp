@@ -173,7 +173,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; string s;
+	cin >> N >> s;
 
+	if ( N % 2 )
+		cout << "No" << endl;
+	else
+	{
+		string t1 = s.substr( 0, N / 2 );
+		string t2 = s.substr( N / 2 );
+
+		if ( t1 == t2 )
+			cout << "Yes" << endl;
+		else
+			cout << "No" << endl;
+	}
 
 	return ( 0 );
 }

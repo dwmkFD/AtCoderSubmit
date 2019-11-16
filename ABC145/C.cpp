@@ -173,7 +173,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<int> fact( N );
+	rep( i, N ) fact[i] = i;
+	vector<Pint> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
 
+	double ans = 0.0;
+	int cnt = 0;
+	do {
+		double tmpans = 0.0;
+		rep( i, N - 1 )
+		{
+			tmpans += sqrt(
+				pow( v[fact[i]].F - v[fact[i + 1]].F, 2 ) +
+				pow( v[fact[i]].S - v[fact[i + 1]].S, 2 )
+				);
+		}
+		ans += tmpans;
+		++cnt;
+	} while ( next_permutation( ALL( fact ) ) );
+
+	cout << fixed << setprecision( 20 );
+	cout << ans / cnt << endl;
 
 	return ( 0 );
 }

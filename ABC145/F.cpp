@@ -173,6 +173,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
 
 	return ( 0 );

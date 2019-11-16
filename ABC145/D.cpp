@@ -103,8 +103,7 @@ template<typename T = ll> T power( T a, T b, T m = MOD ) {
 	return ( res );
 }
 
-/*
-constexpr ll COMBSIZE = 500010;
+constexpr ll COMBSIZE = 1000010;
 ll fact[COMBSIZE];
 ll inv[COMBSIZE];
 ll inv_fact[COMBSIZE];
@@ -126,7 +125,6 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
-*/
 
 /*
 	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
@@ -173,7 +171,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll X, Y; cin >> X >> Y;
 
+	if ( ( X + Y ) % 3 )
+	{
+	}
+	else
+	{
+		initComb( COMBSIZE );
+		const ll maxcnt = ( X + Y ) / 3;
+		for ( ll i = 0; i <= maxcnt; ++i )
+		{
+			if ( i * 1 + ( maxcnt - i ) * 2 == X )
+			{
+				ll ans = comb( (ll)maxcnt, (ll)i );
+				cout << ans << endl;
+				return ( 0 );
+			}
+		}
+	}
+
+	cout << 0 << endl;
 
 	return ( 0 );
 }

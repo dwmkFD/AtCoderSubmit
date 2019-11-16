@@ -173,7 +173,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, T; cin >> N >> T;
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
 
+	sort( ALL( v ), []( Pll a, Pll b ) {
+			return ( (double)a.S / a.F > (double)b.S / b.F );
+		} );
+
+	ll tmpT = 0, ans = 0;
+	ll index_memo = -1;
+	for ( int i = 0; ( i < N ) && ( tmpT < T ); ++i )
+	{
+		tmpT += v[i].F;
+		ans += v[i].S;
+		index_memo = i;
+	}
+
+	if ( index_memo != N - 1 )
+	{
+		ll tmpmax = 0;
+		for ( int i = index_memo; i < N; ++i )
+			chmax( tmpmax, v[i].S );
+		ans -= v[index_memo].S;
+		ans += tmpmax;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
