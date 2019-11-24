@@ -173,7 +173,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	const vector<string> v = {
+		"SUN","MON","TUE","WED","THU","FRI","SAT"
+	};
 
+	int ans = 0;
+	rep( i, v.size() )
+	{
+		if ( s == v[i] )
+			ans = 7 - i;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

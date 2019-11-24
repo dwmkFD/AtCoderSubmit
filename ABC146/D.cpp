@@ -173,7 +173,40 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<vector<int>> g( N, vector<int>() );
+	rep( i, N - 1 )
+	{
+		int a, b; cin >> a >> b;
+		--a; --b;
+		g[a].eb( b );
+	}
 
+	vector<int> ans( N, 0 );
+	deque<int> d;
+	d.push_back( 0 );
+
+	int color = 1;
+	while ( d.empty() == false )
+	{
+		auto x = d.front();
+		d.pop_front();
+
+		arep( it, g[x] )
+		{
+			ans[it - 1] = color++;
+			d.push_back( it );
+		}
+		color = ans[x];
+	}
+
+	int maxcolor = 0;
+	arep( it, ans )
+		chmax( maxcolor, it );
+
+	cout << maxcolor << endl;
+	rep( i, N - 1 )
+		cout << ans[i] << endl;
 
 	return ( 0 );
 }

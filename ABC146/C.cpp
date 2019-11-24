@@ -173,7 +173,53 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, X;
+	cin >> A >> B >> X;
 
+	ll num = X / A;
+	string tmpstr;
+
+	ll ans = 0;
+	ll left = 0, right = num;
+	tmpstr = to_string( right );
+	while ( max( left, right ) * A + tmpstr.size() * B > X )
+	{
+		ll tmpleft = min( left, right );
+		ll tmpright = max( left, right );
+		left = tmpleft; right = tmpright;
+
+		ll mid = left + ( right - left ) / 2;
+		tmpstr = to_string( left );
+		ll a1 = left * A + tmpstr.size() * B;
+		tmpstr = to_string( right );
+		ll a2 = right * A + tmpstr.size() * B;
+
+		if ( a1 < X )
+			left = mid + 1;
+		else if ( a2 > X )
+			right = mid - 1;
+
+		if ( left == right )
+		{
+			--left;
+			break;
+		}
+	}
+
+	tmpstr = to_string( min( left, right ) );
+	ll minans = min( left, right ) * A + tmpstr.size() * B;
+	tmpstr = to_string( max( left, right ) );
+	ll maxans = max( left, right ) * A + tmpstr.size() * B;
+
+#if 0
+	cout << min( left, right ) << ", " << max( left, right ) << endl;
+	cout << minans << ", " << maxans << endl;
+#endif
+
+	if ( maxans <= X )
+		cout << max( min( max( left, right ), 1000000000LL ), 0LL ) << endl;
+	else
+		cout << max( min( min( left, right ), 1000000000LL ), 0LL ) << endl;
 
 	return ( 0 );
 }

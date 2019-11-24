@@ -173,7 +173,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	string s; cin >> s;
 
+	const int last = 'A' + 25;
+
+	rep( i, s.size() )
+	{
+		int tmp = s[i];
+		if ( tmp + N > last )
+		{
+			tmp += ( N - 26 );
+		}
+		else
+			tmp += N;
+		s[i] = tmp;
+	}
+
+	cout << s << endl;
 
 	return ( 0 );
 }
