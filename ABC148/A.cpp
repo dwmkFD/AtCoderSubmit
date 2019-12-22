@@ -173,7 +173,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int A, B; cin >> A >> B;
+	const int x[] = { 1, 2, 3 };
 
+	rep( i, 3 )
+	{
+		if ( x[i] != A && x[i] != B )
+			cout << x[i] << endl;
+	}
 
 	return ( 0 );
 }

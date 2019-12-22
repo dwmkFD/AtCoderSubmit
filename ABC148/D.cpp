@@ -173,7 +173,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll ans = 0;
+	ll check = 1;
+	rep( i, N )
+	{
+		if ( v[i] != check )
+			++ans;
+		else
+			++check;
+	}
+
+	if ( ans >= N )
+		cout << -1 << endl;
+	else
+		cout << ans << endl;
 
 	return ( 0 );
 }

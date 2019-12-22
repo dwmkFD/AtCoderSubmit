@@ -173,7 +173,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B; cin >> A >> B;
 
+	cout << lcm( A, B ) << endl;
 
 	return ( 0 );
 }

@@ -173,7 +173,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	string s, t; cin >> s >> t;
+	string ans = "";
 
+	rep( i, N )
+	{
+		ans += s[i];
+		ans += t[i];
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

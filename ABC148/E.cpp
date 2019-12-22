@@ -173,7 +173,44 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
 
+	if ( N % 2 )
+	{
+		cout << 0 << endl;
+		return ( 0 );
+	}
+
+	ll div = 10;
+	vector<ll> tmp;
+	while ( N / div > 0 )
+	{
+		tmp.eb( N / div );
+		div *= 10;
+	}
+
+	ll div2 = 50;
+	vector<ll> tmp2;
+	while ( N / div2 > 0 )
+	{
+		tmp2.eb( N / div2 );
+		div2 *= 5;
+	}
+
+	ll ans = 0, k = 1;
+	auto it2 = tmp2.begin();
+	arep( it, tmp )
+	{
+		ans += ( ( it * k ) - ( it * ( k - 1 ) ) );
+		++k;
+	}
+
+	rep( i, tmp2.size() )
+	{
+		ans += tmp2[i];
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
