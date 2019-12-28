@@ -173,7 +173,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M, V, P;
+	cin >> N >> M >> V >> P;
+	vector<ll> a( N );
+	rep( i, N ) cin >> a[i];
 
+	sort( ALL( a ), greater<ll>() );
+
+	if ( ( V + P <= N ) || ( V <= P ) )
+	{
+		ll tmp = a[P - 1];
+		for ( int i = P; i < N; ++i )
+			a[i] += M;
+
+		sort( ALL( a ) );
+		auto it = lower_bound( ALL( a ), tmp );
+		cout << N - distance( a.begin(), it ) << endl;
+	}
+	else
+	{
+		vector<ll> b = a;
+		UNIQUE( b );
+		ll res = b[P - 1];
+
+		sort( ALL( a ) );
+		auto it = lower_bound( ALL( a ), res );
+		cout << N - distance( a.begin(), it ) << endl;
+	}
 
 	return ( 0 );
 }

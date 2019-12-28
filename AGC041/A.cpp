@@ -173,7 +173,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, A, B;
+	cin >> N >> A >> B;
 
+	if ( abs( A - B ) % 2 )
+	{
+		ll tmp1 = N - max( A, B );
+		ll tmp2 = min( A, B ) - 1;
+
+		cout << min( tmp1, tmp2 ) + 1 + abs( A - B ) / 2 << endl;
+	}
+	else
+	{
+		cout << abs( A - B ) / 2 << endl;
+	}
 
 	return ( 0 );
 }
