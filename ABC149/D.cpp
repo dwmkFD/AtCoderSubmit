@@ -173,7 +173,75 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	ll R, S, P; cin >> R >> S >> P;
+	string t; cin >> t;
 
+	vector<ll> dp( N, 0 );
+	string s = "";
+	switch ( t[0] )
+	{
+	case 'r': dp[0] = P; s += "p"; break;
+	case 's': dp[0] = R; s += "r"; break;
+	case 'p': dp[0] = S; s += "s"; break;
+	}
+
+	reps( i, N - 1 )
+	{
+		if ( i < K )
+		{
+			switch ( t[i] )
+			{
+			case 'r': dp[i] = dp[i - 1] + P; s += "p"; break;
+			case 's': dp[i] = dp[i - 1] + R; s += "r"; break;
+			case 'p': dp[i] = dp[i - 1] + S; s += "s"; break;
+			}
+		}
+		else
+		{
+			switch ( t[i] )
+			{
+			case 'r':
+				if ( s[i - K] == 'p' )
+				{
+					dp[i] = dp[i - 1];
+					s += "n";
+				}
+				else
+				{
+					dp[i] = dp[i - 1] + P;
+					s += "p";
+				}
+				break;
+			case 's':
+				if ( s[i - K] == 'r' )
+				{
+					dp[i] = dp[i - 1];
+					s += "n";
+				}
+				else
+				{
+					dp[i] = dp[i - 1] + R;
+					s += "r";
+				}
+				break;
+			case 'p':
+				if ( s[i - K] == 's' )
+				{
+					dp[i] = dp[i - 1];
+					s += "n";
+				}
+				else
+				{
+					dp[i] = dp[i - 1] + S;
+					s += "s";
+				}
+				break;
+			}
+		}
+	}
+
+	cout << dp[N - 1] << endl;
 
 	return ( 0 );
 }

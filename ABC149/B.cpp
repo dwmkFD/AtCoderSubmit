@@ -173,7 +173,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, K; cin >> A >> B >> K;
+	ll a = A, b = B;
 
+	if ( a >= K )
+	{
+		a -= K;
+		K = 0;
+	}
+	else
+	{
+		K -= a;
+		a = 0;
+	}
+	if ( b >= K )
+	{
+		b -= K;
+	}
+	else
+	{
+		b = 0;
+	}
+
+	cout << a << " " << b << endl;
 
 	return ( 0 );
 }

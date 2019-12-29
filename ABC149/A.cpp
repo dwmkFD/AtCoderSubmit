@@ -173,7 +173,8 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	string s, t; cin >> s >> t;
+	cout << t << s << endl;
 
 	return ( 0 );
 }

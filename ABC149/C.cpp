@@ -173,7 +173,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll X; cin >> X;
+	vector<bool> p( 300001, true );
+	for ( ll i = 2; i * i <= 300001; ++i )
+	{
+		if ( p[i] )
+		{
+			for ( ll j = 2; j * i <= 300000; ++j )
+			{
+				p[j * i] = false;
+			}
+		}
+	}
 
+	ll k = X;
+	while ( p[k] == false ) ++k;
+
+	cout << k << endl;
 
 	return ( 0 );
 }
