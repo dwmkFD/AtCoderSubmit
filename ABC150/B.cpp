@@ -173,7 +173,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	string s; cin >> s;
 
+	replace( s, "ABC", "x" );
+
+	ll cnt = 0;
+	rep( i, s.size() )
+		if ( s[i] == 'x' ) ++cnt;
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

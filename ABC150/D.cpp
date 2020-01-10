@@ -173,7 +173,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll tmp = v[0];
+	reps( i, N - 1 )
+	{
+		tmp = lcm( tmp, v[i] );
+	}
+
+	if ( tmp % 2 == 0 ) tmp /= 2;
+	if ( tmp <= M )
+		cout << ( M / tmp ) - ( M / ( tmp * 2 ) ) << endl;
+	else
+		cout << 0 << endl;
 
 	return ( 0 );
 }

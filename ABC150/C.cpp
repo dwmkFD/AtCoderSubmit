@@ -173,7 +173,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N ), p( N ), q( N );
+	rep( i, N ) v[i] = i + 1;
+	rep( i, N ) cin >> p[i];
+	rep( i, N ) cin >> q[i];
 
+	int pOK = -1, qOK = -1;
+	int cnt = 1;
+	do {
+		bool pflg = true, qflg = true;
+		rep( i, N )
+		{
+			if ( v[i] != p[i] )
+			{
+				pflg = false;
+			}
+			if ( v[i] != q[i] )
+			{
+				qflg = false;
+			}
+			if ( !pflg && !qflg )
+				break;
+		}
+		if ( pflg ) pOK = cnt;
+		if ( qflg ) qOK = cnt;
+
+		next_permutation( ALL( v ) );
+		++cnt;
+	} while ( ( pOK == -1 ) || ( qOK == -1 ) );
+
+	cout << abs( pOK - qOK ) << endl;
 
 	return ( 0 );
 }
