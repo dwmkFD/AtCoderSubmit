@@ -173,7 +173,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N; cin >> N;
+	vector<string> s( N );
+	vector<int> t( N );
+	rep( i, N ) cin >> s[i] >> t[i];
+	string X; cin >> X;
 
+	int ans = 0;
+	bool slp = false;
+	rep( i, N )
+	{
+		if ( slp )
+			ans += t[i];
+
+		if ( X == s[i] )
+			slp = true;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -173,7 +173,50 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	priority_queue<ll> pq;
+	priority_queue<ll> pq_tmp;
+	rep( i, N )
+	{
+		cin >> v[i];
+		pq.push( i + 1 );
+	}
 
+	vector<ll> ans( N );
+	rrep( i, N )
+	{
+		auto x = pq.top();
+		pq.pop();
+		if ( pq_tmp.empty() )
+		{
+			if ( i > 0 && ( x != v[i - 1] ) )
+				ans[i] = x;
+			else
+			{
+				pq_tmp.push( x );
+				auto y = pq.top();
+				ans[i] = y;
+				pq.pop();
+			}
+		}
+		else
+		{
+			auto y = pq_tmp.top();
+			pq_tmp.pop();
+			ans[i] = y;
+		}
+	}
+
+	if ( pq.empty() && pq_tmp.empty() )
+	{
+		arep( it, ans ) cout << it << " ";
+		cout << endl;
+	}
+	else
+	{
+		cout << -1 << endl;
+	}
 
 	return ( 0 );
 }
