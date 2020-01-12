@@ -173,7 +173,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int N, K, M;
+	cin >> N >> K >> M;
+	vector<int> v( N );
 
+	int total = 0;
+	rep( i, N - 1 )
+	{
+		cin >> v[i];
+		total += v[i];
+	}
+
+	if ( M * N - K > total )
+		cout << -1 << endl;
+	else
+		cout << max( M * N - total, 0 ) << endl;
 
 	return ( 0 );
 }

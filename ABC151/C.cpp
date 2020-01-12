@@ -173,7 +173,48 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	map<int, string> m;
+	vector<Pll> v( N + 1, { 0, 0 } );
 
+	rep( i, M )
+	{
+		ll p; cin >> p;
+		string s; cin >> s;
+
+		if ( m[p].size() == 0 )
+		{
+			if ( s == "WA" )
+			{
+				v[p].S += 1;
+			}
+			else
+			{
+				v[p].F = 1;
+			}
+			m[p] = s;
+		}
+		else
+		{
+			if ( s == "AC" )
+			{
+				v[p].F = 1;
+				m[p] = s;
+			}
+			else if ( m[p] != "AC" )
+				v[p].S += 1;
+		}
+	}
+
+	ll ac = 0, wa = 0;
+	rep( i, N + 1 )
+	{
+		ac += v[i].F;
+		if ( v[i].F == 1 )
+			wa += v[i].S;
+	}
+
+	cout << ac << " " << wa << endl;
 
 	return ( 0 );
 }

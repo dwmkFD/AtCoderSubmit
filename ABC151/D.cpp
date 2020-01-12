@@ -12,7 +12,7 @@
 #include <map>
 #include <cstring>
 
-template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using namespace std;
@@ -173,7 +173,59 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W; cin >> H >> W;
+	vector<string> v( H );
+	rep( i, H ) cin >> v[i];
 
+	int dx[] = { -1, 0, 0, 1 };
+	int dy[] = { 0, -1, 1, 0 };
+	int costmax = -1;
+	queue<Pll> que;
+	rep( i, H )
+	{
+		vector<vector<int>> cost( H, vector<int>( W, 0 ) );
+		rep( j, W )
+		{
+			if ( v[i][j] == '#' )
+				continue;
+			else
+			{
+				que.push( { j, i } );
+				cost[i][j] = 1;
+				while ( que.empty() == false )
+				{
+					auto data = que.front();
+					que.pop();
+
+					for ( int idx = 0; idx < 4; ++idx )
+					{
+						int nx = data.F + dx[idx];
+						int ny = data.S + dy[idx];
+
+						if ( ( nx >= 0 && ny >= 0 && nx < W && ny < H )
+							 && ( v[ny][nx] != '#' ) )
+						{
+							if ( cost[ny][nx] == 0 )
+							{
+								cost[ny][nx] = cost[data.S][data.F] + 1;
+								que.push( { nx, ny } );
+							}
+						}
+					}
+				}
+			}
+
+			rep( k, H ) rep( l, W ) chmax( costmax, cost[k][l] - cost[i][j] );
+		}
+
+#if 0
+		cout << "---" << endl;
+		rep( k, H ) { rep( l, W ) { cout << cost[k][l] << " "; } cout << endl; }
+		cout << "---" << endl;
+#endif
+	}
+
+	cout << max( costmax, 0 ) << endl;
 
 	return ( 0 );
 }
