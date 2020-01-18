@@ -173,7 +173,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K, S;
+	cin >> N >> K >> S;
 
+	rep( i, K )
+	{
+		cout << (ll)S << " ";
+	}
+
+	rep( i, N - K )
+	{
+		if ( S >= 1e9 )
+		{
+			cout << S - 1;
+		}
+		else
+		{
+			cout << S + 1;
+		}
+		if ( i < N - K - 1 )
+			cout << " ";
+	}
+	cout << endl;
 
 	return ( 0 );
 }

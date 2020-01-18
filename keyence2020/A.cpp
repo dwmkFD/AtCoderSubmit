@@ -173,7 +173,10 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, W; cin >> H >> W;
+	int N; cin >> N;
 
+	cout << ceil( (double)N / max( H, W ) ) << endl;
 
 	return ( 0 );
 }
