@@ -173,7 +173,50 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
 
+	auto vald = []( ll x ) {
+		ll ans = 0;
+		while ( x > 0 ) {
+			x /= 10;
+			++ans;
+		}
+		return ( ans );
+	};
+
+	auto topd = []( ll x ) {
+		while ( x > 10 ) x /= 10;
+		return ( x );
+	};
+
+	auto botd = []( ll x ) {
+		return ( x % 10 );
+	};
+
+	ll ans = 0;
+	reps( i, N )
+	{
+		if ( i % 10 == 0 )
+			continue;
+		else
+		{
+			if ( topd( i ) == botd( i ) )
+			{
+				ans += vald( i ) + ( vald( i ) - 1 )
+					* ( pow( 10, max( vald( i ) - 2, 0LL ) ) + 1 );
+			}
+			else
+			{
+				ll tmp = botd( i ) * pow( 10, vald( i ) - 1 ) + topd( i );
+				if ( tmp <= N )
+				{
+					++ans;
+				}
+			}
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

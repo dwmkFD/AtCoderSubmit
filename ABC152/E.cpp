@@ -173,7 +173,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll l = v[0];
+	reps( i, N - 1 )
+	{
+		l = lcm( l, v[i] ) % MOD;
+	}
+
+	vector<ll> vv( N );
+	rep( i, N )
+	{
+		vv[i] = ( v[i] * l ) % MOD;
+	}
+
+	ll ans = 0;
+	rep( i, N ) ans += vv[i];
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

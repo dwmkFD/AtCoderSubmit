@@ -170,10 +170,52 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+class BIT {
+public:
+	BIT( ll n ) {
+		size = n;
+		v.resize( n + 1, 0 );
+	}
+
+	ll sum( ll idx ) {
+		ll ans = 0;
+		while ( idx > 0 ) {
+			ans += v[idx];
+			idx -= idx & -idx;
+		}
+
+		return ( ans );
+	}
+
+	void add( ll idx, ll val ) {
+		while ( idx <= size ) {
+			v[idx] += val;
+			idx += idx & -idx;
+		}
+	}
+
+	vector<ll> v;
+	ll size;
+};
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll ans = 0;
+	ll tmp = MOD;
+	rep( i, N )
+	{
+		if ( v[i] <= tmp )
+		{
+			++ans;
+			chmin( tmp, v[i] );
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

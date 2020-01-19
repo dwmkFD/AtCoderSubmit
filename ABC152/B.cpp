@@ -173,7 +173,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int a, b; cin >> a >> b;
+	char sa[100] = { 0 }, sb[100] = { 0 };
 
+	rep( i, b )
+		sa[i] = '0' + a;
+	rep( i, a )
+		sb[i] = '0' + b;
+
+	vector<string> ans;
+	ans.eb( sa );
+	ans.eb( sb );
+	sort( ALL( ans ) );
+
+	cout << ans[0] << endl;
 
 	return ( 0 );
 }
