@@ -173,7 +173,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll H, N; cin >> H >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll total = 0;
+	rep( i, N ) total += v[i];
+
+	if ( total >= H )
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 
 	return ( 0 );
 }

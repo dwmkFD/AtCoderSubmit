@@ -173,7 +173,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int H, A; cin >> H >> A;
 
+	if ( H % A )
+		cout << H / A + 1 << endl;
+	else
+		cout << H / A << endl;
 
 	return ( 0 );
 }

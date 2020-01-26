@@ -173,7 +173,36 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, D, A;
+	cin >> N >> D >> A;
+	vector<Pll> v( N );
+	rep( i, N ) cin >> v[i].F >> v[i].S;
+	rep( i, N ) v[i].F -= v[0].F;
+	sort( ALL( v ), []( Pll a, Pll b ) { return ( a.F < b.F ); } );
+	map<ll, ll> vd;
+	rep( i, N )
+	{
+		ll p1 = max( v[i].F / D - D, 0LL );
+		ll p2 = v[i].F / D;
+		ll p3 = min( v[i].F / D + D, v.back().F );
+		vd[p2] = max( vd[p2], v[i].S );
+		vd[p1] = max( vd[p1], vd[p2] );
+		vd[p3] = max( vd[p2], vd[p3] );
+	}
+	vector<ll> vv;
+	arep( it, vd )
+		vv.eb( it.S );
 
+	ll ans = 0;
+	rep( i, vv.size() - 1 )
+	{
+		ll tmp = ceil( max( vv[i], vv[i + 1] ) / A );
+		ans += tmp;
+		if ( vv[i + 1] > vv[i] ) vv[i + 1] = 0;
+		else vv[i + 1] -= tmp * A;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

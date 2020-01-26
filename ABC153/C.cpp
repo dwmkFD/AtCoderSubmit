@@ -173,7 +173,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
+	sort( ALL( v ), greater<ll>() );
 
+	rep( i, min( N, K ) ) v[i] = 0;
+	ll total = 0;
+	rep( i, N ) total += v[i];
+
+	cout << total << endl;
 
 	return ( 0 );
 }

@@ -173,7 +173,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll H, N; cin >> H >> N;
+	vector<ll> a( N ), b( N );
+	rep( i, N ) cin >> a[i] >> b[i];
 
+	vector<ll> dp( H + 1, MAX<int> );
+	dp[H] = 0;
+	rrep( i, H + 1 )
+	{
+		rep( k, N )
+		{
+			if ( i >= a[k] )
+				dp[i - a[k]] = min( dp[i - a[k]], dp[i] + b[k] );
+			else
+				dp[0] = min( dp[0], dp[i] + b[k] );
+//				dp[i] = min( dp[i], dp[i + 1] + 1 );
+		}
+	}
+//	rrep( i, H + 1 ) cout << dp[i] << " "; cout << endl;
+
+	cout << dp[0] << endl;
 
 	return ( 0 );
 }

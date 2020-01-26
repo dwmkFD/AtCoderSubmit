@@ -170,10 +170,31 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+map<ll, ll> m;
+
+ll solve( ll h )
+{
+	if ( h == 1 )
+		return ( 1 );
+	else
+	{
+		if ( m[h / 2] == 0 )
+		{
+			m[h / 2] = solve( h / 2 );
+			return ( 1 + m[h / 2] * 2 );
+		}
+		else
+		{
+			return ( 1 + m[h / 2] * 2 );
+		}
+	}
+}
 
 int main()
 {
+	ll H; cin >> H;
 
+	cout << solve( H ) << endl;
 
 	return ( 0 );
 }
