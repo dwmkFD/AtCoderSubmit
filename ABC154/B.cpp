@@ -233,7 +233,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	string s; cin >> s;
+	rep( i, s.size() )
+	{
+		cout << "x";
+	}
+	cout << endl;
 
 	return ( 0 );
 }

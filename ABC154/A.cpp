@@ -233,7 +233,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s, t, u;
+	cin >> s >> t;
+	ll A, B;
+	cin >> A >> B; cin >> u;
 
+	if ( s == u )
+	{
+		cout << A - 1 << " " << B << endl;
+	}
+	else
+	{
+		cout << A << " " << B - 1 << endl;
+	}
 
 	return ( 0 );
 }

@@ -233,7 +233,23 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	map<ll, ll> m;
+	rep( i, N ) m[v[i]]++;
+
+	arep( it, m )
+	{
+		if ( it.S >= 2 )
+		{
+			cout << "NO" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "YES" << endl;
 
 	return ( 0 );
 }

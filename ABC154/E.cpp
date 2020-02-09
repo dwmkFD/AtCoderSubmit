@@ -163,13 +163,12 @@ private:
 constexpr ll MOD = 1000000007LL;
 using mint = Fp<ll, MOD>;
 
-/*
-constexpr ll COMBSIZE = 500010;
+constexpr ll COMBSIZE = 1010;
 ll fact[COMBSIZE];
 ll inv[COMBSIZE];
 ll inv_fact[COMBSIZE];
 
-template<typename T> void initComb( T n, T m = MOD )
+template<typename T> void initComb( T n = COMBSIZE, T m = MOD )
 {
 	fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
 	inv[1] = 1;
@@ -186,7 +185,6 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
-*/
 
 /*
 	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
@@ -233,7 +231,34 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string n; cin >> n;
+	ll K; cin >> K;
+	vector<ll> dp( n.size() + 1, 0 );
 
+	initComb<ll>();
+
+	ll ans = 0;
+	reps( i, n.size() - 1 )
+	{
+		ll tmp = 9 * comb( (ll)n.size() - i, K - 1 );
+		ans += tmp;
+	}
+
+	for ( int i = 1; i < n[0] - '0'; ++i )
+	{
+		ll tmp = 9 * comb( (ll)n.size() - ( i + 1 ), K - 1 );
+		ans += tmp;
+	}
+
+	ll tmp = 1; --K;
+	reps( i, n.size() - 1 )
+	{
+		if ( K > 0 )
+			tmp *= ( n[i] - '0' );
+	}
+	ans += tmp;
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -233,7 +233,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> p( N );
+	rep( i, N ) cin >> p[i];
+	vector<double> ans( N ), anssum( N + 1, 0 );
+	rep( i, N )
+	{
+		ans[i] = ( (double)p[i] * ( p[i] + 1 ) / 2 ) / (double)p[i];
+		anssum[i + 1] = anssum[i] + ans[i];
+//		cout << i + 1 << ": "<< anssum[i + 1] << endl;
+	}
 
+	double result = 0;
+	rep( i, N - K + 1 )
+	{
+		double tmp = anssum[i + K] - anssum[i];
+		chmax( result, tmp );
+	}
+
+	cout << setprecision( 20 );
+	cout << result << endl;
 
 	return ( 0 );
 }

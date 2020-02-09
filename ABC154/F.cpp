@@ -163,8 +163,7 @@ private:
 constexpr ll MOD = 1000000007LL;
 using mint = Fp<ll, MOD>;
 
-/*
-constexpr ll COMBSIZE = 500010;
+constexpr ll COMBSIZE = 2000010;
 ll fact[COMBSIZE];
 ll inv[COMBSIZE];
 ll inv_fact[COMBSIZE];
@@ -186,7 +185,6 @@ template<typename T> T comb( T n, T r, T m = MOD )
 	if ( n < 0 || r < 0 ) return ( 0 );
 	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
 }
-*/
 
 /*
 	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
@@ -233,7 +231,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll r1, r2, c1, c2;
+	cin >> r1 >> c1 >> r2 >> c2;
 
+	initComb( COMBSIZE );
+
+	ll ans = 0;
+	for ( int i = c1; i <= c2; ++i )
+	{
+		for ( int j = r1; j <= r2; ++j )
+		{
+			ans = ( ans + comb( i + j, j ) ) % MOD;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
