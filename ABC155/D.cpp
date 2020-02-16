@@ -233,7 +233,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> v( N );
+	ll pcnt = 0, ncnt = 0, zcnt = 0;
+	rep( i, N )
+	{
+		cin >> v[i];
+		if ( v[i] > 0 )
+			++pcnt;
+		else if ( v[i] == 0 )
+			++zcnt;
+		else
+			++ncnt;
+	}
 
+	if ( zcnt > 0 )
+	{
+		if ( K < ( N - 1 ) * zcnt )
+		{
+			cout << 0 << endl;
+			return ( 0 );
+		}
+		else
+			K -= ( N - 1 ) * zcnt;
+	}
+
+	if ( pcnt * ncnt >= K )
+	{
+	}
+	else
+	{
+	}
 
 	return ( 0 );
 }

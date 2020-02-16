@@ -233,7 +233,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	bool ok = true;
+	rep( i, N )
+	{
+		if ( v[i] % 2 == 0 )
+		{
+			if ( ( v[i] % 3 ) && ( v[i] % 5 ) )
+			{
+				ok = false;
+				break;
+			}
+		}
+	}
+
+	if ( ok )
+		cout << "APPROVED" << endl;
+	else
+		cout << "DENIED" << endl;
 
 	return ( 0 );
 }

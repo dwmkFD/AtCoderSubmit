@@ -233,7 +233,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<string> v( N );
+	rep( i, N ) cin >> v[i];
 
+	map<string, ll> m;
+	rep( i, N ) m[v[i]]++;
+
+	ll num = 0;
+	rep( i, N )
+	{
+		chmax( num, m[v[i]] );
+	}
+
+	vector<string> vv;
+	arep( it, m )
+	{
+		if ( it.S == num )
+			vv.eb( it.F );
+	}
+	sort( ALL( vv ) );
+
+	arep( it, vv )
+		cout << it << endl;
 
 	return ( 0 );
 }

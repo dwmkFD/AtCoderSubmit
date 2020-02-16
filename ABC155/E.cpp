@@ -233,7 +233,57 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
 
+	ll ans = 0;
+	vector<char> dbg;
+	bool cflg = false;
+	rrep( i, s.size() )
+	{
+		if ( ( s[i] - '0' ) < 5 )
+		{
+			ans += s[i] - '0';
+			cflg = false;
+		}
+		else if ( ( s[i] - '0' ) == 5 )
+		{
+			if ( i > 0 )
+			{
+				if ( s[i - 1] <= '4' )
+				{
+					ans += 5;
+				}
+				else
+				{
+					s[i - 1]++;
+					ans += 5;
+				}
+			}
+			else
+			{
+				ans += 5;
+			}
+		}
+		else
+		{
+			if ( i > 0 )
+			{
+				s[i - 1]++;
+				ans += 10 - ( s[i] - '0' );
+				s[i] = '0';
+			}
+			else
+			{
+				ans += 10 - ( s[i] - '0' ) + 1;
+			}
+			cflg = true;
+		}
+
+		if ( s[i] <= '9' ) dbg.eb( s[i] ); else dbg.eb( '0' );
+	}
+//	rrep( i, s.size() ) cout << dbg[i]; cout << endl;
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -233,6 +233,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	int a, b, c;
+	cin >> a >> b >> c;
+
+	bool ok = false;
+	if ( a == b && a != c )
+		ok = true;
+	else if ( a == c && a != b )
+		ok = true;
+	else if ( b == c && a != b )
+		ok = true;
+
+	cout << ( ok ? "Yes" : "No" ) << endl;
 
 
 	return ( 0 );
