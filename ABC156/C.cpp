@@ -12,17 +12,14 @@
 #include <map>
 #include <cstring>
 
-template<typename T> bool chmax( T &a, const T &b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T &b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
-
 using namespace std;
 
-using ll = long long;
-using ull = unsigned long long;
+template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
+using ll = long long;
 using Pint = pair<int, int>;
 using Pll  = pair<ll, ll>;
-using Pull = pair<ull, ull>;
 
 #define eb emplace_back
 #define pb push_back
@@ -38,30 +35,39 @@ using Pull = pair<ull, ull>;
 #define rreps( i, n ) for ( int i = (int)( ( n ) ); i > 0; --i )
 #define arep( i, v ) for ( auto &&i : ( v ) )
 
-template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
-template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
-
 #define ALL( c ) ( c ).begin(), ( c ).end()
 #define RALL( c ) ( c ).rbegin(), ( c ).rend()
 #define UNIQUE( c ) ( c ).erase( unique( ( c ).begin(), ( c ).end() ), ( c ).end() )
 
 template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
+template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
+template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
-#define y0 y3487465
-#define y1 y8687969
-#define j0 j1347829
-#define j1 j234892
-#define next asdnext
-#define prev asdprev
-
-template<typename T = ll> class UnionFind {
-public:
-	UnionFind( T n ) { par.resize( n ); siz.resize( n ); rep( i, n ) { par[i] = i; siz[i] = 1; } }
-	T find( T x ) { if ( x == par[x] ) return ( x ); else return( par[x] = find( par[x] ) ); }
-	void unite( T x, T y ) { T xx = find( x ); T yy = find( y ); if ( xx == yy ) return;
-		if ( siz[xx] <= siz[yy] ) swap( xx, yy ); par[yy] = xx; siz[xx] += siz[yy]; }
-private:
+template<typename T = ll> struct UnionFind {
 	vector<T> par, siz;
+
+	UnionFind( T n ) {
+		par.resize( n ); siz.resize( n );
+		rep( i, n ) {
+			par[i] = i; siz[i] = 1;
+		}
+	}
+
+	T find( T x ) {
+		if ( x == par[x] )
+			return ( x );
+		else
+			return( par[x] = find( par[x] ) );
+	}
+
+	void unite( T x, T y ) {
+		T xx = find( x ); T yy = find( y );
+		if ( xx == yy ) return;
+		if ( siz[xx] <= siz[yy] )
+			swap( xx, yy );
+		par[yy] = xx;
+		siz[xx] += siz[yy];
+	}
 };
 
 template<typename T = ll> class CompareMax {
@@ -71,20 +77,32 @@ template<typename T = ll> class CompareMin {
 public:	T operator()( T a, T b ) { return ( min( a, b ) ); }
 };
 
-template<typename T = ll, typename F = CompareMax<T>, T I = 0> class SegTree {
-public:
-	SegTree( T n ) { N = n; v.resize( 4 * n ); rep( i, 4 * n ) v[i] = I; }
-	void update( T i, T x ) { i += N - 1; v[i] = x; while ( i > 0 ) {
-			i = ( i - 1 ) / 2; v[i] = func( v[i * 2 + 1], v[i * 2 + 2] ); } }
+template<typename T = ll, typename F = CompareMax<T>, T I = 0> struct SegTree {
+	T N; F func; vector<T> v;
+
+	SegTree( T n ) {
+		N = n; v.resize( 4 * n );
+		rep( i, 4 * n ) v[i] = I;
+	}
+
+	void update( T i, T x ) {
+		i += N - 1;
+		v[i] = x;
+		while ( i > 0 ) {
+			i = ( i - 1 ) / 2;
+			v[i] = func( v[i * 2 + 1], v[i * 2 + 2] );
+		}
+	}
+
 	T query( T a, T b, T k, T l, T r ) {
 		if ( r <= a || b <= l ) return ( I );
 		if ( a <= l && r <= b ) return ( v[k] );
-		else { T vl = query( a, b, k * 2 + 1, l, ( l + r ) / 2 );
+		else {
+			T vl = query( a, b, k * 2 + 1, l, ( l + r ) / 2 );
 			T vr = query( a, b, k * 2 + 2, ( l + r ) / 2, r );
-			return ( func( vl, vr ) ); }
+			return ( func( vl, vr ) );
+		}
 	}
-private:
-	T N; F func; vector<T> v;
 };
 
 template<typename T = ll> T solveLIS( const vector<T> &v ) {
@@ -95,8 +113,9 @@ template<typename T = ll> T solveLIS( const vector<T> &v ) {
 	return ( distance( dp.begin(), lower_bound( ALL( dp ), numeric_limits<T>::max() ) ) );
 }
 
-template<typename T, T MOD> class Fp {
-public:
+template<typename T, T MOD> struct Fp {
+	T val;
+
 	constexpr Fp( T input ) noexcept : val( input % MOD ) {
 		if ( val < 0 ) val += MOD;
 	}
@@ -157,36 +176,53 @@ public:
 		if ( n & 1 ) t = t * a;
         return ( t );
 	}
-private:
-	T val;
 };
+
+template<typename T, T MOD> struct BiCoef {
+	using mint = Fp<T, MOD>;
+	vector<mint> fact_, inv_, finv_;
+
+	constexpr BiCoef() {}
+	constexpr BiCoef( T n ) noexcept :
+		fact_( n, 1 ), inv_( n, 1 ), finv_( n, 1 )
+	{
+		init( n );
+	}
+
+	constexpr void init( T n ) {
+		fact_.assign( n, 1 ); inv_.assign( n, 1 ); finv_.assign( n, 1 );
+		for ( T i = 2; i < n; i++ ) {
+			fact_[i] = fact_[i - 1] * i;
+			inv_[i] = -inv_[MOD % i] * ( MOD / i );
+			finv_[i] = finv_[i - 1] * inv_[i];
+       }
+    }
+
+    constexpr mint comb( T n, T k ) const noexcept {
+		if ( n < k || n < 0 || k < 0 ) return ( 0 );
+		if ( n - k < k ) k = n - k;
+		return ( fact_[n] * finv_[k] * finv_[n - k] );
+    }
+
+    constexpr mint fact( T n ) const noexcept {
+		if ( n < 0 ) return ( 0 );
+		return ( fact_[n] ) ;
+    }
+
+    constexpr mint inv( T n ) const noexcept {
+		if ( n < 0 ) return ( 0 );
+		return ( inv_[n] );
+    }
+
+    constexpr mint finv( T n ) const noexcept {
+		if ( n < 0 ) return ( 0 );
+		return ( finv_[n] );
+    }
+};
+
 constexpr ll MOD = 1000000007LL;
 using mint = Fp<ll, MOD>;
-
-/*
-constexpr ll COMBSIZE = 500010;
-ll fact[COMBSIZE];
-ll inv[COMBSIZE];
-ll inv_fact[COMBSIZE];
-
-template<typename T> void initComb( T n, T m = MOD )
-{
-	fact[0] = fact[1] = inv_fact[0] = inv_fact[1] = 1;
-	inv[1] = 1;
-	for ( int i = 2; i < n; i++ ) {
-		fact[i] = ( fact[i - 1] * i ) % m;
-		inv[i] = m - inv[m % i] * ( m / i ) % m;
-		inv_fact[i] = inv_fact[i - 1] * inv[i] % m;
-	}
-}
-
-template<typename T> T comb( T n, T r, T m = MOD )
-{
-	if ( n < r ) return ( 0 );
-	if ( n < 0 || r < 0 ) return ( 0 );
-	return ( fact[n] * ( inv_fact[r] * inv_fact[n - r] % m ) % m );
-}
-*/
+BiCoef<ll, MOD> bc;
 
 /*
 	regex reg( R"(^(dream|dreamer|erase|eraser)+$)" );
@@ -233,7 +269,22 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> v( N );
+	rep( i, N ) cin >> v[i];
 
+	ll ans = MAX<int>;
+	rep( i, 101 )
+	{
+		ll tmp = 0;
+		rep( j, N )
+		{
+			tmp += ( v[j] - i ) * ( v[j] - i );
+		}
+		chmin( ans, tmp );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
