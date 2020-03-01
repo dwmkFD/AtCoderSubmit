@@ -269,7 +269,44 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M, K;
+	cin >> N >> M >> K;
+	vector<ll> a( M ), b( M );
+	vector<ll> c( K ), d( K );
 
+	rep( i, M ) cin >> a[i] >> b[i];
+	rep( i, K ) cin >> c[i] >> d[i];
+
+	UnionFind<ll> ufF( N + 1 ), ufB( N + 1 );
+	rep( i, M )
+		ufF.unite( a[i], b[i] );
+	rep( i, K )
+		ufB.unite( c[i], d[i] );
+
+	rep( i, N )
+	{
+		ll ans = 0;
+		for ( int j = i + 2; j < N; ++j )
+		{
+			if ( ufF.find( i ) == ufF.find( j ) )
+				continue;
+			if ( ufB.find( i ) == ufB.find( j ) )
+				continue;
+			for ( int k = i + 1; k < j; ++k )
+			{
+				if ( ufF.find( i ) == ufF.find( k ) )
+				{
+					if ( ufF.find( j ) == ufF.find( k ) )
+					{
+						++ans;
+						break;
+					}
+				}
+			}
+		}
+
+		cout << ans << " \n"[i == N - 1];
+	}
 
 	return ( 0 );
 }

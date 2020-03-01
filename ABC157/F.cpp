@@ -269,7 +269,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, K; cin >> N >> K;
+	vector<ll> x( N ), y( N ), c( N );
+	rep( i, N ) cin >> x[i] >> y[i] >> c[i];
 
+	double best = MAX<float>;
+	vector<double> tmp( N );
+	for ( int i = -1000; i <= 1000; ++i )
+	{
+		for ( int j = -1000; j <= 1000; ++j )
+		{
+			rep( k, N )
+			{
+				tmp[k] = c[k] * sqrt( ( i - x[k] ) * ( i - x[k] ) + ( j - y[k] ) * ( j - y[k] ) );
+			}
+			sort( ALL( tmp ) );
+			double t = 0.0; rep( k, K ) t += tmp[k];
+			chmin( best, t );
+		}
+	}
+
+	cout << setprecision( 20 );
+	cout << best << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,46 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M; cin >> N >> M;
+	vector<ll> s( M ), c( M );
+	rep( i, M ) cin >> s[i] >> c[i];
 
+	string ans = "";
+	rep( i, N ) ans += "a";
+
+	rep( i, M )
+	{
+		if ( ans[s[i] - 1] == 'a' )
+			ans[s[i] - 1] = '0' + c[i];
+		else if ( ans[s[i] - 1] == '0' + c[i] )
+			;
+		else
+		{
+			cout << -1 << endl;
+			return ( 0 );
+		}
+	}
+
+	if ( ans[0] == '0' )
+	{
+		if ( N == 1 )
+		{
+			cout << 0 << endl;
+		}
+		else
+		{
+			cout << -1 << endl;
+		}
+		return ( 0 );
+	}
+	else
+	{
+		replace( ans, "a", "0" );
+		if ( ( ans[0] == '0' ) && ( N > 1 ) )
+			ans[0] = '1';
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

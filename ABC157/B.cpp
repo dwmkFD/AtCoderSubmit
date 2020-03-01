@@ -269,7 +269,73 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	vector<vector<ll>> v( 3, vector<ll>( 3, 0 ) );
+	vector<vector<bool>> vv( 3, vector<bool>( 3, 0 ) );
+	rep( i, 3 ) rep( j, 3 ) cin >> v[i][j];
+	ll N; cin >> N;
+	vector<ll> b( N );
+	rep( i, N ) cin >> b[i];
 
+	rep( k, N )
+	{
+		rep( i, 3 )
+		{
+			rep( j, 3 )
+			{
+				if ( v[i][j] == b[k] )
+				{
+					vv[i][j] = true;
+				}
+			}
+		}
+	}
+
+	rep( i, 3 )
+	{
+		bool ok = true;
+		rep( j, 3 )
+		{
+			if ( vv[i][j] != true )
+			{
+				ok = false;
+				break;
+			}
+		}
+		if ( ok )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	}
+
+	rep( i, 3 )
+	{
+		bool ok = true;
+		rep( j, 3 )
+		{
+			if ( vv[j][i] != true )
+			{
+				ok = false;
+				break;
+			}
+		}
+
+		if ( ok )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	}
+
+	if ( ( vv[0][0] && vv[1][1] && vv[2][2] )
+		 || ( vv[0][2] && vv[1][1] && vv[2][0] )
+		)
+	{
+		cout << "Yes" << endl;
+		return ( 0 );
+	}
+
+	cout << "No" << endl;
 
 	return ( 0 );
 }

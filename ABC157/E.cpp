@@ -266,10 +266,78 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+struct BIT {
+	BIT( ll n ) {
+		size = n;
+		v.resize( 26, vector<ll>( n + 1, 0 ) );
+	}
+
+	ll sum( ll idx, char c ) {
+		ll sum = 0;
+		while ( idx > 0 ) {
+			sum += v[c - 'a'][idx];
+			idx -= idx & -idx;
+		}
+		sum += v[c - 'a'][0];
+		return ( sum );
+	}
+
+	ll sum( ll idx1, ll idx2, char c ) {
+		return ( sum( idx2 - 1, c ) - sum( idx1 - 1, c ) );
+	}
+
+	void initadd( ll idx, char c ) {
+		while ( idx <= size ) {
+			v[c - 'a'][idx] += 1;
+			idx += idx & -idx;
+		}
+	}
+
+	void add( ll idx, char c1, char c2 ) {
+		while ( idx <= size ) {
+			v[c1 - 'a'][idx] -= 1;
+			v[c2 - 'a'][idx] += 1;
+			idx += idx & -idx;
+		}
+	}
+
+	ll size;
+	vector<vector<ll>> v;
+};
 
 int main()
 {
+	ll N; cin >> N;
+	string s; cin >> s;
+	ll Q; cin >> Q;
 
+	BIT b( N + 1 );
+	rep( i, s.size() )
+		b.initadd( i + 1, s[i] );
+
+	rep( i, Q )
+	{
+		ll q; cin >> q;
+		if ( q == 1 )
+		{
+			ll idx; char c;
+			cin >> idx >> c;
+
+			b.add( idx, s[idx - 1], c );
+			s[idx - 1] = c;
+		}
+		else
+		{
+			ll l, r; cin >> l >> r;
+			ll ans = 0;
+			rep( j, 26 )
+			{
+				ll ans2 = b.sum( l, r + 1, 'a' + j );
+				if ( ans2 > 0 ) ++ans;
+			}
+			cout << ans << endl;
+		}
+	}
 
 	return ( 0 );
 }
