@@ -269,7 +269,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, A, B;
+	cin >> N >> A >> B;
 
+	ll tmp = N / ( A + B );
+	ll tmp2 = N % ( A + B );
+	ll tmp3 = min( A, tmp2 );
+
+	if ( tmp == 0 )
+		cout << min( N, A ) << endl;
+	else
+		cout << tmp * A + tmp3 << endl;
 
 	return ( 0 );
 }

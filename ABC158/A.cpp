@@ -269,6 +269,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	map<char, int> m;
+	rep( i, s.size() ) m[s[i]]++;
+
+	arep( it, m )
+	{
+		if ( it.S >= 3 )
+			cout << "No" << endl;
+		else
+		{
+			cout << "Yes" << endl;
+			break;
+		}
+	}
 
 
 	return ( 0 );

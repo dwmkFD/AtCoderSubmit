@@ -269,7 +269,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B; cin >> A >> B;
 
+	reps( i, 10000 )
+	{
+		if ( ( (int)( i * 0.08 ) == A ) && ( (int)( i * 0.1 ) == B ) )
+		{
+			cout << i << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << -1 << endl;
 
 	return ( 0 );
 }

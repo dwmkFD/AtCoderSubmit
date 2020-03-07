@@ -269,7 +269,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, P; cin >> N >> P;
+	string s; cin >> s;
 
+	ll cnt = 0;
+	ll tmp = 0;
+ 
+	rep( i, s.size() )
+	{
+		int c = s[i] - '0';
+		tmp = tmp * 10 + c;
+
+		if ( tmp % P == 0 )
+		{
+			++cnt;
+			tmp = 0;
+		}
+	}
+
+	cout << cnt * ( cnt + 1 ) / 2 << endl;
 
 	return ( 0 );
 }

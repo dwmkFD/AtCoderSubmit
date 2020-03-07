@@ -269,7 +269,52 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	ll Q; cin >> Q;
+	int reverseflg = 0;
+	string fs = "", bs = "";
 
+	rep( i, Q )
+	{
+		ll t; cin >> t;
+		if ( t == 1 )
+		{
+			reverseflg ^= 1;
+		}
+		else
+		{
+			ll f; char c;
+			cin >> f >> c;
+
+			if ( f == 1 )
+			{
+				if ( reverseflg )
+					bs += c;
+				else
+					fs += c;
+			}
+			else
+			{
+				if ( reverseflg )
+					fs += c;
+				else
+					bs += c;
+			}
+		}
+	}
+
+	reverse( ALL( fs ) );
+
+	if ( reverseflg )
+	{
+		s = fs + s + bs;
+		reverse( ALL( s ) );
+		cout << s << endl;
+	}
+	else
+	{
+		cout << fs + s + bs << endl;
+	}
 
 	return ( 0 );
 }
