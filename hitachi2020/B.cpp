@@ -269,7 +269,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll A, B, M; cin >> A >> B >> M;
+	vector<ll> a( A );
+	vector<ll> b( B );
+	vector<ll> x( M ), y( M ), c( M );
+	rep( i, A ) cin >> a[i];
+	rep( i, B ) cin >> b[i];
+	rep( i, M ) cin >> x[i] >> y[i] >> c[i];
 
+	ll ans = 0;
+	ll ansA = MAX<int>, ansB = MAX<int>;
+	rep( i, A )
+		chmin( ansA, a[i] );
+	rep( i, B )
+		chmin( ansB, b[i] );
+	ans = ansA + ansB;
+
+	rep( i, M )
+	{
+		ll tmp = a[x[i] - 1] + b[y[i] - 1] - c[i];
+		chmin( ans, tmp );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
 
+	bool ok = true;
+	rep( i, s.size() )
+	{
+		if ( s[i] == 'h' && s[i + 1] == 'i' )
+			++i;
+		else
+			ok = false;
+	}
+
+	cout << ( ok ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }

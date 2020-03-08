@@ -266,10 +266,76 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+vector<vector<ll>> g;
+vector<vector<ll>> gg;
+
+void dfs( ll P, ll p, ll v, ll d ) {
+	if ( d == 3 )
+	{
+		g[P].eb( v );
+		return;
+	}
+
+	arep( it, g[v] )
+	{
+		if ( it != p )
+		{
+			dfs( P, v, it, d + 1 );
+		}
+	}
+}
 
 int main()
 {
+	ll N; cin >> N;
+	g.resize( N );
+	gg.resize( N );
+	rep( i, N - 1 )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		g[a].eb( b );
+		g[b].eb( a );
+	}
 
+	rep( i, N )
+		dfs( i, -1, i, 0 );
+
+	vector<ll> idx( N ); rep( i, N ) idx[i] = i;
+	sort( ALL( idx ), []( ll i, ll j ) {
+			return ( gg[i].size() > gg[j].size() );
+		} );
+
+	if ( gg[0].size() <= 0 )
+	{
+		cout << -1 << endl;
+		return ( 0 );
+	}
+
+	vector<ll> ans( N );
+	ll mul = 1;
+	vector<bool> bbb( N + 1 );
+	rep( i, N )
+	{
+		if ( 3 * mul <= N )
+		{
+			ans[idx[i]] = 3 * mul;
+			bbb[3 * mul] = true;
+			++mul;
+		}
+		else
+			break;
+	}
+
+	ll j = 0;
+	rep( i, N )
+	{
+		while ( bbb[j] ) ++j;
+		ans[idx[i]] = j++;
+	}
+
+	rep( i, N )
+		cout << ans[i] << " \n"[i == N - 1];
 
 	return ( 0 );
 }
