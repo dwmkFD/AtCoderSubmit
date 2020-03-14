@@ -269,7 +269,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a, b, c;
+	cin >> a >> b >> c;
 
+	if ( 4 * ( a * b ) >= ( c - ( a + b ) ) * ( c - ( a + b ) ) )
+		cout << "No" << endl;
+	else
+		cout << "Yes" << endl;
 
 	return ( 0 );
 }
