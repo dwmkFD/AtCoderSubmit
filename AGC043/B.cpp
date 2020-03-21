@@ -266,10 +266,93 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
+auto Manacher( string &S )
+{
+	vector<ll> R( S.size() + 1 );
+	int i = 0, j = 0;
+	while (i < S.size()) {
+		while (i-j >= 0 && i+j < S.size() && S[i-j] == S[i+j]) ++j;
+		R[i] = j;
+		int k = 1;
+		while (i-k >= 0 && i+k < S.size() && k+R[i-k] < j) R[i+k] = R[i-k], ++k;
+		i += k; j -= k;
+	}
+
+	return ( R );
+}
 
 int main()
 {
+	ll N; cin >> N;
+	string a; cin >> a;
 
+	map<string, char> m;
+	m["111"] = '0';
+	m["112"] = '1';
+	m["113"] = '2';
+	m["121"] = '0';
+	m["122"] = '1';
+	m["123"] = '0';
+	m["131"] = '0';
+	m["132"] = '1';
+	m["133"] = '2';
+	m["211"] = '1';
+	m["212"] = '0';
+	m["213"] = '1';
+	m["221"] = '1';
+	m["222"] = '0';
+	m["223"] = '1';
+	m["231"] = '1';
+	m["232"] = '0';
+	m["233"] = '1';
+	m["311"] = '1';
+	m["312"] = '1';
+	m["313"] = '0';
+	m["321"] = '0';
+	m["322"] = '1';
+	m["323"] = '0';
+	m["331"] = '1';
+	m["332"] = '2';
+	m["333"] = '0';
+
+	auto step = []( string &s ) {
+		string res = "";
+		rep( i, s.size() - 1 )
+			res += abs( s[i] - s[i + 1] ) + '0';
+		return ( res );
+	};
+
+	while ( a.size() > 3 )
+	{
+		string s = "";
+		for ( ll i = 0; i < a.size(); i += 2 )
+		{
+			if ( a.size() - i >= 3 )
+			{
+				auto c = m[a.substr( i, 3 )];
+				if ( c != '0' )
+					s += c;
+			}
+			else
+			{
+				auto cc = m[a.substr( a.size() - 3 )];
+				s += cc;
+			}
+		}
+
+		if ( s.empty() )
+		{
+			cout << m[a.substr( 0, 3 )] << endl;
+			return ( 0 );
+		}
+		else
+			a = s;
+	}
+
+	while ( a.size() > 1 )
+		a = step( a );
+
+	cout << a[0] << endl;
 
 	return ( 0 );
 }

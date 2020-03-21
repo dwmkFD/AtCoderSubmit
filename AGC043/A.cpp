@@ -11,11 +11,12 @@
 #include <cmath>
 #include <map>
 #include <cstring>
+#include <stack>
 
 using namespace std;
 
-template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
 using Pint = pair<int, int>;
@@ -269,7 +270,50 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll H, W; cin >> H >> W;
+	vector<string> v( H );
+	rep( i, H ) cin >> v[i];
 
+	vector<vector<ll>> cost( H, vector<ll>( W, MAX<int> ) );
+	stack<Pll> s;
+	cost[0][0] = ( v[0][0] == '#' );
+	s.push( mp( 0, 0 ) );
+
+	while ( s.empty() == false )
+	{
+		auto x = s.top();
+		s.pop();
+
+		ll r = x.S + 1;
+		ll d = x.F + 1;
+		bool flg;
+
+		if ( r < W )
+		{
+			if ( ( v[x.F][r] != v[x.F][x.S] ) && ( v[x.F][x.S] == '.' ) )
+				flg = chmin( cost[x.F][r], cost[x.F][x.S] + 1 );
+			else
+				flg = chmin( cost[x.F][r], cost[x.F][x.S] );
+
+			if ( flg )
+				s.push( mp( x.F, r ) );
+		}
+
+		if ( d < H )
+		{
+			if ( ( v[d][x.S] != v[x.F][x.S] ) && ( v[x.F][x.S] == '.' ) )
+				flg = chmin( cost[d][x.S], cost[x.F][x.S] + 1 );
+			else
+				flg = chmin( cost[d][x.S], cost[x.F][x.S] );
+
+			if ( flg )
+				s.push( mp( d, x.S ) );
+		}
+
+//		cout << r << ", " << d << endl;
+	}
+
+	cout << cost[H - 1][W - 1] << endl;
 
 	return ( 0 );
 }
