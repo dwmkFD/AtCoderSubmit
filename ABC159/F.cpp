@@ -220,7 +220,7 @@ template<typename T, T MOD> struct BiCoef {
     }
 };
 
-constexpr ll MOD = 1000000007LL;
+constexpr ll MOD = 998244353LL;
 using mint = Fp<ll, MOD>;
 BiCoef<ll, MOD> bc;
 
@@ -269,7 +269,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, S; cin >> N >> S;
+	vector<ll> a( N );
+	rep( i, N ) cin >> a[i];
 
+	vector<vector<ll>> dp( N + 1, vector<ll>( S + 1, 0 ) );
+	dp[0][0] = 1;
+	rep( i, N )
+	{
+		rep( j, S + 1 )
+		{
+			if ( j >= a[i] )
+				dp[i][j] = ( ( dp[i][j] + 1 ) * ( dp[i][j - a[i]] ) ) % MOD;
+			dp[i + 1][j] = dp[i][j];
+		}
+	}
+
+	ll ans = 0;
+	rep( i, N + 1 )
+	{
+		rep( j, N + 1 )
+		{
+			ans = ( ans + ( dp[j][S] - dp[i][S] ) * ( N - max( i, j ) ) % MOD ) % MOD;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

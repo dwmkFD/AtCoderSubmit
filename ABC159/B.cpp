@@ -269,7 +269,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s; cin >> s;
+	ll N = s.size();
+	string t = s.substr( 0, ( N - 1 ) / 2 );
+	string u = s.substr( ( N + 1 ) / 2 );
 
+	auto chk = []( string &s ) {
+		ll n = s.size();
+		rep( i, n / 2 )
+		{
+			if ( s[i] != s[n - 1 - i] )
+			{
+				return ( false );
+			}
+		}
+		return ( true );
+	};
+
+	if ( chk( s ) && chk( t ) && chk( u ) )
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 
 	return ( 0 );
 }

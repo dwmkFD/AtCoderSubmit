@@ -269,6 +269,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll H, W, K; cin >> H >> W >> K;
+	vector<string> v( H );
+	rep( i, H ) cin >> v[i];
 
 
 	return ( 0 );

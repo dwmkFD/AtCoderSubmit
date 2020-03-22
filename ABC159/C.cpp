@@ -269,7 +269,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll L; cin >> L;
 
+	cout << setprecision( 20 );
+
+	double x = L / 3.0;
+	double y = L / 3.0;
+	double z = L - ( x + y );
+
+	cout << x * y * z << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N; cin >> N;
+	vector<ll> a( N );
+	rep( i, N ) cin >> a[i];
 
+	map<ll, ll> m, m2;
+	rep( i, N ) m[a[i]]++;
+
+	ll total = 0;
+	arep( it, m )
+	{
+		m2[it.F] = it.S * ( it.S - 1 ) / 2;
+		total += m2[it.F];
+	}
+
+	rep( i, N )
+	{
+		ll ans = total;
+		ans -= m2[a[i]];
+		ans += ( m[a[i]] - 1 ) * ( m[a[i]] - 2 ) / 2;
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }

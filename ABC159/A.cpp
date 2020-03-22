@@ -269,7 +269,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, M;
+	cin >> N >> M;
 
+	ll x = N * ( N - 1 ) / 2;
+	ll y = M * ( M - 1 ) / 2;
+
+	cout << x + y << endl;
 
 	return ( 0 );
 }
