@@ -269,7 +269,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll X; cin >> X;
 
+	ll t1 = X / 500;
+	ll t2 = ( X - ( t1 * 500 ) ) / 5;
+
+	cout << t1 *1000 + t2 * 5 << endl;
 
 	return ( 0 );
 }

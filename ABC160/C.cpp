@@ -269,7 +269,19 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll K, N; cin >> K >> N;
+	vector<ll> a( N );
+	rep( i, N ) cin >> a[i];
 
+	vector<ll> s( N );
+	reps( i, N - 1 ) s[i - 1] = a[i] - a[i - 1];
+	s[N - 1] = a[0] - a[N - 1] + K;
+	sort( ALL( s ) );
+
+	ll ans = 0;
+	rep( i, N - 1 ) ans += s[i];
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll N, X, Y;
+	cin >> N >> X >> Y;
 
+	reps( k, N - 2 )
+	{
+		if ( k <= Y - X )
+			cout << N - k + 1 << endl;
+		else
+			cout << max( N - k - ( k - ( Y - X ) ), 0LL ) << endl;
+	}
+	cout << 0 << endl;
 
 	return ( 0 );
 }

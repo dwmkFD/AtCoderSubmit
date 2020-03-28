@@ -269,7 +269,120 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x, y, a, b, c;
+	cin >> x >> y >> a >> b >> c;
+	priority_queue<ll> p, q, r;
+	rep( i, a )
+	{
+		ll x; cin >> x;
+		p.push( x );
+	}
+	rep( i, b )
+	{
+		ll x; cin >> x;
+		q.push( x );
+	}
+	rep( i, c )
+	{
+		ll x; cin >> x;
+		r.push( x );
+	}
 
+	ll ans = 0;
+	while ( x > 0 || y > 0 )
+	{
+		ll t1 = p.top();
+		ll t2 = q.top();
+		if ( r.empty() )
+		{
+			while ( x > 0 )
+			{
+				ans += p.top();
+				p.pop();
+				--x;
+			}
+			while ( y > 0 )
+			{
+				ans += q.top();
+				q.pop();
+				--y;
+			}
+		}
+		else
+		{
+			ll t3 = r.top();
+			if ( t1 < t2 )
+			{
+				if ( x > 0 )
+				{
+					if ( t1 < t3 )
+					{
+						ans += t3;
+						r.pop();
+					}
+					else
+					{
+						ans += t1;
+						p.pop();
+					}
+					--x;
+				}
+				else
+				{
+					if ( y > 0 )
+					{
+						if ( t2 < t3 )
+						{
+							ans += t3;
+							r.pop();
+						}
+						else
+						{
+							ans += t2;
+							q.pop();
+						}
+						--y;
+					}
+				}
+			}
+			else
+			{
+				if ( y > 0 )
+				{
+					if ( t2 < t3 )
+					{
+						ans += t3;
+						r.pop();
+					}
+					else
+					{
+						ans += t2;
+						q.pop();
+					}
+					--y;
+				}
+				else
+				{
+					if ( x > 0 )
+					{
+						if ( t1 < t3 )
+						{
+							ans += t3;
+							r.pop();
+						}
+						else
+						{
+							ans += t1;
+							p.pop();
+						}
+						--x;
+					}
+				}
+			}
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
