@@ -269,7 +269,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
 
+	if ( n > k )
+	{
+		n = n % k;
+		if ( n == 0 )
+			cout << 0 << endl;
+		else
+			cout << min( n, abs( n - k ) ) << endl;
+	}
+	else if ( n == k )
+	{
+		cout << 0 << endl;
+	}
+	else
+	{
+		cout << min( n, abs( n - k ) ) << endl;
+	}
 
 	return ( 0 );
 }

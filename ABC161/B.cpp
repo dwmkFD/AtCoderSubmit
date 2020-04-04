@@ -269,7 +269,27 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<ll> a( n );
+	ll total = 0;
+	rep( i, n )
+	{
+		cin >> a[i];
+		total += a[i];
+	}
+	sort( ALL( a ), greater<ll>() );
 
+	ll cnt = 0;
+	rep( i, n )
+	{
+		if ( 4 * m * a[i] >= total )
+			++cnt;
+	}
+
+	if ( cnt >= m )
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 
 	return ( 0 );
 }

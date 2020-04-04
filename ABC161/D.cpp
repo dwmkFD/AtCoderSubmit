@@ -266,10 +266,98 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
-
 int main()
 {
+	ll n; cin >> n;
 
+	auto nextans = []( ll x ) {
+		vector<ll> keta;
+		ll tmp = x;
+		while ( tmp > 0 )
+		{
+			keta.eb( tmp % 10 );
+			tmp /= 10;
+		}
+
+		rep( i, keta.size() - 1 )
+		{
+			if ( keta[i] + 1 == keta[i + 1] )
+			{
+				keta[i] += 1;
+				break;
+			}
+			else if ( keta[i] == keta[i + 1] )
+			{
+				if ( keta[i] == 9 )
+				{
+					ll j = i;
+					while ( j < keta.size() && keta[j] == 9 ) ++j;
+					if ( j < keta.size() )
+					{
+						keta[j] += 1;
+						for ( int k = i; k < j; ++k )
+							keta[k] = keta[j] - 1;
+					}
+					else
+					{
+						keta[i] += 1;
+						break;
+					}
+				}
+				else
+				{
+					keta[i] += 1;
+					break;
+				}
+			}
+			else if ( keta[i] == keta[i + 1] + 1 )
+			{
+				if ( keta.size() == 2 )
+				{
+					keta[i + 1] += 1;
+					keta[i] -= 1;
+					break;
+				}
+				else
+				{
+					for ( int j = i + 1; j < keta.size() - 1; ++j )
+					{
+						if ( abs( ( keta[j] + 1 ) - ( keta[j + 1] ) ) > 1 )
+						{
+							keta[j + 1] += 1;
+							keta[j] -= 1;
+						}
+						else
+						{
+							keta[j] += 1;
+							break;
+						}
+					}
+					keta[i] = keta[i + 1] - 1;
+				}
+				break;
+			}
+		}
+
+		ll res = 0;
+		rrep( i, keta.size() )
+		{
+			res *= 10;
+			res += keta[i];
+		}
+
+		return ( res );
+	};
+
+	vector<ll> ans( n + 1 );
+	reps( i, 10 ) ans[i] = i;
+	for ( ll i = 11; i <= n; ++i )
+	{
+		ans[i] = nextans( ans[i - 1] );
+		cout << ans[i] << endl;
+	}
+
+	cout << ans[n] << endl;
 
 	return ( 0 );
 }

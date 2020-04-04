@@ -269,7 +269,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
 
+	ll cnt = 0;
+	for ( ll i = 2; i * i <= n; ++i )
+	{
+		ll tmp = n;
+		if ( n % i == 1 )
+			++cnt;
+		else
+		{
+			while ( tmp % i == 0 )
+			{
+				tmp /= i;
+			}
 
+			if ( tmp % i == 1 )
+				++cnt;
+		}
+	}
+
+	cout << cnt * 2 + 1 << endl;
 	return ( 0 );
 }
