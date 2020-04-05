@@ -269,7 +269,42 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, q; cin >> n >> q;
+	vector<ll> a( n );
+	vector<ll> s( q );
+	rep( i, n ) cin >> a[i];
+	rep( i, q ) cin >> s[i];
 
+	vector<ll> gcds( n );
+	gcds[0] = a[0];
+	reps( i, n - 1 )
+		gcds[i] = gcd( gcds[i - 1], a[i] );
+
+	rep( i, q )
+	{
+		ll left = 0;
+		ll right = n - 1;
+
+		if ( gcd( gcds.back(), s[i] ) != 1 )
+		{
+			cout << gcd( gcds.back(), s[i] ) << endl;
+			continue;
+		}
+
+		while ( abs( right - left ) > 1 )
+		{
+			ll mid = ( left + right ) / 2;
+			if ( gcd( gcds[mid], s[i] ) == 1 )
+				right = mid;
+			else
+				left = mid;
+		}
+
+		if ( gcd( gcds[left], s[i] ) == 1 )
+			cout << left + 1 << endl;
+		else
+			cout << right + 1 << endl;
+	}
 
 	return ( 0 );
 }

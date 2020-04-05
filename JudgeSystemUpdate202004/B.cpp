@@ -269,7 +269,31 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	priority_queue<ll, vector<ll>, greater<ll>> rq, bq;
+	rep( i, n )
+	{
+		ll x; char c;
+		cin >> x >> c;
+		if ( c == 'R' )
+			rq.push( x );
+		else
+			bq.push( x );
+	}
 
+	while ( rq.empty() == false )
+	{
+		auto x = rq.top();
+		rq.pop();
+		cout << x << endl;
+	}
+
+	while ( bq.empty() == false )
+	{
+		auto x = bq.top();
+		bq.pop();
+		cout << x << endl;
+	}
 
 	return ( 0 );
 }

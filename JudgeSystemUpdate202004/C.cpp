@@ -269,7 +269,74 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a1, a2, a3;
+	cin >> a1 >> a2 >> a3;
+	ll n = a1 + a2 + a3;
 
+	vector<ll> v( n );
+	rep( i, n ) v[i] = i + 1;
+
+	ll ans = 0;
+	do {
+		vector<ll> v1( a1 );
+		vector<ll> v2( a2 );
+		vector<ll> v3( a3 );
+		bool ok = true;
+
+		for ( int i = 0; i < a1; ++i )
+			v1[i] = v[i];
+		for ( int i = 0; i < a2; ++i )
+			v2[i] = v[i + a1];
+		for ( int i = 0; i < a3; ++i )
+			v3[i] = v[i + a1 + a2];
+
+		rep( i, a1 - 1 )
+		{
+			if ( v1[i] >= v1[i + 1] )
+			{
+				ok = false;
+				break;
+			}
+		}
+		rep( i, a2 - 1 )
+		{
+			if ( v2[i] >= v2[i + 1] )
+			{
+				ok = false;
+				break;
+			}
+		}
+		rep( i, a3 - 1 )
+		{
+			if ( v3[i] >= v3[i + 1] )
+			{
+				ok = false;
+				break;
+			}
+		}
+
+		rep( i, a2 )
+		{
+			if ( v1[i] >= v2[i] )
+			{
+				ok = false;
+				break;
+			}
+		}
+
+		rep( i, a3 )
+		{
+			if ( v2[i] >= v3[i] )
+			{
+				ok = false;
+				break;
+			}
+		}
+
+		if ( ok ) ++ans;
+	} while ( next_permutation( ALL( v ) ) );
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

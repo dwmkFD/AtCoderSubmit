@@ -269,7 +269,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll s, l, r;
+	cin >> s >> l >> r;
 
+	if ( s < l )
+		cout << l << endl;
+	else if ( s >= l && s <= r )
+		cout << s << endl;
+	else
+		cout << r << endl;
 
 	return ( 0 );
 }
