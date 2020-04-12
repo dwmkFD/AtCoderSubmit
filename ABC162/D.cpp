@@ -269,7 +269,77 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	string s; cin >> s;
+	vector<ll> r( n ), g( n ), b( n );
+	map<char, ll> m;
+	rep( i, s.size() )
+	{
+		m[s[i]]++;
+		r[i] = m['R'];
+		g[i] = m['G'];
+		b[i] = m['B'];
+	}
 
+//	cout << m['R'] << ", " << m['G'] << ", " << m['B'] << endl;
+
+	ll ans = 0;
+	rep( i, s.size() - 2 )
+	{
+		for ( ll j = i + 1; j < n - 1; ++j )
+		{
+			ll k = j + j - i;
+			switch ( s[i] )
+			{
+			case 'R':
+				if ( s[j] == 'G' )
+				{
+					ans += ( b[n - 1] - b[j] );
+					if ( k < n && s[k] == 'B' )
+						--ans;
+				}
+				if ( s[j] == 'B' )
+				{
+					ans += ( g[n - 1] - g[j] );
+					if ( k < n && s[k] == 'G' )
+						--ans;
+				}
+				break;
+
+			case 'G':
+				if ( s[j] == 'R' )
+				{
+					ans += ( b[n - 1] - b[j] );
+					if ( k < n && s[k] == 'B' )
+						--ans;
+				}
+				if ( s[j] == 'B' )
+				{
+					ans += ( r[n - 1] - r[j] );
+					if ( k < n && s[k] == 'R' )
+						--ans;
+				}
+				break;
+
+			case 'B':
+				if ( s[j] == 'R' )
+				{
+					ans += ( g[n - 1] - g[j] );
+					if ( k < n && s[k] == 'G' )
+						--ans;
+				}
+				if ( s[j] == 'G' )
+				{
+					ans += ( r[n - 1] - r[j] );
+					if ( k < n && s[k] == 'R' )
+						--ans;
+				}
+				break;
+			}
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

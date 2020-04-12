@@ -269,6 +269,7 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
 
 
 	return ( 0 );

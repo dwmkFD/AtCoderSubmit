@@ -269,7 +269,11 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	string n; cin >> n;
+	if ( n.find( "7" ) != string::npos )
+		cout << "Yes" << endl;
+	else
+		cout << "No" << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,37 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	ll ans = -( MAX<ll> / 2 );
+	if ( n % 2 == 0 )
+	{
+		ll t1 = 0, t2 = 0;
+		rep( i, n )
+		{
+			if ( i % 2 )
+				t1 += a[i];
+			else
+				t2 += a[i];
+		}
+		cout << max( t1, t2 ) << endl;
+	}
+	else
+	{
+		vector<ll> dp( n + 1 );
+		rep( i, n )
+		{
+			rep( j, ( n - i ) / 2 )
+			{
+				if ( i + 2 + j <= n )
+					dp[i + 2 + j] = max( dp[i + 2 + j], dp[i] + a[i] );
+			}
+		}
+
+		cout << dp[n] << endl;
+	}
 
 	return ( 0 );
 }

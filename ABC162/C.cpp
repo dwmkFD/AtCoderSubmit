@@ -269,7 +269,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll k; cin >> k;
+	ll ans = 0;
+	reps( a, k )
+	{
+		reps( b, k )
+		{
+			reps( c, k )
+			{
+				ans += gcd( gcd( a, b ), c );
+			}
+		}
+	}
 
+	cout << ans << endl;
 
 	return ( 0 );
 }

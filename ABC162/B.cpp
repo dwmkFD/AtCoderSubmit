@@ -269,7 +269,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	ll ans = 0;
+	reps( i, n )
+	{
+		if ( i % 3 == 0 && i % 5 == 0 )
+			;
+		else if ( i % 3 == 0 )
+			;
+		else if ( i % 5 == 0 )
+			;
+		else
+			ans += i;
+	}
 
+	cout << ans << endl;
 
 	return ( 0 );
 }
