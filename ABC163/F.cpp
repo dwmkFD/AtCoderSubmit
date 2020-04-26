@@ -269,7 +269,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> c( n );
+	rep( i, n ) cin >> c[i];
+	vector<vector<ll>> g( n );
+	rep( i, n - 1 )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		g[a].eb( b );
+		g[b].eb( a );
+	}
 
+	vector<ll> x( n, 0 );
+	auto dfs = [&]( auto &&dfs, ll p, ll v ) {
+		arep( it, g[v] )
+		{
+		}
+	};
+
+	rep( i, n )
+	{
+		cout << x[i] << endl;
+	}
 
 	return ( 0 );
 }

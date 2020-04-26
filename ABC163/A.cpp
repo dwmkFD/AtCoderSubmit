@@ -269,7 +269,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	ll r; cin >> r;
+	cout << setprecision( 20 );
+	cout << r * 2 * 3.141592653589 << endl;
 
 	return ( 0 );
 }

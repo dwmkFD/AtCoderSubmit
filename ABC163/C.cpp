@@ -269,7 +269,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	reps( i, n - 1 ) cin >> a[i];
 
+	map<ll, ll> m;
+	reps( i, n - 1 ) m[a[i] - 1]++;
+
+	rep( i, n )
+	{
+		cout << m[i] << endl;
+	}
 
 	return ( 0 );
 }

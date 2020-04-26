@@ -269,7 +269,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	ll total = 0;
+	rep( i, m )
+	{
+		ll a; cin >> a;
+		total += a;
+	}
 
+	if ( total > n )
+		cout << -1 << endl;
+	else
+		cout << n - total << endl;
 
 	return ( 0 );
 }

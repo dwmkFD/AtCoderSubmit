@@ -269,7 +269,32 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	vector<ll> order( n );
+	iota( ALL( order ), 0 );
+	sort( ALL( order ), [&]( ll i, ll j ) { return ( a[i] > a[j] ); } );
 
+	vector<vector<ll>> dp( n + 1, vector<ll>( n + 1, 0 ) );
+	rep( i, n )
+	{
+		rep( j, n )
+		{
+			if ( i + j >= n ) break;
+			ll pos = order[i + j];
+			chmax( dp[i][j + 1], dp[i][j] + a[pos] * abs( pos - ( n - 1 - j ) ) );
+			chmax( dp[i + 1][j], dp[i][j] + a[pos] * abs( pos - i ) );
+		}
+	}
+
+	ll ans = 0;
+	rep( i, n )
+	{
+		chmax( ans, dp[i][n - i] );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

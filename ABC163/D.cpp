@@ -269,7 +269,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
 
+	mint ans = 0;
+	for ( ll i = k; i <= n + 1; ++i )
+	{
+		ll t1 = ( i - 1 ) * i / 2;
+		ll t2 = ( ( n - i + 1 ) + ( n ) ) * i / 2;
+		ans += ( t2 - t1 + 1 );
+//		cout << t1 << ", " << t2 << endl;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
