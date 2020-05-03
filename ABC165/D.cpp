@@ -269,7 +269,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a, b, n;
+	cin >> a >> b >> n;
 
+	ll left = 0, right = n;
+	auto check = [&]( ll mid ) {
+		return ( (ll)( floor( a * mid / (double)b ) - a * floor( mid / (double)b ) ) );
+	};
+
+	ll ans = 0;
+	for ( ll i = 0; i < 500; ++i )
+	{
+		ll mid = ( left + right ) / 2;
+		if ( chmax( ans, check( mid ) ) )
+		{
+			left = mid;
+		}
+		else
+		{
+			right = mid;
+		}
+	}
+
+	ans = check( min( b - 1, n ) );
+	cout << ans << endl;
 
 	return ( 0 );
 }

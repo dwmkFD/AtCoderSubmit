@@ -269,7 +269,17 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x; cin >> x;
 
+	ll now = 100;
+	ll cnt = 0;
+	while ( now < x )
+	{
+		now = (ll)( now * 1.01 );
+		++cnt;
+	}
+
+	cout << cnt << endl;
 
 	return ( 0 );
 }

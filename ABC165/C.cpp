@@ -269,7 +269,63 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m, q;
+	cin >> n >> m >> q;
+	vector<ll> a( q ), b( q ), c( q ), d( q );
+	rep( i, q ) cin >> a[i] >> b[i] >> c[i] >> d[i];
 
+	vector<ll> v( n, 1 );
+	auto check = [&]() {
+		rrep( i, v.size() )
+		{
+			if ( v[i] > m )
+			{
+				v[i - 1]++;
+				v[i] = 1;
+			}
+		}
+
+		rep( i, v.size() - 1 )
+		{
+			if ( v[i] > v[i + 1] )
+			{
+				v[i + 1] = v[i];
+			}
+		}
+
+		if ( v.back() > m ) v.back() = v[v.size() - 2];
+	};
+
+	auto break_loop = [&]() {
+		rep( i, v.size() )
+		{
+			if ( v[i] < m )
+				return ( false );
+		}
+		return ( true );
+	};
+
+	ll ans = 0;
+	while ( v[0] <= m )
+	{
+		ll tmp = 0;
+#if 0
+		rep( i, n )
+			cout << v[i] << " \n"[i == n - 1];
+#endif
+		rep( i, q )
+		{
+			if ( v[b[i] - 1] - v[a[i] - 1] == c[i] )
+				tmp += d[i];
+		}
+		chmax( ans, tmp );
+		if ( break_loop() ) break;
+
+		v.back() = v.back() + 1;
+		check();
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
