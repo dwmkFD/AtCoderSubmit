@@ -269,7 +269,24 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<bool> b( n, false );
 
+	rep( i, k )
+	{
+		ll d;
+		cin >> d;
+		rep( i, d )
+		{
+			ll a; cin >> a;
+			b[a - 1] = true;
+		}
+	}
+
+	ll ans = 0;
+	rep( i, n )
+		if ( b[i] == false ) ++ans;
+	cout << ans << endl;
 
 	return ( 0 );
 }

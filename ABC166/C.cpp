@@ -14,7 +14,7 @@
 
 using namespace std;
 
-template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
@@ -47,6 +47,14 @@ template<typename T = ll> struct UnionFind {
 	vector<T> par, siz;
 
 	UnionFind( T n ) {
+		par.resize( n ); siz.resize( n );
+		rep( i, n ) {
+			par[i] = i; siz[i] = 1;
+		}
+	}
+
+	UnionFind() {}
+	void resize( T n ) {
 		par.resize( n ); siz.resize( n );
 		rep( i, n ) {
 			par[i] = i; siz[i] = 1;
@@ -269,7 +277,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<ll> h( n );
+	rep( i, n ) cin >> h[i];
+	vector<ll> hi( n, 0 );
+	rep( i, m )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		chmax( hi[a], h[a] );
+		chmax( hi[a], h[b] );
+		chmax( hi[b], h[a] );
+		chmax( hi[b], h[b] );
+	}
 
+	ll ans = 0;
+	rep( i, n )
+	{
+		if ( hi[i] == h[i] )
+			++ans;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

@@ -269,7 +269,33 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x; cin >> x;
+	vector<Pll> y;
+	rep( i, 10000 )
+	{
+		ll z = pow( i, 5 );
+		if ( z <= MAX<ll> )
+			y.eb( mp( i, z ) );
+		else
+			break;
+	}
 
+	rep( i, y.size() )
+	{
+		rep( j, y.size() )
+		{
+			if ( y[i].S - y[j].S == x )
+			{
+				cout << y[i].F << " " << y[j].F << endl;
+				return ( 0 );
+			}
+			else if ( y[i].S + y[j].S == x )
+			{
+				cout << y[i].F << " -" << y[j].F << endl;
+				return ( 0 );
+			}
+		}
+	}
 
 	return ( 0 );
 }
