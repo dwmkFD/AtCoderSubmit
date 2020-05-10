@@ -286,7 +286,45 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	vector<ll> cost( n, -1 );
 
+	ll cnt = 0;
+	ll ptr = 0;
+	rep( i, n * 2 )
+	{
+		if ( cost[ptr] == -1 )
+		{
+			if ( cnt == k - 1 )
+			{
+				cout << a[ptr] << endl;
+				return ( 0 );
+			}
+			else
+			{
+				cost[ptr] = cnt++;
+				ptr = a[ptr] - 1;
+			}
+		}
+		else
+		{
+			break;
+		}
+	}
+
+//	cout << cnt << ", " << ptr << ", " << cost[ptr] << ", " << cost[a[ptr] - 1] << endl;
+
+	ll tmp = k - cost[ptr];
+	tmp %= ( cnt - cost[ptr] );
+
+	rep( i, tmp )
+	{
+		ptr = a[ptr] - 1;
+	}
+
+	cout << ptr + 1 << endl;
 
 	return ( 0 );
 }

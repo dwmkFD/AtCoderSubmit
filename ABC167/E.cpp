@@ -237,7 +237,7 @@ template<typename T, T MOD> struct BiCoef {
     }
 };
 
-constexpr ll MOD = 1000000007LL;
+constexpr ll MOD = 998244353LL;
 using mint = Fp<ll, MOD>;
 BiCoef<ll, MOD> bc;
 
@@ -286,7 +286,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m, k;
+	cin >> n >> m >> k;
+	bc.init( n + 10 );
 
+	mint t1 = m;
+	t1 = modpow( t1, n );
+	for ( ll i = n; i > k + 1; --i )
+	{
+		t1 -= bc.comb( n, i ) * m;
+	}
+
+	cout << t1 << endl;
 
 	return ( 0 );
 }

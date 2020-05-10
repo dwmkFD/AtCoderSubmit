@@ -286,7 +286,51 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m, x;
+	cin >> n >> m >> x;
+	vector<ll> c( n );
+	vector<vector<ll>> a( n, vector<ll>( m ) );
+	rep( i, n )
+	{
+		cin >> c[i];
+		rep( j, m ) cin >> a[i][j];
+	}
 
+	constexpr ll inf = 1e18;
+	ll ans = inf;
+	rep( i, 1 << n )
+	{
+		ll tmp = 0;
+		vector<ll> v( m, 0 );
+
+		rep( j, n )
+		{
+			if ( i & ( 1 << j ) )
+			{
+				tmp += c[j];
+				rep( k, m )
+				{
+					v[k] += a[j][k];
+				}
+			}
+		}
+
+		bool ok = true;
+		rep( i, m )
+		{
+			if ( v[i] < x )
+			{
+				ok = false;
+				break;
+			}
+		}
+		if ( ok ) chmin( ans, tmp );
+	}
+
+	if ( ans < inf )
+		cout << ans << endl;
+	else
+		cout << -1 << endl;
 
 	return ( 0 );
 }

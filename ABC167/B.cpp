@@ -286,7 +286,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a, b, c, k;
+	cin >> a >> b >> c >> k;
 
+	if ( k <= a + b )
+		cout << min( a, k ) << endl;
+	else
+		cout << a - ( k - ( a + b ) ) << endl;
+	
 
 	return ( 0 );
 }
