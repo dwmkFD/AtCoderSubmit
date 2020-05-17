@@ -283,7 +283,18 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a, b, h, m;
+	cin >> a >> b >> h >> m;
 
+	constexpr double pi = 3.14159265358979;
+	ll xxx = h * 60 + m;
+	double hlen = xxx / 2.0;
+	double mlen = m * 6.0;
+	double yyy = abs( hlen - mlen );
+	yyy = ( yyy >= 180.0 ? 360.0 - yyy : yyy );
+
+	cout << setprecision( 20 );
+	cout << sqrt( a * a + b * b - 2 * a * b * cos( ( pi / 180.0 ) * yyy ) ) << endl;
 
 	return ( 0 );
 }

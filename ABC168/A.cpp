@@ -283,7 +283,20 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	ll x = n % 10;
 
+	switch ( x )
+	{
+	case 2: case 4: case 5: case 7: case 9:
+		cout << "hon" << endl;
+		break;
+	case 0: case 1: case 6: case 8:
+		cout << "pon" << endl;
+		break;
+	default:
+		cout << "bon" << endl;
+	}
 
 	return ( 0 );
 }

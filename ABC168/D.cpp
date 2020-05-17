@@ -283,7 +283,39 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<vector<ll>> g( n );
+	rep( i, m )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		g[a].eb( b );
+		g[b].eb( a );
+	}
 
+	constexpr ll inf = 1e18;
+	vector<ll> cost( n, inf );
+	vector<ll> num( n, -1 );
+	cost[0] = 0;
+	queue<ll> q;
+	q.push( 0 );
+	while ( q.empty() == false )
+	{
+		auto x = q.front(); q.pop();
+		arep( it, g[x] )
+		{
+			if ( cost[x] + 1 < cost[it] )
+			{
+				q.push( it );
+				cost[it] = cost[x] + 1;
+				num[it] = x;
+			}
+		}
+	}
+
+	cout << "Yes" << endl;
+	reps( i, n - 1 )
+		cout << num[i] + 1 << endl;
 
 	return ( 0 );
 }

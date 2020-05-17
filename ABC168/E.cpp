@@ -283,6 +283,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n ), b( n );
+	rep( i, n ) cin >> a[i] >> b[i];
 
 
 	return ( 0 );
