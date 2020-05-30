@@ -283,7 +283,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll h1, m1, h2, m2, k;
+	cin >> h1 >> m1 >> h2 >> m2 >> k;
 
+	ll hh = h2 - h1;
+	ll mm = m2 - m1;
+
+	cout << ( hh * 60 + mm ) - k << endl;
 
 	return ( 0 );
 }

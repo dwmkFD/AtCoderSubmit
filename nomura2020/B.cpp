@@ -283,7 +283,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string t; cin >> t;
+	rep( i, t.size() )
+	{
+		if ( t[i] == '?' )
+			t[i] = 'D';
+	}
 
+	cout << t << endl;
 
 	return ( 0 );
 }
