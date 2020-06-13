@@ -283,7 +283,8 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	string s; cin >> s;
+	cout << s.substr( 0, 3 ) << endl;
 
 	return ( 0 );
 }

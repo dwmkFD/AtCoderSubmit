@@ -283,7 +283,14 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a, v; cin >> a >> v;
+	ll b, w; cin >> b >> w;
+	ll t; cin >> t;
 
+	if ( abs( a - b ) > ( v - w ) * t )
+		cout << "NO" << endl;
+	else
+		cout << "YES" << endl;
 
 	return ( 0 );
 }

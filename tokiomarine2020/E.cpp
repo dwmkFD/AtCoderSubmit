@@ -283,7 +283,83 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k, s, t;
+	cin >> n >> k >> s >> t;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	ll tmpbit1 = 0, tmpbit2 = 0;
+	rep( i, 18 )
+	{
+		if ( ( s >> i ) & 1 )
+		{
+			if ( ( ( t >> i ) & 1 ) == 0 )
+			{
+				cout << 0 << endl;
+				return ( 0 );
+			}
+			tmpbit1 |= ( 1LL << i );
+		}
+		if ( ( ( t >> i ) & 1 ) == 0 )
+		{
+			if ( ( s >> i ) & 1 )
+			{
+				cout << 0 << endl;
+				return ( 0 );
+			}
+			tmpbit2 |= ( 1LL << i );
+		}
+	}
+	tmpbit2 = ~tmpbit2;
+
+	vector<ll> aa;
+	rep( i, n )
+	{
+		if ( tmpbit1 )
+		{
+			if ( ( tmpbit1 & a[i] ) == tmpbit1 )
+				aa.eb( a[i] );
+		}
+		else if ( tmpbit2 )
+		{
+			if ( ( tmpbit2 | a[i] ) == tmpbit2 )
+				aa.eb( a[i] );
+		}
+		else
+			aa.eb( a[i] );
+	}
+
+	auto make_data = [&]( ll nx, ll idx ) {
+		vector<ll> res;
+		rep( b, 1LL << nx )
+		{
+			ll tmp = 0;
+			rep( j, nx )
+			{
+				if ( ( b >> j ) & 1 )
+					tmp |= aa[j + idx];
+			}
+			res.eb( tmp );
+		}
+
+		return ( res );
+	};
+
+	ll nn = aa.size();
+	auto b = make_data( nn - ( nn / 2 ), 0 );
+	auto c = make_data( nn / 2, nn - ( nn / 2 ) );
+	sort( ALL( b ) ); sort( ALL( c ) );
+
+	ll ans = 0;
+	rep( i, b.size() )
+	{
+		ll tt = ( b[i] ^ t ) & 0x3ffff;
+		auto it1 = lower_bound( ALL( c ), tt );
+		auto it2 = upper_bound( ALL( c ), tt );
+		ans += it2 - it1;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

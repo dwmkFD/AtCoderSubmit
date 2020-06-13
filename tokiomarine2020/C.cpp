@@ -283,7 +283,29 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	k = min( 64LL, k );
+
+	rep( j, k )
+	{
+		vector<ll> b( n + n + n );
+		rep( i, n )
+		{
+			ll s = max( i - a[i], 0LL );
+			ll t = i + a[i];
+			b[s] += 1;
+			b[t + 1] -= 1;
+		}
+		vector<ll> bb( 3 * n + 1 );
+		rep( i, n )
+			bb[i + 1] = bb[i] + b[i];
+		rep( i, n ) a[i] = bb[i + 1];
+	}
+	rep( i, n )
+		cout << a[i] << " \n"[i == n - 1];
 
 	return ( 0 );
 }
