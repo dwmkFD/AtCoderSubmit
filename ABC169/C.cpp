@@ -283,7 +283,21 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll a;
+	string b;
+	cin >> a >> b;
 
+	ll c = 0;
+	rep( i, b.size() )
+	{
+		if ( b[i] == '.' ) continue;
+		c *= 10;
+		c += b[i] - '0';
+	}
+
+	a *= c;
+
+	cout << (ll)( a / 100 ) << endl;
 
 	return ( 0 );
 }

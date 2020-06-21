@@ -283,7 +283,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n ), b( n );
+	rep( i, n ) cin >> a[i] >> b[i];
 
+	sort( ALL( a ) );
+	sort( ALL( b ) );
+
+	if ( n % 2 )
+	{
+		ll mid = n / 2;
+		cout << b[mid] - a[mid] + 1 << endl;
+	}
+	else
+	{
+		ll mid = n / 2 - 1;
+		ll amid = ( a[mid] + a[mid + 1] + 1 ) / 2;
+		ll aaa = ( a[mid] + a[mid + 1] ) % 2;
+		ll bmid = ( b[mid] + b[mid + 1] ) / 2;
+		ll bbb = ( b[mid] + b[mid + 1] ) % 2;
+
+		cout << ( bmid - amid ) * 2 + aaa + bbb + 1 << endl;
+	}
 
 	return ( 0 );
 }

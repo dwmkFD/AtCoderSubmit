@@ -235,7 +235,7 @@ template<typename T, T MOD> struct BiCoef {
 };
 
 constexpr ll MOD = 1000000007LL;
-using mint = Fp<ll, MOD>;
+using mint = Fp<ll, 1000000000000000001>;
 BiCoef<ll, MOD> bc;
 
 /*
@@ -283,7 +283,39 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	bool zeroflg = false;
+	rep( i, n )
+	{
+		cin >> a[i];
+		if ( a[i] == 0 )
+		{
+			zeroflg = true;
+		}
+	}
 
+	if ( zeroflg )
+	{
+		cout << 0 << endl;
+		return ( 0 );
+	}
+
+	ll ans = 1e18;
+	rep( i, n )
+	{
+		ans /= a[i];
+	}
+
+	if ( ans == 0 )
+		cout << -1 << endl;
+	else
+	{
+		ll ans = 1;
+		rep( i, n )
+			ans *= a[i];
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }

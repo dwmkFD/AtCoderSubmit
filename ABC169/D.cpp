@@ -283,7 +283,43 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
 
+	auto div = []( ll x ) {
+		vector<Pll> res;
+		for ( ll i = 2; i * i <= x; ++i )
+		{
+			ll cnt = 0;
+			while ( x % i == 0 )
+			{
+				++cnt;
+				x /= i;
+			}
+			res.eb( mp( i, cnt ) );
+		}
+
+		if ( x != 1 )
+			res.eb( mp( x, 1 ) );
+
+		return ( res );
+	};
+
+	auto v = div( n );
+//	arep( it, v ) cout << it.F << ", " << it.S << endl;
+
+	ll ans = 0;
+	arep( it, v )
+	{
+		ll cnt = 1;
+		while ( it.S >= cnt )
+		{
+			it.S -= cnt;
+			++ans;
+			++cnt;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
