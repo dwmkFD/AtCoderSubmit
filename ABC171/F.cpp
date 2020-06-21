@@ -283,7 +283,13 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll k; cin >> k;
+	string s; cin >> s;
 
+	bc.init( 2000000 );
+
+	mint t = 26;
+	cout << modpow( t, k ) * bc.comb( s.size() + k, k ) << endl;
 
 	return ( 0 );
 }

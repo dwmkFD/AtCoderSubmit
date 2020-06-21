@@ -283,7 +283,26 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	// 2,3,4,5,6 1,3,4,5,6 1,2,4,5,6 1,2,3,5,6 1,2,3,4,6, 1,2,3,4,5
+	ll tmp = 0;
+	rep( i, n - 2 ) tmp ^= a[i];
+	vector<ll> b( n );
+	rep( i, n )
+	{
+		b[( n - 2 + i ) % n] = tmp;
+		tmp ^= a[i];
+		tmp ^= a[( n - 2 + i ) %n];
+	}
+
+	vector<ll> ans( n );
+	rep( i, n )
+		ans[(i + 1) % n] = b[i] ^ a[i];
+
+	rep( i, n ) cout << ans[i] << " \n"[i == n - 1];
 
 	return ( 0 );
 }

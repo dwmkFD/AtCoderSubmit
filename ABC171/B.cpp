@@ -283,7 +283,16 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> p( n );
+	rep( i, n ) cin >> p[i];
+	sort( ALL( p ) );
 
+	ll ans = 0;
+	rep( i, k )
+		ans += p[i];
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

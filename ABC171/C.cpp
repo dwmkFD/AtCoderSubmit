@@ -283,7 +283,35 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
 
+	auto check = []( ll x ) {
+		vector<ll> res;
+		while ( x > 0 )
+		{
+			if ( x % 26 )
+				res.eb( x % 26 );
+			else
+			{
+				res.eb( 26 );
+				x -= 1;
+			}
+
+			if ( x == 26 ) break;
+			x /= 26;
+		}
+		return ( res );
+	};
+
+	auto x = check( n );
+
+//	arep( it, x ) cout << it << " "; cout  << endl;
+
+	rrep( i, x.size() )
+	{
+		cout << (char)( 'a' + ( x[i] - 1 ) );
+	}
+	cout << endl;
 
 	return ( 0 );
 }

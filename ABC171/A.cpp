@@ -283,7 +283,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	char c; cin >> c;
 
+	if ( c >= 'A' && c <= 'Z' )
+		cout << 'A' << endl;
+	else
+		cout << 'a' << endl;
 
 	return ( 0 );
 }

@@ -283,7 +283,30 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	ll sum = 0;
+	map<ll, ll> m;
+	rep( i, n )
+	{
+		m[a[i]]++;
+		sum += a[i];
+	}
+
+	ll q; cin >> q;
+	rep( i, q )
+	{
+		ll b, c; cin >> b >> c;
+
+		sum -= b * m[b];
+		sum += c * m[b];
+		m[c] += m[b];
+		m[b] = 0;
+
+		cout << sum << endl;
+	}
 
 	return ( 0 );
 }
