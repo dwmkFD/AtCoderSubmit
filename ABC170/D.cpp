@@ -15,7 +15,7 @@
 using namespace std;
 
 template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
 using Pint = pair<int, int>;
@@ -283,7 +283,48 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	map<ll, ll> m;
+	ll amax = 0;
+	rep( i, n )
+	{
+		cin >> a[i];
+		m[a[i]]++;
+		chmax( amax, a[i] );
+	}
 
+	vector<bool> b( amax + 1, true );
+	sort( ALL( a ) );
+
+	auto check = [&]( ll x ) {
+		reps( i, amax )
+		{
+			ll tmp = x * i;
+			if ( tmp <= amax )
+				b[tmp] = false;
+			else
+				break;
+		}
+	};
+
+	arep( it, m )
+	{
+		if ( it.S >= 2 )
+			check( it.F );
+	}
+
+	ll ans = 0;
+	rep( i, n )
+	{
+		if ( b[a[i]] )
+		{
+			++ans;
+			check( a[i] );
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

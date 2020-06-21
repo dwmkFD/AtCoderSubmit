@@ -283,7 +283,12 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x[5];
+	rep( i, 5 ) cin >> x[i];
 
+	rep( i, 5 )
+		if ( x[i] == 0 )
+			cout << i + 1 << endl;
 
 	return ( 0 );
 }

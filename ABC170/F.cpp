@@ -15,7 +15,7 @@
 using namespace std;
 
 template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
 using Pint = pair<int, int>;
@@ -283,7 +283,59 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll h, w, k;
+	cin >> h >> w >> k;
+	ll x1, y1, x2, y2;
+	cin >> x1 >> y1 >> x2 >> y2;
+	--x1; --x2; --y1; --y2;
+	vector<string> c( h );
+	rep( i, h ) cin >> c[i];
 
+	constexpr ll inf = 1e18;
+	vector<vector<ll>> cost( h, vector<ll>( w, inf ) );
+	cost[x1][y1] = 0;
+
+	const ll dx[] = { -1, 0, 1, 0 };
+	const ll dy[] = { 0, -1, 0, 1 };
+
+	queue<Pll> q;
+	q.push( mp( x1, y1 ) );
+	while ( q.empty() == false )
+	{
+		auto tmp = q.front(); q.pop();
+		rep( j, 4 )
+		{
+			reps( i, k )
+			{
+				ll nx = tmp.F + dx[j] * i;
+				ll ny = tmp.S + dy[j] * i;
+
+				if ( nx >= 0 && ny >= 0 && nx < h && ny < w )
+				{
+					if ( c[nx][ny] == '.' )
+					{
+						ll cost1 = cost[nx][ny];
+						ll cost2 = cost[tmp.F][tmp.S] + 1;
+						if ( chmin( cost[nx][ny], cost[tmp.F][tmp.S] + 1 ) )
+							q.push( mp( nx, ny ) );
+						else if ( cost1 == cost2 )
+							continue;
+						else
+							break;
+					}
+					else
+						break;
+				}
+				else
+					break;
+			}
+		}
+	}
+
+	if ( cost[x2][y2] < inf )
+		cout << cost[x2][y2] << endl;
+	else
+		cout << -1 << endl;
 
 	return ( 0 );
 }

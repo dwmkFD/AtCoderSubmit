@@ -283,7 +283,36 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x, n; cin >> x >> n;
+	vector<ll> p( n );
+	rep( i, n ) cin >> p[i];
+	vector<ll> pp( 210 );
+	iota( ALL( pp ), -100 );
+	rep( i, pp.size() )
+	{
+		rep( j, n )
+		{
+			if ( pp[i] == p[j] )
+			{
+				pp[i] = MAX<int>;
+				break;
+			}
+		}
+	}
 
+	ll check = MAX<int>;
+	ll ans = MAX<int>;
+	rrep( i, pp.size() )
+	{
+		if ( pp[i] < MAX<int> )
+		{
+			ll tmp = abs( pp[i] - x );
+			if ( chmin( check, tmp ) )
+				chmin( ans, pp[i] );
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

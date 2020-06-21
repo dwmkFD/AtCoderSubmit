@@ -283,6 +283,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, q;
+	cin >> n >> q;
+	vector<ll> a( n ), b( n );
+	vector<ll> c( q ), d( q );
+	rep( i, n ) cin >> a[i] >> b[i];
+	rep( i, q ) cin >> c[i] >> d[i];
+
+
+	SegTree<ll, ll> avg( 200001, []( ll a, ll b ) { return ( min( a, b ) ); }, inf );
 
 
 	return ( 0 );

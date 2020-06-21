@@ -283,7 +283,25 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll x, y; cin >> x >> y;
 
+	rep( i, x + 1 )
+	{
+		rep( j, x + 1 )
+		{
+			if ( i + j != x )
+			{
+				continue;
+			}
+			if ( i * 2 + j * 4 == y )
+			{
+				cout << "Yes" << endl;
+				return ( 0 );
+			}
+		}
+	}
+
+	cout << "No" << endl;
 
 	return ( 0 );
 }
