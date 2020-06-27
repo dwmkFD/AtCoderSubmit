@@ -283,7 +283,47 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	ll tmp = 0;
+	for( ll i = 2; i < n; ++i ) tmp ^= a[i];
+
+	auto bit = []( ll x, ll n ) {
+		return ( x & ( 1LL << n ) );
+	};
+
+	if ( ( bit( a[0], 0 ) ^ bit( a[1], 0 ) ) != bit( tmp, 0 ) )
+	{
+		cout << -1 << endl;
+		return ( 0 );
+	}
+
+	ll ans = 0;
+	reps( i, 63 )
+	{
+		if ( ( bit( a[0], i ) ^ bit( a[1], i ) ) != bit( tmp, i ) )
+		{
+			a[0] -= ( 1LL << ( i - 1 ) );
+			a[1] += ( 1LL << ( i - 1 ) );
+			ll tmp2 = ( 1LL << i ) - 1;
+			if ( ( a[0] & tmp2 ) ^ ( a[1] & tmp2 ) ^ ( tmp & tmp2 ) )
+			{
+				cout << -1 << endl;
+				return ( 0 );
+			}
+			else if ( a[0] <= 0 )
+			{
+				cout << -1 << endl;
+				return ( 0 );
+			}
+			else
+				ans += ( 1LL << ( i - 1 ) );
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

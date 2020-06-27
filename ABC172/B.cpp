@@ -283,7 +283,15 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	string s, t; cin >> s >> t;
+	ll ans = 0;
+	rep( i, s.size() )
+	{
+		if ( s[i] != t[i] )
+			++ans;
+	}
 
+	cout << ans << endl;
 
 	return ( 0 );
 }

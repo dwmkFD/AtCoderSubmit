@@ -283,7 +283,28 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n, m, k; cin >> n >> m >> k;
+	vector<ll> a( n ), b( m );
+	rep( i, n ) cin >> a[i];
+	rep( i, m ) cin >> b[i];
 
+	vector<ll> suma( n + 1 ), sumb( m + 1 );
+	rep( i, n ) suma[i + 1] = suma[i] + a[i];
+	rep( i, m ) sumb[i + 1] = sumb[i] + b[i];
+
+	ll ans = 0;
+	rep( i, n + 1 )
+	{
+		if ( suma[i] > k ) continue;
+		auto it = upper_bound( ALL( sumb ), k - suma[i] );
+		if ( it != sumb.end() ) --it;
+		ll tmp = distance( sumb.begin(), it );
+		tmp = min( tmp, m );
+		tmp += min( i, n );
+		chmax( ans, tmp );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

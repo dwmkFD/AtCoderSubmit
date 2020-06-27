@@ -283,7 +283,9 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
-
+	ll a;
+	cin >> a;
+	cout << a + a * a + a * a * a << endl;
 
 	return ( 0 );
 }

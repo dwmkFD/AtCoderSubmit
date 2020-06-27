@@ -283,7 +283,11 @@ void replace( string &s, string t, string r ) {
 
 int main()
 {
+	ll n; cin >> n;
+	map<ll, ll> m;
 
+	auto calc = [&]( ll x ) {
+	};
 
 	return ( 0 );
 }
