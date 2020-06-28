@@ -280,34 +280,6 @@ void replace( string &s, string t, string r ) {
 	}
 }
 
-template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
-	ll left = 0, right = v.size() - 1;
-	while ( abs( right - left ) > 1 )
-	{
-		ll mid = ( left + right ) / 2;
-		if ( v[mid] > val )
-			right = mid;
-		else
-			left = mid;
-	}
-
-	tuple<ll, ll, ll> res;
-	if ( v[left] == val )
-		res = { left, 1, v.size() - right };
-	else if ( v[right] == val )
-		res = { v.size() - 1, 1, v.size() - right - 1 };
-	else
-	{
-		if ( v[left] < val && val < v[right] )
-			res = { left + 1, 0, v.size() - right };
-		else if ( v[left] > val )
-			res = { 0, 0, v.size() };
-		else
-			res = { v.size(), 0, 0 };
-	}
-
-	return ( res );
-};
 
 int main()
 {
