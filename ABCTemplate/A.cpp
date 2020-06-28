@@ -294,6 +294,8 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 	tuple<ll, ll, ll> res;
 	if ( v[left] == val )
 		res = { left, 1, v.size() - right };
+	else if ( v[right] == val )
+		res = { v.size() - 1, 1, v.size() - right - 1 };
 	else
 	{
 		if ( v[left] < val && val < v[right] )
