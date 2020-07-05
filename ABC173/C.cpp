@@ -297,7 +297,36 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll h, w, k; cin >> h >> w >> k;
+	vector<string> c( h );
+	rep( i, h ) cin >> c[i];
 
+	ll total = 0;
+	rep( i, h ) rep( j, w ) if ( c[i][j] == '#' ) ++total;
+
+	ll ans = 0;
+	rep( i, 1LL << h )
+	{
+		rep( j, 1LL << w )
+		{
+			ll tmp = 0;
+			rep( ii, h )
+			{
+				if ( i & ( 1LL << ii ) )
+					rep( jj, w ) if ( c[ii][jj] == '#' ) ++tmp;
+			}
+			rep( jj, w )
+			{
+				if ( j & ( 1LL << jj ) )
+					rep( ii, h )
+						if ( ( c[ii][jj] == '#' ) && ( ( i & ( 1LL << ii ) ) == 0 ) ) ++tmp;
+			}
+
+			if ( total - tmp == k ) ++ans;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

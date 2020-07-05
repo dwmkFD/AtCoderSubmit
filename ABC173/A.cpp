@@ -297,7 +297,10 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n; cin >> n;
+	while ( n > 0 )
+		n -= 1000;
 
-
+	cout << -n << endl;
 	return ( 0 );
 }

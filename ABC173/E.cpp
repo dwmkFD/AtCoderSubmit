@@ -297,7 +297,74 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> a( n );
+	rep( i, n )
+	{
+		cin >> a[i];
+	}
+	sort( ALL( a ), []( ll x, ll y ) { return ( abs( x ) > abs( y ) ); } );
 
+	if ( n == k )
+	{
+		mint ans = 1;
+		rep( i, n ) ans *= a[i];
+		cout << ans << endl;
+		return ( 0 );
+	}
+	else if ( k == 1 )
+	{
+		mint ans = 1;
+		rep( i, n )
+			if ( a[i] >= 0 )
+			{
+				ans = a[i]; break;
+			}
+		cout << ans << endl;
+		return ( 0 );
+	}
+
+	ll cnt = 0;
+	rep( i, k )
+		if ( a[i] < 0 )
+			cnt = ( cnt + 1 ) % 2;
+
+	mint ans = 1;
+	if ( cnt )
+	{
+		ll x = 1e18, y = 1e18;
+		rrep( i, k )
+		{
+			if ( abs( a[i] ) < x && a[i] > 0 )
+				x = a[i];
+			if ( abs( a[i] ) < y && a[i] < 0 )
+				y = a[i];
+		}
+
+		ll xx = -1e18, yy = -1e18;
+		rep( i, n )
+		{
+			if ( i + k >= n ) break;
+			if ( a[i] > 0 ) chmax( xx );
+			if ( a[i] < 0 ) chmax( yy );
+		}
+
+		if ( abs( x ) > abs( y ) )
+		{
+			if ( xx >= 0 )
+			{
+			}
+		}
+		else
+		{
+		}
+	}
+	else
+	{
+		rep( i, k ) ans *= a[i];
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

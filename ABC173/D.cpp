@@ -297,7 +297,29 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	sort( ALL( a ), greater<ll>() );
 
+	ll ans = 0;
+	if ( n % 2 )
+	{
+		rep( i, n / 2 )
+			ans += a[i];
+		reps( i, n / 2 )
+			ans += a[i];
+	}
+	else
+	{
+		rep( i, n / 2 - 1 )
+			ans += a[i];
+		reps( i, n / 2 - 1 )
+			ans += a[i];
+		ans += a[n / 2 - 1];
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
