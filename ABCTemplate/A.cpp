@@ -130,7 +130,7 @@ template<typename T = ll> T solveLIS( const vector<T> &v ) {
 template<typename T, T MOD> struct Fp {
 	T val;
 
-	constexpr Fp( T input ) noexcept : val( input % MOD ) {
+	constexpr Fp( T input = 0 ) noexcept : val( input % MOD ) {
 		if ( val < 0 ) val += MOD;
 	}
 	constexpr T getmod() { return ( MOD ); }
