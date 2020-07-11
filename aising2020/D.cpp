@@ -294,10 +294,43 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 	return ( mp( v[right] == val, right ) );
 }
 
+#define popcnt( x ) __builtin_popcount( x )
 
 int main()
 {
+	ll n; cin >> n;
+	string x; cin >> x;
+	string y = x;
 
+	ll cnt = 0;
+	rep( i, x.size() )
+		if ( x[i] == '1' ) ++cnt;
+
+	rep( i, x.size() )
+	{
+		y[i] = ( x[i] == '0' ? '1' : '0' );
+		ll cnt2 = cnt + ( y[i] == '1' );
+		ll check = 1, tmp = 0, cnt3 = 0;
+		while ( check < cnt2 )
+		{
+			tmp <<= 1;
+			tmp += ( y[y.size() - 1 - cnt3] - '0' );
+			check <<= 1;
+			++cnt3;
+		}
+		tmp <<= 1; tmp += ( y[y.size() - 1 - cnt3] - '0' );
+
+		cout << y << ", " << cnt2 << ", " << check << ", " << tmp << endl;
+		ll ans = 0;
+		while ( tmp > 0 )
+		{
+			tmp %= popcnt( tmp );
+			++ans;
+		}
+		cout << ans << endl;
+
+		y[i] = x[i];
+	}
 
 	return ( 0 );
 }
