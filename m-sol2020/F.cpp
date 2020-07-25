@@ -296,9 +296,9 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 	return ( mp( v[right] == val, right ) );
 }
 
-
 int main()
 {
+	ll n; cin >> n;
 
 
 	return ( 0 );

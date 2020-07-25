@@ -299,7 +299,41 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n; cin >> n;
+	constexpr ll inf = 1e18;
+	vector<ll> a( n + 2 );
+	reps( i, n ) cin >> a[i];
 
+	a[0] = inf; a.back() = -inf;
+	bool dir = false;
+
+	ll ans = 1000;
+	ll cnt = 0;
+	reps( i, n + 1 )
+	{
+		if ( a[i] >= a[i - 1] )
+		{
+			if ( dir == false )
+			{
+				dir = true;
+				cnt += ans / a[i - 1];
+				ans -= ( ans / a[i - 1] ) * a[i - 1];
+			}
+		}
+		else
+		{
+			if ( dir == true )
+			{
+				dir = false;
+				ans += cnt * a[i - 1];
+				cnt = 0;
+			}
+		}
+
+//		cout << i << " : " << a[i] << ", " << ans << ", " << cnt << endl;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

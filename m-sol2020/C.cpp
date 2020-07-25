@@ -299,7 +299,17 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	rep( i, n - k )
+	{
+		if ( a[i] >= a[i + k] )
+			cout << "No" << endl;
+		else
+			cout << "Yes" << endl;
+	}
 
 	return ( 0 );
 }
