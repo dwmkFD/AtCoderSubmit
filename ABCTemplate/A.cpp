@@ -31,6 +31,8 @@ using Pll  = pair<ll, ll>;
 #define F first
 #define S second
 
+#define popcnt __builtin_popcountll
+
 #define rep( i, n ) for ( ll i = 0; i < (ll)( n ); ++i )
 #define reps( i, n ) for ( ll i = 1; i <= (ll)( n ); ++i )
 #define rrep( i, n ) for ( ll i = (ll)( ( n ) - 1 ); i >= 0; --i )
