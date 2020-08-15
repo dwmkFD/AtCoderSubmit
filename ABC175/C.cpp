@@ -301,7 +301,24 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll x, k, d;
+	cin >> x >> k >> d;
 
+	ll ax = abs( x );
+	ll ad = abs( d );
+
+	if ( ad <= ax / k )
+		cout << abs( ax - ad * k ) << endl;
+	else
+	{
+		ll kk = ax / ad;
+		k -= kk;
+		ll xx = ax - kk * ad;
+		if ( k % 2 )
+			cout << min( abs( xx - ad ), abs( xx + ad ) ) << endl;
+		else
+			cout << min( { abs( xx - 2 * ad ), abs( xx + 2 * ad ), xx } ) << endl;
+	}
 
 	return ( 0 );
 }

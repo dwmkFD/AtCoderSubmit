@@ -16,8 +16,8 @@
 
 using namespace std;
 
-template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
-template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmin( T &a, const T b ) { if ( a > b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
 using Pint = pair<int, int>;
@@ -301,7 +301,40 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	ll n, K; cin >> n >> K;
+	vector<ll> p( n ), c( n );
+	rep( i, n ) { cin >> p[i]; --p[i]; }
+	rep( i, n ) cin >> c[i];
 
+	vector<vector<ll>> dbl( 65, vector<ll>( n + 1, 0 ) );
+	vector<vector<ll>> score( 65, vector<ll>( n + 1, 0 ) );
+	rep( i, n )
+	{
+		dbl[0][i] = p[i];
+		score[0][i] = c[p[i]];
+	}
+	reps( k, 63 )
+	{
+		rep( i, n )
+		{
+			dbl[k][i] = dbl[k - 1][dbl[k - 1][i]];
+			score[k][i] = score[k - 1][i]
+				+ score[k - 1][dbl[k - 1][i]];
+		}
+	}
+
+	vector<ll> ans( n, 0 );
+	rep( i, n )
+	{
+		ans[i] += score[0][i];
+		reps( k, 63 )
+		{
+			if ( ( K >> k ) & 1LL )
+				chmax( ans[i], ans[i] + score[dbl[k][i]][i] );
+		}
+	}
+
+	cout << *max_element( ALL( ans ) ) << endl;
 
 	return ( 0 );
 }

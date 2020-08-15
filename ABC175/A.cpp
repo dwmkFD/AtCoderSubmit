@@ -301,7 +301,22 @@ template<typename T> auto binsearch_idx( vector<T> &v, T val ) {
 
 int main()
 {
+	string s; cin >> s;
+	char c = s[0];
+	ll cnt = c == 'R';
+	for ( ll i = 1; i < 3; ++i )
+	{
+		if ( s[i] == 'R' )
+		{
+			if ( c == 'R' )
+				++cnt;
+			else
+				cnt = 1;
+		}
+		c = s[i];
+	}
 
+	cout << cnt << endl;
 
 	return ( 0 );
 }
