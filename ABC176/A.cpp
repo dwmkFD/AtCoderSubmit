@@ -50,7 +50,10 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, x, t;
+	cin >> n >> x >> t;
 
+	cout << ( ( n + ( x - 1 ) ) / x ) * t << endl;
 
 	return ( 0 );
 }

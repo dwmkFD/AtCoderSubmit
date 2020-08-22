@@ -50,7 +50,41 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( 3 * n );
+	rep( i, 3 * n ) cin >> a[i];
 
+	ll ans = 0;
+	for ( ll i = 3 * n - 1; i >= 5; i -= 3 )
+	{
+		vector<ll> vv;
+		for ( ll j = i - 5; j < i; ++j )
+			vv.eb( a[j] );
+		sort( ALL( vv ) );
+		if ( vv[0] == vv[2] )
+		{
+			++ans;
+			a[i - 5] = vv[3];
+			a[i - 4] = vv[4];
+		}
+		else if ( vv[1] == vv[3] )
+		{
+			++ans;
+			a[i - 5] = vv[0];
+			a[i - 4] = vv[4];
+		}
+		else if ( vv[2] == vv[4] )
+		{
+			++ans;
+			a[i - 5] = vv[0];
+			a[i - 4] = vv[1];
+		}
+	}
+
+	if ( a[0] == a[1] && a[1] == a[2] )
+		++ans;
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
