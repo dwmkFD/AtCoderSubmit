@@ -47,10 +47,24 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
-
 int main()
 {
+	string s, t;
+	cin >> s >> t;
 
+	ll t1 = 0;
+	rep( i, s.size() - t.size() + 1 )
+	{
+		ll t2 = 0;
+		rep( j, t.size() )
+		{
+			if ( s[i + j] == t[j] )
+				++t2;
+		}
+		chmax( t1, t2 );
+	}
+
+	cout << max( (ll)t.size() - t1, 0LL ) << endl;
 
 	return ( 0 );
 }

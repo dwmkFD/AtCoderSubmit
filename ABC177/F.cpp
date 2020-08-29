@@ -50,7 +50,33 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll h, w; cin >> h >> w;
+	vector<ll> a( h ), b( h );
+	vector<ll> vv( w + 10 );
+	iota( ALL( vv ), 1 );
+	rep( i, h ) cin >> a[i] >> b[i];
 
+	ll ans = 0;
+	ll idx = 1;
+	rep( i, h )
+	{
+		if ( idx >= a[i] )
+		{
+			auto it = upper_bound( vv.begin() + b[i], vv.end(), idx );
+//			cout << "dbg: " << i << ", " << idx << ", " << *it << endl;
+			if ( *it <= w )
+				cout << ans + *it - idx + 1 << endl;
+			else
+				cout << -1 << endl;
+			ans += *it - idx + 1;
+			idx = *it;
+		}
+		else
+		{
+			cout << ans + 1 << endl;
+			++ans;
+		}
+	}
 
 	return ( 0 );
 }

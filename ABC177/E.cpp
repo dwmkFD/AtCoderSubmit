@@ -50,7 +50,53 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	map<ll, ll> m;
 
+	auto calc = [&]( ll x ) {
+		for ( ll i = 2; i * i <= x; ++i )
+		{
+			if ( x % i == 0 )
+			{
+				if ( m[i] != 0 )
+					return ( false );
+				else
+					m[i]++;
+				while ( x % i == 0 )
+				{
+					x /= i;
+				}
+			}
+		}
+
+		if ( x != 1 && m[x] != 0 )
+			return ( false );
+		m[1]++;
+		m[x]++;
+
+		return ( true );
+	};
+
+	ll sgcd = a[0];
+	bool pc = true, sc = true;
+	rep( i, n )
+	{
+		pc = calc( a[i] );
+		if ( pc == false )
+			break;
+	}
+	reps( i, n - 1 )
+		sgcd = gcd( sgcd, a[i] );
+	sc = sgcd == 1;
+
+	if ( pc )
+		cout << "pairwise coprime" << endl;
+	else if ( sc )
+		cout << "setwise coprime" << endl;
+	else
+		cout << "not coprime" << endl;
 
 	return ( 0 );
 }
