@@ -50,7 +50,27 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<Pll> d( n );
+	rep( i, n ) cin >> d[i].F >> d[i].S;
 
+	bool ok = false;
+	ll cnt = 0;
+	rep( i, n )
+	{
+		if ( d[i].F == d[i].S )
+			++cnt;
+		else
+			cnt = 0;
+		if ( cnt >= 3 )
+		{
+			ok = true;
+			break;
+		}
+	}
+
+	if ( ok ) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return ( 0 );
 }
