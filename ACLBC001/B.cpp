@@ -50,7 +50,27 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll a, b, c, d;
+	cin >> a >> b >> c >> d;
 
+	if ( a <= c )
+	{
+		if ( b < c )
+		{
+			cout << "No" << endl;
+			return ( 0 );
+		}
+	}
+	else
+	{
+		if ( d < a )
+		{
+			cout << "No" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "Yes" << endl;
 
 	return ( 0 );
 }
