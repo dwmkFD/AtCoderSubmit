@@ -50,7 +50,60 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	string s; cin >> s;
+	vector<ll> a( n + 1 ), t( n + 1 ), c( n + 1 ), g( n + 1 );
+	rep( i, n )
+	{
+		switch ( s[i] )
+		{
+		case 'A':
+			a[i + 1] = a[i] + 1; t[i + 1] = t[i];
+			c[i + 1] = c[i]; g[i + 1] = g[i];
+			break;
+		case 'T':
+			a[i + 1] = a[i]; t[i + 1] = t[i] + 1;
+			c[i + 1] = c[i]; g[i + 1] = g[i];
+			break;
+		case 'C':
+			a[i + 1] = a[i]; t[i + 1] = t[i];
+			c[i + 1] = c[i] + 1; g[i + 1] = g[i];
+			break;
+		case 'G':
+			a[i + 1] = a[i]; t[i + 1] = t[i];
+			c[i + 1] = c[i]; g[i + 1] = g[i] + 1;
+			break;
+		}
+	}
 
+	ll ans = 0;
+	for ( ll i = 0; i < n; ++i )
+	{
+		for ( ll j = i + 1; j <= n; ++j )
+		{
+			ll an = a[j] - a[i];
+			ll tn = t[j] - t[i];
+			ll cn = c[j] - c[i];
+			ll gn = g[j] - g[i];
+
+
+			ll x = min( { an, tn, cn, gn } );
+			ll y = max( { an, tn, cn, gn } );
+
+			if ( x == y && x > 0 )
+				ans += 1;
+			else
+			{
+				if ( an == tn && cn == gn )
+						ans += 1;
+			}
+
+//			cout << an << ", " << tn << ", " << cn << ", " << gn << endl;
+//			cout << s.substr( i, j - i ) << " : " << ans << endl;
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
