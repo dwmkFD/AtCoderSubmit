@@ -50,7 +50,24 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> p( n );
+	rep( i, n ) cin >> p[i];
+	priority_queue<ll, vector<ll>, greater<ll>> pq;
+	map<ll, ll> m;
+	rep( i, 200001 ) pq.push( i );
 
+	rep( i, n )
+	{
+		m[p[i]]++;
+		auto x = pq.top();
+		while ( m[x] >= 1 )
+		{
+			pq.pop();
+			x = pq.top();
+		}
+		cout << x << endl;
+	}
 
 	return ( 0 );
 }
