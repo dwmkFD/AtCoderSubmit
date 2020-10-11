@@ -50,7 +50,25 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll t; cin >> t;
+	while ( t-- )
+	{
+		ll n; cin >> n;
+		vector<ll> a( n );
+		rep( i, n ) cin >> a[i];
+		ll x = 0;
+		rep( i, n ) x ^= a[i];
 
+		if ( n % 2 )
+			cout << "Second" << endl;
+		else
+		{
+			if ( x == 0 && n == 2 )
+				cout << "Second" << endl;
+			else
+				cout << "First" << endl;
+		}
+	}
 
 	return ( 0 );
 }

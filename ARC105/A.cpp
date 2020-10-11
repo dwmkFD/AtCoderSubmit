@@ -50,7 +50,27 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	vector<ll> x( 4 );
+	rep( i, 4 ) cin >> x[i];
 
+	rep( i, 1 << 4 )
+	{
+		ll t1 = 0, t2 = 0;
+		rep( j, 4 )
+		{
+			if ( i & ( 1 << j ) )
+				t1 += x[j];
+			else
+				t2 += x[j];
+		}
+		if ( t1 == t2 )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "No" << endl;
 
 	return ( 0 );
 }

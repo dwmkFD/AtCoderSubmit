@@ -50,6 +50,22 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<ll> w( n );
+	rep( i, n ) cin >> w[i];
+	vector<Pll> lv( m );
+	rep( i, m ) cin >> lv[i].F >> lv[i].S;
+	sort( ALL( w ) );
+	sort( ALL( lv ), []( Pll a, Pll b ) { return ( a.S < b.S ); } );
+
+	rep( i, m )
+	{
+		if ( lv[i].S < w.back() )
+		{
+			cout << -1 << endl;
+			return ( 0 );
+		}
+	}
 
 
 	return ( 0 );
