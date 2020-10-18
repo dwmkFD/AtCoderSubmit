@@ -50,7 +50,23 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> x( n );
+	rep( i, n ) cin >> x[i];
 
+	double ans1 = 0.0, ans2 = 0.0, ans3 = -1.0;
+
+	rep( i, n )
+	{
+		ans1 += abs( x[i] );
+		ans2 += x[i] * x[i];
+		chmax( ans3, (double)abs( x[i] ) );
+	}
+
+	cout << setprecision( 20 );
+	cout << ans1 << endl;
+	cout << sqrt( ans2 ) << endl;
+	cout << ans3 << endl;
 
 	return ( 0 );
 }

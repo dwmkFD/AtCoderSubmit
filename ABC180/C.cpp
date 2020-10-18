@@ -50,7 +50,21 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> v;
 
+	for ( ll x = 1; x * x <= n; ++x )
+	{
+		if ( n % x == 0 )
+		{
+			v.eb( x );
+			v.eb( n / x );
+		}
+	}
+
+	sort( ALL( v ) ); UNIQUE( v );
+	arep( it, v )
+		cout << it << endl;
 
 	return ( 0 );
 }
