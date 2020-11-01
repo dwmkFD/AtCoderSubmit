@@ -50,7 +50,24 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, k; cin >> n >> k;
 
+	ll ans = 0;
+	for ( ll x = 2; x <= 2 * n; ++x )
+	{
+		ll y = x - k;
+
+		if ( y > 2 * n ) continue;
+		if ( y < 2 ) continue;
+		ll xx = x > n + 1 ? 2 * n - x + 1 : x - 1;
+		ll yy = y > n + 1 ? 2 * n - y + 1 : y - 1;
+
+//		cout << x << ", " << y << " :: " << xx << ", " << yy << endl;
+
+		ans += xx * yy;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
