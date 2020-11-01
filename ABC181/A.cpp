@@ -50,7 +50,11 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
-
+	ll n; cin >> n;
+	if ( n % 2 )
+		cout << "Black" << endl;
+	else
+		cout << "White" << endl;
 
 	return ( 0 );
 }

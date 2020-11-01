@@ -50,7 +50,70 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> x( n ), y( n );
+	rep( i, n ) cin >> x[i] >> y[i];
+	vector<ll> x_bk = x;
+	vector<ll> y_bk = y;
 
+	sort( ALL( x ) );
+	rep( i, n - 2 )
+	{
+		auto it = upper_bound( x.begin() + i, x.end(), x[i] );
+		if ( it - ( x.begin() + i ) >= 3 && x[i] == *( it - 1 ) )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	}
+
+	sort( ALL( y ) );
+	rep( i, n - 2 )
+	{
+		auto it = upper_bound( y.begin() + i, y.end(), x[i] );
+		if ( it - ( y.begin() + i ) >= 3 && y[i] == *( it - 1 ) )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	}
+
+	ll cnt = 0;
+	x = x_bk;
+	y = y_bk;
+	vector<ll> order( n );
+	iota( ALL( order ), 0 );
+	sort( ALL( order ), [&]( ll i, ll j ) { return ( x[i] < x[j] ); } );
+
+	rep( i, n )
+	{
+		for ( ll j = i + 1; j < n; ++j )
+		{
+			ll x1 = x[order[j]] - x[order[i]];
+			ll y1 = y[order[j]] - y[order[i]];
+
+			for ( ll k = j + 1; k < n; ++k )
+			{
+				ll x2 = x[order[k]] - x[order[j]];
+				ll y2 = y[order[k]] - y[order[j]];
+#if 0
+				cout << "------------------------" << endl;
+				cout << x[order[i]] << ", " << y[order[i]] << endl;
+				cout << x[order[j]] << ", " << y[order[j]] << endl;
+				cout << x[order[k]] << ", " << y[order[k]] << endl;
+				cout << x1 << ", " << y1 << ", " << x2 << ", " << y2 << endl;
+				cout << "------------------------" << endl;
+#endif
+				if ( x1 * y2 == x2 * y1 )
+				{
+					cout << "Yes" << endl;
+					return ( 0 );
+				}
+			}
+		}
+	}
+
+	cout << "No" << endl;
 
 	return ( 0 );
 }
