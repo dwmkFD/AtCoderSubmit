@@ -50,7 +50,26 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	vector<ll> sum( n + 1 );
+	rep( i, n ) sum[i + 1] = sum[i] + a[i];
+	vector<ll> summax( n + 10 );
+	rep( i, n ) summax[i + 1] = max( summax[i], sum[i + 1] );
+
+	ll ans = 0;
+	ll tmp = 0;
+	rep( i, n )
+	{
+		ll x = summax[i + 1];
+//		cout << tmp << ", " << *it << endl;
+		chmax( ans, tmp + x );
+		tmp += sum[i + 1] - sum[0];
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

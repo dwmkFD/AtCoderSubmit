@@ -50,7 +50,57 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll h, w, n, m;
+	cin >> h >> w >> n >> m;
+	vector<ll> a( n ), b( n ), c( m ), d( m );
+	map<ll, set<ll>> ma, mb, mc, md;
+	rep( i, n )
+	{
+		cin >> a[i] >> b[i];
+		--a[i]; --b[i];
+		ma[a[i]].insert( b[i] );
+		mb[b[i]].insert( a[i] );
+	}
+	rep( i, m )
+	{
+		cin >> c[i] >> d[i];
+		--c[i]; --d[i];
+		mc[c[i]].insert( d[i] );
+		md[d[i]].insert( c[i] );
+	}
 
+	ll ans = 0;
+	rep( i, h )
+	{
+		rep( j, w )
+		{
+			if ( ma[i].size() > 0 )
+			{
+				if ( mc[i].size() > 0 )
+				{
+					auto it1 = ma[i].lower_bound( i );
+					auto it2 = mc[i].lower_bound( i );
+					if ( *it1 < *it2 )
+						++ans;
+				}
+				else
+					++ans;
+			}
+			else if ( mb[j].size() > 0 )
+			{
+				if ( md[j].size() > 0 )
+				{
+					auto it1 = mb[j].lower_bound( j );
+					auto it2 = md[j].lower_bound( j );
+					if ( *it1 < *it2 )
+						++ans;
+				}
+				else
+					++ans;
+			}
+		}
+	}
 
+	cout << ans << endl;
 	return ( 0 );
 }

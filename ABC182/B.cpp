@@ -50,7 +50,25 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
 
+	ll ans = 0;
+	ll cnt = 0;
+	for ( ll k = 2; k <= 1000; ++k )
+	{
+		ll tmp = 0;
+		rep( i, n )
+		{
+			if ( a[i] % k == 0 )
+				++tmp;
+		}
+		if ( chmax( cnt, tmp ) )
+			ans = k;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

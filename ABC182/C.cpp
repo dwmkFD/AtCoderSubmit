@@ -50,7 +50,45 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	string n; cin >> n;
+	ll tmp = 0;
+	map<ll, ll> m;
 
+	rep( i, n.size() )
+	{
+		ll x = ( n[i] - '0' ) % 3;
+		m[x]++;
+		tmp += x;
+		tmp %= 3;
+	}
+
+	if ( tmp == 0 )
+	{
+		cout << 0 << endl;
+		return ( 0 );
+	}
+	else if ( tmp == 1 )
+	{
+		if ( m[1] > 0 && m[1] < n.size() )
+			cout << 1 << endl;
+		else if ( m[2] >= 2 && m[2] < n.size() )
+			cout << 2 << endl;
+		else
+			cout << -1 << endl;
+		return ( 0 );
+	}
+	else if ( tmp == 2 )
+	{
+		if ( m[2] > 0 && m[2] < n.size() )
+			cout << 1 << endl;
+		else if ( m[1] >= 2 && m[1] < n.size() )
+			cout << 2 << endl;
+		else
+			cout << -1 << endl;
+		return ( 0 );
+	}
+
+	cout << -1 << endl;
 
 	return ( 0 );
 }
