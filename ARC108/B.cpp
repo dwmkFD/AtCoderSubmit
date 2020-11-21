@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <numeric>
 #include <vector>
+#include <list>
 #include <string>
 #include <bitset>
 #include <stack>
@@ -47,10 +48,47 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+void replace( string &s, string t, string r ) {
+	string::size_type p = 0;
+	while ( ( p = s.find( t, p ) ) != string::npos ) {
+		s.replace( p, t.length(), r );
+		p += r.length();
+	}
+}
 
 int main()
 {
+	ll n; cin >> n;
+	string s; cin >> s;
+	list<char> l;
+	rep( i, s.size() )
+		l.pb( s[i] );
+	l.pb( '#' );
 
+	auto ddd = []( list<char> &l ) {
+		auto it = l.begin();
+		while ( it != l.end() )
+		{
+			while ( *it == 'f' && *next( it ) == 'o' && *next( it, 2 ) == 'x' )
+			{
+				it = l.erase( it );
+				it = l.erase( it );
+				it = l.erase( it );
+				--it;
+			}
+			++it;
+		}
+	};
+
+	ll ans = n;
+	ll tmp = l.size();
+	do {
+		ans = l.size();
+		ddd( l );
+		tmp = l.size();
+	} while ( ans != tmp );
+
+	cout << ans - 1 << endl;
 
 	return ( 0 );
 }

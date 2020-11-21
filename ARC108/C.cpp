@@ -3,6 +3,7 @@
 #include <iomanip>
 #include <numeric>
 #include <vector>
+#include <random>
 #include <string>
 #include <bitset>
 #include <stack>
@@ -50,7 +51,24 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<vector<Pll>> g( n );
+	rep( i, m )
+	{
+		ll u, v, c; cin >> u >> v >> c;
+		--u; --v;
+		g[u].eb( mp( v, c ) );
+		g[v].eb( mp( u, c ) );
+	}
 
+	vector<ll> ans( n, 0 );
+	random_device rnd;
+	rep( i, n )
+	{
+		ans[i] = ( rnd() * 1000 ) % n + 1;
+	}
+
+	arep( it, ans ) cout << it << endl;
 
 	return ( 0 );
 }

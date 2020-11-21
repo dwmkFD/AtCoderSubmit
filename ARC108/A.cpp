@@ -50,7 +50,38 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll s, p; cin >> s >> p;
 
+	auto calc = []( ll x ) {
+		vector<ll> res;
+		res.eb( 1 ); res.eb( x );
+		for ( ll i = 2; i * i <= x; ++i )
+		{
+			if ( x % i == 0 )
+			{
+				res.eb( i );
+				res.eb( x / i );
+			}
+		}
+
+		return ( res );
+	};
+
+	auto tmp = calc( p );
+	sort( ALL( tmp ) );
+
+	rep( i, tmp.size() )
+	{
+		for ( ll j = i + 1; j < tmp.size(); ++j )
+		{
+			if ( tmp[i] + tmp[j] == s )
+			{
+				cout << "Yes" << endl;
+				return ( 0 );
+			}
+		}
+	}
+	cout << "No" << endl;
 
 	return ( 0 );
 }
