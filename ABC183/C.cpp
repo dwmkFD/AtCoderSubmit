@@ -50,7 +50,26 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	vector<ll> nxt( n - 1 );
+	iota( ALL( nxt ), 1 );
+	vector<vector<ll>> t( n, vector<ll>( n, 0 ) );
+	rep( i, n ) rep( j, n ) cin >> t[i][j];
 
+	ll ans = 0;
+	do {
+		ll now = 0, tmp = 0;
+		rep( i, n - 1 )
+		{
+			tmp += t[now][nxt[i]];
+			now = nxt[i];
+		}
+		tmp += t[now][0];
+		if ( tmp == k )
+			++ans;
+	} while ( next_permutation( ALL( nxt ) ) );
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

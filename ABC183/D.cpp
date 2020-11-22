@@ -50,7 +50,31 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, w; cin >> n >> w;
+	vector<ll> s( n ), t( n ), p( n );
+	rep( i, n ) cin >> s[i] >> t[i] >> p[i];
 
+	vector<ll> ww( 2e5 + 10, 0 );
+	rep( i, n )
+	{
+		ww[s[i]] += p[i];
+		ww[t[i]] -= p[i];
+	}
+
+	vector<ll> sww( 2e5 + 11, 0 );
+	rep( i, n )
+		sww[i + 1] = sww[i] + ww[i];
+
+	rep( i, n + 1 )
+	{
+		if ( sww[i] > w )
+		{
+			cout << "No" << endl;
+			return ( 0 );
+		}
+	}
+
+	cout << "Yes" << endl;
 
 	return ( 0 );
 }

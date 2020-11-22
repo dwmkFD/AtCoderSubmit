@@ -50,7 +50,25 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll sx, sy, gx, gy;
+	cin >> sx >> sy >> gx >> gy;
 
+	if ( gx < sx )
+	{
+		swap( sx, gx );
+		swap( sy, gy );
+	}
+
+	gy *= -1;
+	double xxx = (double)( sy - gy ) / ( gx - sx );
+#if 0
+	cout << sy - gy << endl;
+	cout << gx - sx << endl;
+	cout << xxx << endl;
+#endif
+
+	cout << setprecision( 20 );
+	cout << sy / xxx + sx << endl;
 
 	return ( 0 );
 }
