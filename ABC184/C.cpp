@@ -12,6 +12,7 @@
 #include <cmath>
 #include <map>
 #include <set>
+#include <random>
 #include <functional>
 #include <cstring>
 
@@ -50,7 +51,37 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll r[2], c[2];
+	cin >> r[0] >> c[0] >> r[1] >> c[1];
 
+	if ( r[0] > r[1] )
+		r[1] += 2 * ( r[0] - r[1] );
+	if ( c[0] > c[1] )
+		c[1] += 2 * ( c[0] - c[1] );
+
+	if ( r[0] == r[1] && c[0] == c[1] )
+	{
+		cout << 0 << endl;
+		return ( 0 );
+	}
+	else if ( r[1] - r[0] + c[1] - c[0] <= 3 )
+	{
+		cout << 1 << endl;
+		return ( 0 );
+	}
+	else if ( r[1] % r[0] == 0 || c[1] % c[0] == 0 )
+	{
+		cout << 2 << endl;
+		return ( 0 );
+	}
+	else
+	{
+		if ( r[1] % r[0] == c[1] % c[0] )
+			cout << 3 << endl;
+		else
+			cout << 2 << endl;
+	}
+	
 
 	return ( 0 );
 }

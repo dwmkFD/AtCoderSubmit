@@ -50,7 +50,43 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, t; cin >> n >> t;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	if ( n % 2 ) a.pb( t + 1 );
 
+	vector<ll> v1, v2;
+	for ( ll bit = 0; bit < ( 1 << n / 2 ); ++bit )
+	{
+		ll sum = 0;
+		rep( i, n / 2 )
+		{
+			if ( bit & ( 1 << i ) )
+				sum += a[i];
+		}
+		v1.pb( sum );
+	}
+	for ( ll bit = 0; bit < ( 1 << ( n + 1 ) / 2 ); ++bit )
+	{
+		ll sum = 0;
+		rep( i, ( n + 1 ) / 2 )
+		{
+			if ( bit & ( 1 << i ) )
+				sum += a[n / 2 + i];
+		}
+		v2.pb( sum );
+	}
+
+	sort( ALL( v2 ) );
+//	arep( it, v2 ) cout << it << " "; cout << endl;
+	ll ans = 0;
+	arep( it, v1 )
+	{
+		if ( t - it >= 0 )
+			chmax( ans, it + *( upper_bound( ALL( v2 ), t - it ) - 1 ) );
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

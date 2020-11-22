@@ -50,7 +50,19 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, x; cin >> n >> x;
+	string s; cin >> s;
 
+	rep( i, s.size() )
+	{
+		if ( s[i] == 'o' )
+			++x;
+		else
+			--x;
+		chmax( x, 0LL );
+	}
+
+	cout << x << endl;
 
 	return ( 0 );
 }

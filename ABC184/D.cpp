@@ -50,7 +50,17 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll a, b, c;
+	cin >> a >> b >> c;
 
+	ll x = 100 - a;
+	ll y = 100 - b;
+	ll z = 100 - c;
+
+	double = 0.0;
+	for ( ll i = min( { x, y, z } ); i < x + y + z - 3; ++i )
+	{
+	}
 
 	return ( 0 );
 }
