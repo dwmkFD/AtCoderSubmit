@@ -50,7 +50,31 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll q; cin >> q;
+	ll xwrite = 0;
+	auto cmp = []( ll a, ll b ) { return ( a > b ); };
+	priority_queue<ll, vector<ll>, decltype( cmp )> pq( cmp );
 
+	rep( _, q )
+	{
+		ll p; cin >> p;
+		if ( p == 1 )
+		{
+			ll x; cin >> x;
+			pq.push( x - xwrite );
+		}
+		else if ( p == 2 )
+		{
+			ll x; cin >> x;
+			xwrite += x;
+		}
+		else
+		{
+			auto x = pq.top();
+			pq.pop();
+			cout << x + xwrite << endl;
+		}
+	}
 
 	return ( 0 );
 }

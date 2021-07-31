@@ -50,7 +50,34 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	string x; cin >> x;
 
+	auto chk1 = []( string x ) {
+		auto c = x[0];
+		reps( i, x.size() - 1 )
+		{
+			if ( x[i] != c )
+				return ( false );
+		}
+		return ( true );
+	};
+
+	auto chk2 = []( string x ) {
+		ll c = x[0] - '0';
+		reps( i, x.size() - 1 )
+		{
+			ll cc = x[i] - '0';
+			if ( ( c + 1 ) % 10 != cc )
+				return ( false );
+			c = cc;
+		}
+		return ( true );
+	};
+
+	if ( chk1( x ) || chk2( x ) )
+		cout << "Weak" << endl;
+	else
+		cout << "Strong" << endl;
 
 	return ( 0 );
 }

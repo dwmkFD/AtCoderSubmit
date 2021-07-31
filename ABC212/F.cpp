@@ -47,10 +47,71 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+struct Data {
+	ll to;
+	ll start;
+	ll end;
+
+	Data( ll t, ll s, ll e ) {
+		to = t; start = s; end = e;
+	}
+
+	bool operator<( const Data &obj ) const {
+		return ( this->start < obj.start );
+	}
+};
 
 int main()
 {
+	ll n, m, q;
+	cin >> n >> m >> q;
+	vector<set<Data>> v( n );
 
+	rep( i, m )
+	{
+		ll a, b, s, t;
+		cin >> a >> b >> s >> t;
+		--a; --b;
+		Data tmp( b, s, t );
+		v[a].insert( tmp );
+	}
+
+	rep( _, q )
+	{
+		ll x, y, z;
+		cin >> x >> y >> z;
+		--y;
+		while ( x < z )
+		{
+			Data tmp( 0, x, 0 );
+			auto t = v[y].lower_bound( tmp );
+
+			if ( t == v[y].end() )
+			{
+				cout << y + 1 << endl;
+				break;
+			}
+
+			if ( t->end >= z )
+			{
+				if ( t->start >= z )
+				{
+					cout << y + 1 << endl;
+					break;
+				}
+				else
+				{
+					cout << y + 1 << " " << t->to + 1 << endl;
+					break;
+				}
+			}
+			else
+			{
+				x = t->end;
+				y = t->to;
+			}
+		}
+	}
 
 	return ( 0 );
 }
