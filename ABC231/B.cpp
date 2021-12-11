@@ -50,7 +50,23 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	map<string, ll> m;
+	rep( i, n )
+	{
+		string s; cin >> s;
+		m[s]++;
+	}
 
+	string ans = "";
+	ll tmp = -1;
+	arep( it, m )
+	{
+		if ( chmax( tmp, it.S ) )
+			ans = it.F;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

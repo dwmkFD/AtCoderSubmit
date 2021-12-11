@@ -47,10 +47,68 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+template<typename T = ll> struct UnionFind {
+	vector<T> par;
+
+	UnionFind( T n ) : par( n, -1 ) {}
+
+	void init( T n ) { par.assign( n, -1 ); }
+	T find( T x ) {
+		if ( par[x] < 0 ) return ( x );
+		else return ( par[x] = find( par[x] ) );
+	}
+	bool isSame( T x, T y ) {
+		return ( find( x ) == find( y ) );
+	}
+	bool unite( T x, T y ) {
+		x = find( x ); y = find( y );
+		if ( x == y ) return ( false );
+		if ( par[x] > par[y] ) swap( x, y );
+		par[x] += par[y];
+		par[y] = x;
+		return ( true );
+	}
+	T size( T x ) { return ( -par[find( x )] ); }
+};
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<ll> a( m ), b( m );
+	vector<vector<ll>> g( n );
+	rep( i, m )
+	{
+		cin >> a[i] >> b[i];
+		--a[i]; --b[i];
+		g[a[i]].eb( b[i] );
+		g[b[i]].eb( a[i] );
+	}
 
+	bool ans = true;
+	rep( i, n )
+	{
+		if ( g[i].size() >= 3 )
+		{
+			ans = false;
+			break;
+		}
+	}
+
+	if ( ans )
+	{
+		UnionFind<ll> uf( n + 10 );
+		rep( i, m )
+		{
+			if ( uf.isSame( a[i], b[i] ) )
+			{
+				ans = false;
+				break;
+			}
+			uf.unite( a[i], b[i] );
+		}
+	}
+
+	cout << ( ans ? "Yes" : "No" ) << endl;
 
 	return ( 0 );
 }

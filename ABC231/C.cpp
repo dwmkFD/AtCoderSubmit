@@ -50,7 +50,17 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, q; cin >> n >> q;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	sort( ALL( a ) );
 
+	rep( _, q )
+	{
+		ll x; cin >> x;
+		auto it = lower_bound( ALL( a ), x );
+		cout << n - distance( a.begin(), it ) << endl;
+	}
 
 	return ( 0 );
 }
