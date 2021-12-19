@@ -50,7 +50,46 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<vector<ll>> g( n, vector<ll>( n, 0 ) );
+	vector<vector<ll>> h( n, vector<ll>( n, 0 ) );
+	rep( i, m )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		g[a][b] = g[b][a] = 1;
+	}
+	rep( i, m )
+	{
+		ll a, b; cin >> a >> b;
+		--a; --b;
+		h[a][b] = h[b][a] = 1;
+	}
 
+	vector<ll> v( n );
+	iota( ALL( v ), 0 );
+	do {
+		bool ok = true;
+		rep( i, n )
+		{
+			if ( ok == false ) break;
+			for ( ll j = i + 1; j < n; ++j )
+			{
+				if ( g[i][j] != h[v[i]][v[j]] )
+				{
+					ok = false;
+					break;
+				}
+			}
+		}
+		if ( ok )
+		{
+			cout << "Yes" << endl;
+			return ( 0 );
+		}
+	} while ( next_permutation( ALL( v ) ) );
+
+	cout << "No" << endl;
 
 	return ( 0 );
 }

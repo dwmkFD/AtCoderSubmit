@@ -17,7 +17,7 @@
 
 using namespace std;
 
-template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
@@ -50,7 +50,45 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll h, w; cin >> h >> w;
+	vector<string> c( h );
+	rep( i, h ) cin >> c[i];
 
+	vector<vector<ll>> dp( h + 1, vector<ll>( w + 1, 1 ) );
+
+	ll dx[] = { 0, 1 };
+	ll dy[] = { 1, 0 };
+	queue<Pll> q;
+	q.push( mp( 0, 0 ) );
+	while ( q.empty() == false )
+	{
+		auto t = q.front(); q.pop();
+		ll x = t.F; ll y = t.S;
+		rep( i, 2 )
+		{
+			ll nx = x + dx[i];
+			ll ny = y + dy[i];
+			if ( nx < h && ny < w )
+			{
+				if ( c[nx][ny] == '.' )
+				{
+					if ( chmax( dp[nx][ny], dp[x][y] + 1 ) )
+						q.push( mp( nx, ny ) );
+				}
+			}
+		}
+	}
+
+	ll ans = 0;
+	rep( i, h )
+	{
+		rep( j, w )
+		{
+			chmax( ans, dp[i][j] );
+		}
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }
