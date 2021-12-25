@@ -50,7 +50,20 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<string> s( n );
+	rep( i, n ) cin >> s[i];
+	map<vector<string>, ll> m;
 
+	rep( i, n )
+	{
+		rep( j, n )
+		{
+			rep( k, n )
+			{
+			}
+		}
+	}
 
 	return ( 0 );
 }

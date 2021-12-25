@@ -50,7 +50,41 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, x; cin >> n >> x;
+	vector<vector<ll>> sum( n );
+	rep( i, n )
+	{
+		ll L; cin >> L;
+		rep( j, L )
+		{
+			ll tmp; cin >> tmp;
+			if ( i > 0 )
+			{
+				arep( it, sum[i - 1] )
+				{
+					if ( it % tmp == 0 )
+						sum[i].eb( it / tmp );
+					else
+						sum[i].eb( 0 );
+				}
+			}
+			else
+			{
+				if ( x % tmp == 0 )
+					sum[i].eb( x / tmp );
+				else
+					sum[i].eb( 0 );
+			}
+		}
+	}
 
+	ll ans = 0;
+	arep( it, sum[n - 1] )
+	{
+		if ( it == 1 ) ++ans;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

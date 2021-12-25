@@ -50,7 +50,33 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	string x; cin >> x;
+	vector<ll> a( 1000010 );
 
+	rep( i, 1000005 )
+	{
+		if ( i >= x.size() )
+			break;
+		if ( i == 0 )
+			a[i] = x[i] - '0';
+		else
+		{
+			a[i] = a[i - 1] + x[i] - '0';
+		}
+	}
+
+	for ( ll i = x.size() - 1; i >= 0; --i )
+	{
+		if ( i > 0 )
+		{
+			a[i - 1] += a[i] / 10;
+			a[i] %= 10;
+		}
+	}
+
+	rep( i, x.size() )
+		cout << a[i];
+	cout << endl;
 
 	return ( 0 );
 }

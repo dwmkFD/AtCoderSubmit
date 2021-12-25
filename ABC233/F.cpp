@@ -47,9 +47,27 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+struct Edge {
+	ll to, num;
+	Edge( ll t, ll n ) {
+		to = t; num = n;
+	}
+};
 
 int main()
 {
+	ll n; cin >> n;
+	vector<vector<Edge>> g( n + 1 );
+	vector<ll> p( n );
+	rep( i, n ) cin >> p[i];
+
+	ll m; cin >> m;
+	rep( i, m )
+	{
+		ll a, b; cin >> a >> b;
+		g[a].eb( Edge( b, i + 1 ) );
+		g[b].eb( Edge( a, i + 1 ) );
+	}
 
 
 	return ( 0 );
