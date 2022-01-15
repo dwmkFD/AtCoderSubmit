@@ -47,9 +47,50 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+template<typename T = ll> struct UnionFind {
+	vector<T> par;
+
+	UnionFind( T n ) : par( n, -1 ) {}
+
+	void init( T n ) { par.assign( n, -1 ); }
+	T find( T x ) {
+		if ( par[x] < 0 ) return ( x );
+		else return ( par[x] = find( par[x] ) );
+	}
+	bool isSame( T x, T y ) {
+		return ( find( x ) == find( y ) );
+	}
+	bool unite( T x, T y ) {
+		x = find( x ); y = find( y );
+		if ( x == y ) return ( false );
+		if ( par[x] > par[y] ) swap( x, y );
+		par[x] += par[y];
+		par[y] = x;
+		return ( true );
+	}
+	T size( T x ) { return ( -par[find( x )] ); }
+};
+
+struct Edge {
+	ll to, cost;
+	Edge( ll to_, ll cost_ ) {
+		to = to_; cost = cost_;
+	}
+};
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<vector<Edge>> g( n );
+	vector<ll> a( m ), b( m ), c( m );
+	rep( i, m )
+	{
+		cin >> a[i] >> b[i] >> c[i];
+		--a[i]; --b[i];
+	}
+	vector<ll> idx( n );
+	iota( ALL( idx ), 0 );
+	sort( ALL( idx ), [&]( ll i, ll j ) { return ( c[i] < c[j] ); } );
 
 
 	return ( 0 );

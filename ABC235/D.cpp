@@ -50,7 +50,52 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll a, n; cin >> a >> n;
+	vector<ll> dp( 1e6 + 10, 1e18 );
+	dp[1] = 0;
 
+	auto calc_ = []( ll x ) {
+		ll res = 0;
+		do {
+			x /= 10;
+			++res;
+		} while ( x > 0 );
+		return ( res );
+	};
+
+	auto calc1 = [calc_]( ll x ) {
+		ll t1 = calc_( x ) - 1;
+		ll t2 = pow( 10, t1 );
+		ll y = ( x / t2 ) + ( x % t2 ) * 10;
+		return ( y );
+	};
+	auto calc2 = [calc_]( ll x ) {
+		ll t1 = calc_( x ) - 1;
+		ll t2 = pow( 10, t1 );
+		ll y = ( x % 10 ) * t2 + x / 10;
+		return ( y );
+	};
+
+	rep( _, 10 )
+	{
+	for ( ll i = 1; i * a <= n; i *= a )
+	{
+		chmin( dp[i * a], dp[i] + 1 );
+	}
+
+	reps( i, 1e6 )
+	{
+		if ( dp[i] < 1e18 && i > 10 && i % 10 != 0 )
+		{
+			ll idx = calc2( i );
+			chmin( dp[idx], dp[i] + 1 );
+		}
+	}
+	}
+	if ( dp[n] < 1e18 )
+		cout << dp[n] << endl;
+	else
+		cout << -1 << endl;
 
 	return ( 0 );
 }

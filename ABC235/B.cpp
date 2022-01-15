@@ -17,7 +17,7 @@
 
 using namespace std;
 
-template<typename T> bool chmax( T &a, const T b ) { if ( a <= b ) { a = b; return ( true ); } else { return ( false ); } }
+template<typename T> bool chmax( T &a, const T b ) { if ( a < b ) { a = b; return ( true ); } else { return ( false ); } }
 template<typename T> bool chmin( T &a, const T b ) { if ( a >= b ) { a = b; return ( true ); } else { return ( false ); } }
 
 using ll = long long;
@@ -50,7 +50,17 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> h( n );
+	rep( i, n ) cin >> h[i];
 
+	ll ans = h[0];
+	reps( i, n - 1 )
+	{
+		if ( chmax( ans, h[i] ) == false )
+			break;
+	}
+	cout << ans << endl;
 
 	return ( 0 );
 }
