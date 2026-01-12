@@ -50,7 +50,26 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, q; cin >> n >> q;
+	vector<ll> a( n );
+	rep( i, n ) cin >> a[i];
+	sort( ALL( a ) );
 
+	rep( _, q ) {
+		ll x, y; cin >> x >> y;
+
+		auto itL = lower_bound( ALL( a ), x );
+		ll dL = distance( a.begin(), itL );
+		if ( itL == a.end() ) dL = n;
+		else if ( *itL > x ) --dL;
+
+		auto itR = lower_bound( ALL( a ), x + y );
+		ll dR = distance( a.begin(), itR );
+		if ( itR == a.end() ) dR = n;
+		else if ( *itR > y ) --dR;
+
+		cout << x + y << endl;
+	}
 
 	return ( 0 );
 }

@@ -50,7 +50,25 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll t; cin >> t;
+	while ( t-- ) {
+		ll n, w; cin >> n >> w;
+		vector<ll> c( n );
+		rep( i, n ) cin >> c[i];
 
+		vector<ll> cw( w + w );
+		rep( i, n ) cw[i % ( w + w )] += c[i];
+
+		ll ans = 1e18, tmp = 0;
+		rep( i, w ) tmp += cw[i];
+		chmin( ans, tmp );
+		for ( ll left = 0; left < w + w; ++left ) {
+			tmp += cw[(left + w) % ( w + w )];
+			tmp -= cw[left];
+			chmin( ans, tmp );
+		}
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }
