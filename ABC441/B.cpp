@@ -50,7 +50,34 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	string s, t; cin >> s >> t;
+	ll q; cin >> q;
 
+	rep( _, q ) {
+		string w; cin >> w;
+		ll check = 3;
+
+		arep( it, w ) {
+			if ( s.find( it ) == string::npos ) {
+				check -= 1;
+				break;
+			}
+		}
+		arep( it, w ) {
+			if ( t.find( it ) == string::npos ) {
+				check -= 2;
+				break;
+			}
+		}
+
+		if ( check == 1 )
+			cout << "Takahashi" << endl;
+		else if ( check == 2 )
+			cout << "Aoki" << endl;
+		else
+			cout << "Unknown" << endl;
+	}
 
 	return ( 0 );
 }

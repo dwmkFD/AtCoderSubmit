@@ -47,10 +47,62 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+struct Edge {
+	ll to, cost;
+	Edge( ll t, ll c ) {
+		to = t;
+		cost = c;
+	}
+};
+
+struct Check {
+	ll to, cost, round;
+	Check( ll t, ll c, ll r ) {
+		to = t;
+		cost = c;
+		round = r;
+	}
+};
 
 int main()
 {
+	ll n, m, l, s, t;
+	cin >> n >> m >> l >> s >> t;
 
+	vector<vector<Edge>> g( n );
+	rep( i, m ) {
+		ll u, v, c;
+		cin >> u >> v >> c;
+		--u; --v;
+		g[u].eb( Edge( v, c ) );
+	}
+
+	vector<ll> ans;
+	queue<Check> q;
+	q.push( Check( 0, 0, 0 ) );
+	while ( q.empty() == false ) {
+		auto c = q.front();
+		q.pop();
+
+		if ( c.cost >= s && c.cost <= t ) {
+			if ( c.round == l ) {
+				ans.eb( c.to );
+			}
+		}
+
+		arep( it, g[c.to] ) {
+			if ( c.cost + it.cost <= t && c.round < l ) {
+				q.push( Check( it.to, c.cost + it.cost, c.round + 1 ) );
+			}
+		}
+
+	}
+
+	sort( ALL( ans ) );
+	UNIQUE( ans );
+	rep( i, ans.size() ) {
+		cout << ans[i] + 1 << " \n"[i == ans.size() - 1];
+	}
 
 	return ( 0 );
 }
