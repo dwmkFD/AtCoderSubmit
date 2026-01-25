@@ -50,7 +50,29 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll q; cin >> q;
+	ll sound = 0;
+	ll stop = 1;
 
+	rep( _, q ) {
+		ll a; cin >> a;
+		switch ( a ) {
+		case 1:
+			++sound;
+			break;
+		case 2:
+			sound = max( sound - 1, 0LL );
+			break;
+		case 3:
+			stop ^= 1;
+			break;
+		}
+
+		if ( stop == 0 && sound >= 3 )
+			cout << "Yes" << endl;
+		else
+			cout << "No" << endl;
+	}
 
 	return ( 0 );
 }

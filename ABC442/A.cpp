@@ -50,7 +50,14 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	string s; cin >> s;
+	ll ans = 0;
+	rep( i, s.size() ) {
+		if ( s[i] == 'i' || s[i] == 'j' )
+			++ans;
+	}
 
+	cout << ans << endl;
 
 	return ( 0 );
 }

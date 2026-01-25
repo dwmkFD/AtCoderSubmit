@@ -50,7 +50,28 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, q; cin >> n >> q;
+	vector<ll> x( n ), y( n );
+	rep( i, n ) cin >> x[i] >> y[i];
 
+	constexpr double eps = 1e-10;
+
+	vector<double> at( n );
+	rep( i, n ) at[i] = atan2( y[i], x[i] );
+	sort( ALL( at ), greater<double>() );
+
+	rep( _, q ) {
+		ll a, b; cin >> a >> b;
+		--a; --b;
+
+		ll atA = atan2( y[a], x[a] ) - eps;
+		ll atB = atan2( y[b], x[b] );
+		auto itA = lower_bound( ALL( at ), atA );
+		auto itB = lower_bound( ALL( at ), atB );
+
+		cout << distance( at.begin(), itB )
+			- distance( at.begin(), itA ) << endl;
+	}
 
 	return ( 0 );
 }
