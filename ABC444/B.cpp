@@ -50,7 +50,24 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, k; cin >> n >> k;
+	ll ans = 0;
 
+	auto judge = []( ll x ) {
+		ll res = 0;
+		while ( x > 0 ) {
+			res += ( x % 10 );
+			x /= 10;
+		}
+		return ( res );
+	};
+
+	reps( i, n ) {
+		if ( judge( i ) == k )
+			++ans;
+	}
+
+	cout << ans << endl;
 
 	return ( 0 );
 }

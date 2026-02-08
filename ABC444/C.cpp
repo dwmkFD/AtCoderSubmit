@@ -50,7 +50,60 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<ll> a( n );
+	map<ll, ll> m;
+	rep( i, n ) {
+		cin >> a[i];
+		m[a[i]]++;
+	}
+	sort( ALL( a ), greater<>() );
 
+	if ( a.front() == a.back() ) {
+		cout << a.front();
+		if ( a.size() % 2 == 0 )
+			cout << " " << a.front() * 2;
+		cout << endl;
+		return ( 0 );
+	}
+
+	vector<ll> ans;
+	ll L = a[0];
+	bool ok = true;
+	if ( ( n - m[L] ) % 2 ) ok = false;
+	map<ll, ll> m2 = m;
+	reps( i, n - 1 ) {
+		if ( m2[a[i]] <= 0 ) break;
+		else if ( a[i] == L ) continue;
+		if ( m2[L - a[i]] > 0 ) {
+			--m2[L - a[i]];
+		}
+		else {
+			ok = false;
+			break;
+		}
+	}
+	if ( ok ) ans.eb( L );
+
+	ok = true;
+	m2 = m;
+	L = a.front() + a.back();
+	rep( i, ( n + 1 ) / 2 ) {
+		if ( m2[a[i]] <= 0 ) {
+			ok = false;
+			break;
+		}
+		if ( a[i] + a[n - 1 - i] != L ) {
+			ok = false;
+			break;
+		}
+	}
+	if ( ok ) ans.eb( L );
+	sort( ALL( ans ) );
+
+	rep( i, ans.size() ) {
+		cout << ans[i] << " \n"[i == ans.size() - 1];
+	}
 
 	return ( 0 );
 }
