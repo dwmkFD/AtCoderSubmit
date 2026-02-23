@@ -50,7 +50,46 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll t; cin >> t;
 
+	while ( t-- ) {
+		ll n, d; cin >> n >> d;
+		vector<ll> a( n ), b( n );
+		rep( i, n ) cin >> a[i];
+		rep( i, n ) cin >> b[i];
+
+		ll dd = 0;
+		deque<ll> dq;
+
+		rep( i, n ) {
+			dq.pb( a[i] );
+			ll bb = b[i];
+
+			while ( bb > 0 ) {
+				if ( bb > dq.front() ) {
+					bb -= dq.front();
+					dq.pop_front();
+					++dd;
+				} else {
+					dq.front() -= bb;
+					bb = 0;
+				}
+			}
+			if ( i - d >= dd ) {
+				if ( dq.empty() == false ) {
+					dq.pop_front();
+					++dd;
+				}
+			}
+		}
+
+		ll ans = 0;
+		while ( dq.empty() == false ) {
+			ans += dq.front();
+			dq.pop_front();
+		}
+		cout << ans << endl;
+	}
 
 	return ( 0 );
 }

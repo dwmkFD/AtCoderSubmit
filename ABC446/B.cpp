@@ -50,7 +50,27 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n, m; cin >> n >> m;
+	vector<bool> x( m, false );
 
+	rep( i, n ) {
+		ll l; cin >> l;
+		vector<ll> xi( l );
+		rep( j, l ) cin >> xi[j];
+
+		bool ok = false;
+		rep ( j, l ) {
+			if ( x[xi[j]] == false ) {
+				x[xi[j]] = true;
+				cout << xi[j] << endl;
+				ok = true;
+				break;
+			}
+		}
+		if ( ok == false ) {
+			cout << 0 << endl;
+		}
+	}
 
 	return ( 0 );
 }
