@@ -47,10 +47,84 @@ template<typename T = ll> constexpr T MAX = numeric_limits<T>::max();
 template<typename T> T gcd( const T a, const T b ) { return ( b ? gcd( b, a % b ) : a ); }
 template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * b ); }
 
+template<typename T = ll> struct UnionFind {
+	vector<T> par;
+
+	UnionFind( T n ) : par( n, -1 ) {}
+
+	void init( T n ) { par.assign( n, -1 ); }
+	T find( T x ) {
+		if ( par[x] < 0 ) return ( x );
+		else return ( par[x] = find( par[x] ) );
+	}
+	bool isSame( T x, T y ) {
+		return ( find( x ) == find( y ) );
+	}
+	bool unite( T x, T y ) {
+		x = find( x ); y = find( y );
+		if ( x == y ) return ( false );
+		if ( par[x] > par[y] ) swap( x, y );
+		par[x] += par[y];
+		par[y] = x;
+		return ( true );
+	}
+	T size( T x ) { return ( -par[find( x )] ); }
+};
+
 
 int main()
 {
+	ll h, w; cin >> h >> w;
+	vector<string> s( h );
+	rep( i, h ) cin >> s[i];
 
+	ll dx[] = { 1, 0, -1, 0 };
+	ll dy[] = { 0, 1, 0, -1 };
+
+	UnionFind<ll> uf( h * w + 10 );
+	rep( i, h ) {
+		rep( j, w ) {
+			rep( k, 4 ) {
+				ll nx = i + dx[k];
+				ll ny = j + dy[k];
+
+				if ( nx >= 0 && nx < h && ny >= 0 && ny < w ) {
+					if ( s[i][j] == '.' && s[nx][ny] == '.' ) {
+						uf.unite( i * w + j, nx * w + ny );
+					}
+				}
+			}
+		}
+	}
+
+	map<ll, ll> ans;
+	rep( i, h ) {
+		rep( j, w ) {
+			if ( s[i][j] == '.' )
+				ans[uf.find( i * w + j )]++;
+		}
+	}
+	rep( i, h ) {
+		if ( ans[uf.find( i * w )] )
+			ans[uf.find( i * w )] = 0;
+		if ( ans[uf.find( i * w + w - 1 )] )
+			ans[uf.find( i * w + w - 1 )] = 0;
+	}
+	rep( i, w ) {
+		if ( ans[uf.find( i )] )
+			ans[uf.find( i )] = 0;
+		if ( ans[uf.find( ( h - 1 ) * w + i )] )
+			ans[uf.find( ( h - 1 ) * w + i )] = 0;
+	}
+
+	ll ansll = 0;
+	arep( it, ans ) {
+		if ( it.S > 0 ) {
+//			cout << "dbg: " << it.F << endl;
+			++ansll;
+		}
+	}
+	cout << ansll << endl;
 
 	return ( 0 );
 }

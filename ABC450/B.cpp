@@ -50,7 +50,31 @@ template<typename T> T lcm( const T a, const T b ) { return ( a / gcd( a, b ) * 
 
 int main()
 {
+	ll n; cin >> n;
+	vector<vector<ll>> c( n, vector<ll>( n, 1e18 ) );
 
+	rep( i, n ) {
+		rep( j, n - 1 - i ) {
+			cin >> c[i][j + 1 + i];
+		}
+	}
+
+	bool ok = false;
+	rep( i, n - 2 ) {
+		for ( ll j = i + 1; j < n; ++j ) {
+			for ( ll k = j + 1; k < n; ++k ) {
+				if ( c[i][k] > c[i][j] + c[j][k] )
+				{
+					ok = true;
+					goto finish;
+				}
+			}
+		}
+	}
+finish:
+
+	if ( ok ) cout << "Yes" << endl;
+	else cout << "No" << endl;
 
 	return ( 0 );
 }
